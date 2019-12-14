@@ -13,3 +13,4 @@ helloWorld = (request, response) => {
 app.get('/', helloWorld);
 
 exports.api = functions.region('europe-west1').https.onRequest(app);
+
