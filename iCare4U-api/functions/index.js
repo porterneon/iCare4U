@@ -10,6 +10,12 @@ helloWorld = (request, response) => {
  response.send("Hello from iCare4U!");
 };
 
+const {
+    getAllUsers
+  } = require('./handlers/users');
+
 app.get('/', helloWorld);
+
+app.get('/users', getAllUsers);
 
 exports.api = functions.region('europe-west1').https.onRequest(app);
