@@ -1,10 +1,10 @@
-const functions = require('firebase-functions');
-const app = require('express')();
-const FBAuth = require('./util/fbAuth');
+const functions = require("firebase-functions");
+const app = require("express")();
+const FBAuth = require("./util/fbAuth");
 //const { db } = require('./util/admin');
 
 helloWorld = (request, response) => {
- response.send("Hello from iCare4U!");
+  response.send("Hello from iCare4U!");
 };
 
 const {
@@ -15,17 +15,17 @@ const {
   addUserDetails,
   getAuthenticatedUser,
   getUserDetails
-} = require('./handlers/users');
+} = require("./handlers/users");
 
-app.get('/', helloWorld);
+app.get("/", helloWorld);
 
 // Users routes
-app.post('/signup', signup);
-app.post('/login', login);
-app.post('/user/image', FBAuth, uploadImage);
-app.get('/users', FBAuth, getAllUsers);
-app.post('/user', FBAuth, addUserDetails);
-app.get('/user', FBAuth, getAuthenticatedUser);
-app.get('/user/:handle', getUserDetails);
+app.post("/signup", signup);
+app.post("/login", login);
+app.post("/user/image", FBAuth, uploadImage);
+app.get("/users", FBAuth, getAllUsers);
+app.post("/user", FBAuth, addUserDetails);
+app.get("/user", FBAuth, getAuthenticatedUser);
+app.get("/user/:handle", getUserDetails);
 
-exports.api = functions.region('europe-west1').https.onRequest(app);
+exports.api = functions.region("europe-west1").https.onRequest(app);
