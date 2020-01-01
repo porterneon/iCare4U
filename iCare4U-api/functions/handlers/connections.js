@@ -17,32 +17,17 @@ exports.getPatientsByUser = async (req, res) => {
       });
     }
 
-    console.log(patientIds);
-
     let patients = [];
-    patientIds.forEach(async id => {
-      //   const data = await db
-      //     .collection("patient")
-      //     .where("patientId", "==", id)
-      //     .get();
 
-      //   data.forEach(doc => {
-      //     patients.push(doc.data());
-      //   });
+    const data = await db
+      .collection("patient")
+      .where("patientId", "in", patientIds)
+      .get();
 
-      const data = await db.doc(`/patient/${id}`).get();
-
-      console.log(data.data());
-      if (data.exists) {
-        patients.push({
-          patientId: data.data().patientId,
-          height: data.data().height
-        });
-
-        console.log(patients);
-      }
+    data.forEach(doc => {
+      patients.push(doc.data());
     });
-
+    console.log(patients);
     return res.json(patients);
   } catch (e) {
     return res.status(500).json(e);
