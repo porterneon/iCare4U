@@ -20,7 +20,7 @@ exports.getAllUsers = async (req, res) => {
     });
 
     return res.status(200).json(items);
-  } catch (err) {
+  } catch (e) {
     return res.status(500).json(e);
   }
 };

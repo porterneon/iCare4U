@@ -17,6 +17,11 @@ const {
   getUserDetails
 } = require("./handlers/users");
 
+const {
+  getAllPatients,
+  getPatientDetails
+} = require("./handlers/patients");
+
 app.get("/", helloWorld);
 
 // Users routes
@@ -27,5 +32,9 @@ app.get("/users", FBAuth, getAllUsers);
 app.post("/user", FBAuth, addUserDetails);
 app.get("/user", FBAuth, getAuthenticatedUser);
 app.get("/user/:handle", getUserDetails);
+
+// Patients routes
+app.get("/patients", FBAuth, getAllPatients);
+app.get("/patients/:patientId",FBAuth, getPatientDetails);
 
 exports.api = functions.region("europe-west1").https.onRequest(app);
