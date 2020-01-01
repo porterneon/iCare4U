@@ -1,4 +1,4 @@
-const { admin, db } = require("../util/admin");
+const { db } = require("../util/admin");
 
 exports.getAllPatients = async (req, res) => {
     try{

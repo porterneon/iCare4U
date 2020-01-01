@@ -1,7 +1,6 @@
 const functions = require("firebase-functions");
 const app = require("express")();
 const FBAuth = require("./util/fbAuth");
-//const { db } = require('./util/admin');
 
 helloWorld = (request, response) => {
   response.send("Hello from iCare4U!");
@@ -22,6 +21,10 @@ const {
   getPatientDetails
 } = require("./handlers/patients");
 
+const {
+  getPatientsByUser
+} = require("./handlers/connections");
+
 app.get("/", helloWorld);
 
 // Users routes
@@ -36,5 +39,6 @@ app.get("/user/:handle", getUserDetails);
 // Patients routes
 app.get("/patients", FBAuth, getAllPatients);
 app.get("/patients/:patientId",FBAuth, getPatientDetails);
+app.get("/patientsByUserId/:userId", getPatientsByUser);
 
 exports.api = functions.region("europe-west1").https.onRequest(app);
