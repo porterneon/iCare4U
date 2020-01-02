@@ -20,8 +20,10 @@ async function getPatientsByIds(patientIds) {
 
   const data = await db
     .collection("patient")
-    .where("patientId", "in", patientIds)
+    .where("id", "in", patientIds)
     .get();
+
+  console.log(data);
 
   data.forEach(doc => {
     patients.push(doc.data());
