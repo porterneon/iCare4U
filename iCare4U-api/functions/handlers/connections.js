@@ -15,21 +15,25 @@ async function getPatientIdsByUserId(userId) {
   return patientIds;
 }
 
-async function getPatientsByIds(patientIds) {
-  let patients = [];
-
-  const data = await db
-    .collection("patient")
-    .where("id", "in", patientIds)
-    .get();
-
-  console.log(data);
-
-  data.forEach(doc => {
-    patients.push(doc.data());
+async function getPatients(ids) {
+  let queries = [];
+  ids.forEach(id => {
+    queries.push(db.doc(`/patient/${id}`).get());
   });
 
-  return patients;
+  return Promise.all(queries)
+    .then(items => {
+      let patients = [];
+      items.forEach(element => {
+        patients.push(element.data());
+      });
+
+      return patients;
+    })
+    .catch(e => {
+      console.error(e);
+      return [];
+    });
 }
 
 exports.getPatientsByUser = async (req, res) => {
@@ -38,9 +42,10 @@ exports.getPatientsByUser = async (req, res) => {
 
     let patientIds = await getPatientIdsByUserId(req.params.userId);
 
-    let patients = await getPatientsByIds(patientIds);
+    let p = await getPatients(patientIds);
+    console.log(p);
 
-    return res.json(patients);
+    return res.json(p);
   } catch (e) {
     return res.status(500).json(e);
   }
