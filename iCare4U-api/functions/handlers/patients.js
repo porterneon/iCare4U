@@ -2,7 +2,7 @@ const { db } = require("../util/admin");
 
 const { reducePatientDetails } = require("../util/validators");
 
-const connections = require("../modules/connectionsModule");
+const connections = require("../modules/connections");
 
 async function getPatients(ids) {
   let queries = [];
