@@ -19,10 +19,9 @@ const {
 const {
   getAllPatients,
   getPatientDetails,
-  addPatientDetails
+  addPatientDetails,
+  getPatientsByUser
 } = require("./handlers/patients");
-
-const { getPatientsByUser } = require("./handlers/connections");
 
 app.get("/", helloWorld);
 
