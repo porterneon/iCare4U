@@ -2,45 +2,17 @@ const { db } = require("../util/admin");
 
 const { reducePatientDetails } = require("../util/validators");
 
-const connections = require("../modules/connections");
+const connectionsModule = require("../modules/connections");
+const patientsModule = require("../modules/patients");
 
-async function getPatients(ids) {
-  let queries = [];
-  ids.forEach(id => {
-    queries.push(db.doc(`/patient/${id}`).get());
-  });
-
-  var errors = [];
-  var results = [];
-
-  return Promise.all(queries)
-    .then(items => {
-      items.forEach(element => {
-        results.push(element.data());
-      });
-
-      return {
-        errors: errors,
-        results: results
-      };
-    })
-    .catch(e => {
-      console.error(e);
-      errors.push(e);
-      return {
-        errors: errors,
-        results: results
-      };
-    });
-}
 
 exports.getPatientsByUser = async (req, res) => {
   try {
     console.log(req.params);
 
-    let patientIds = await connections.getPatientIdsByUserId(req.params.userId);
+    let patientIds = await connectionsModule.getPatientIdsByUserId(req.params.userId);
 
-    let patients = await getPatients(patientIds);
+    let patients = await patientsModule.getPatients(patientIds);
     console.log(patients);
     if (patients.errors.length > 0) {
       console.error(patients.errors);
