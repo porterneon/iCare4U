@@ -46,9 +46,7 @@ exports.signup = (req, res) => {
     .get()
     .then(doc => {
       if (doc.exists) {
-        return res
-          .status(400)
-          .json({ email: "this email is already taken" });
+        return res.status(400).json({ email: "this email is already taken" });
       } else {
         return firebase
           .auth()
@@ -66,7 +64,8 @@ exports.signup = (req, res) => {
         email: newUser.email,
         createdAt: new Date().toISOString(),
         imageUrl: `https://firebasestorage.googleapis.com/v0/b/${config.storageBucket}/o/${noImg}?alt=media`,
-        userId
+        userId,
+        subscription: "base"
       };
 
       return db.doc(`/users/${userId}`).set(userCredentials);
