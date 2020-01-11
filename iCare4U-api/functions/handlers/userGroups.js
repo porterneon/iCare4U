@@ -1,5 +1,3 @@
-const { db } = require("../util/admin");
-
 const groupModule = require("../modules/userGroups");
 
 exports.getGroupByUserId = async (req, res) => {
