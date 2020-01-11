@@ -41,13 +41,14 @@ exports.signup = (req, res) => {
   const noImg = "no-img.png";
 
   let token, userId;
-  db.doc(`/users/${newUser.userName}`)
+  db.collection("users")
+    .where("email", "==", newUser.email)
     .get()
     .then(doc => {
       if (doc.exists) {
         return res
           .status(400)
-          .json({ userName: "this userName is already taken" });
+          .json({ email: "this email is already taken" });
       } else {
         return firebase
           .auth()
@@ -68,7 +69,7 @@ exports.signup = (req, res) => {
         userId
       };
 
-      return db.doc(`/users/${newUser.userName}`).set(userCredentials);
+      return db.doc(`/users/${userId}`).set(userCredentials);
     })
     .then(() => {
       return res.status(201).json({ token });
