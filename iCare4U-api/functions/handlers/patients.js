@@ -5,12 +5,13 @@ const { reducePatientDetails } = require("../util/validators");
 const connectionsModule = require("../modules/connections");
 const patientsModule = require("../modules/patients");
 
-
 exports.getPatientsByUser = async (req, res) => {
   try {
     console.log(req.params);
 
-    let patientIds = await connectionsModule.getPatientIdsByUserId(req.params.userId);
+    let patientIds = await connectionsModule.getPatientIdsByUserId(
+      req.params.userId
+    );
 
     let patients = await patientsModule.getPatients(patientIds);
     console.log(patients);
@@ -77,5 +78,13 @@ exports.addPatientDetails = async (req, res) => {
   } catch (e) {
     console.log(e);
     return res.status(500).json({ error: "something went wrong" });
+  }
+};
+
+exports.addPatientIntoGroup = async (reg, res) => {
+  try {
+  } catch (e) {
+    console.error(e);
+    return res.status(500).json({ error: e.message });
   }
 };
