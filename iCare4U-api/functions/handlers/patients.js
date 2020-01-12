@@ -1,5 +1,4 @@
-const { db } = require("../util/admin");
-const admin = require("firebase-admin");
+const { db, admin } = require("../util/admin");
 
 const {
   reducePatientDetails,
@@ -101,9 +100,8 @@ exports.addPatientIntoGroup = async (req, res) => {
 
     if (!valid) return res.status(400).json(errors);
 
-    console.log(">>>");
     let doc = db.collection("userGroups").doc(req.body.groupId);
-    console.log((await doc.get()).data());
+    //console.log((await doc.get()).data());
     let arrUnion = await doc.update({
       patients: admin.firestore.FieldValue.arrayUnion(req.body.patientId)
     });
