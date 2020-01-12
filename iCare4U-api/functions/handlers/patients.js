@@ -110,7 +110,7 @@ exports.addPatientIntoGroup = async (req, res) => {
 
     console.log(arrUnion);
 
-    return res.json(arrUnion);
+    return res.json(req.body);
   } catch (e) {
     console.error(e);
     return res.status(500).json({ error: e.message });
