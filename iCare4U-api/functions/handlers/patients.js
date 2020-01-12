@@ -2,19 +2,27 @@ const { db } = require("../util/admin");
 
 const { reducePatientDetails } = require("../util/validators");
 
-const connectionsModule = require("../modules/connections");
 const patientsModule = require("../modules/patients");
+const groupModule = require("../modules/userGroups");
 
 exports.getPatientsByUser = async (req, res) => {
   try {
     console.log(req.params);
 
-    let patientIds = await connectionsModule.getPatientIdsByUserId(
-      req.params.userId
-    );
+    let patientIds = [];
 
-    let patients = await patientsModule.getPatients(patientIds);
+    let groups = await groupModule.getUserGroups(req.params.userId);
+    groups.forEach(group => {
+      patientIds.push(group.patients);
+    });
+
+    const uniquePatientIds = [...new Set(patientIds.map(i => i))];
+
+    console.log(uniquePatientIds);
+
+    let patients = await patientsModule.getPatients(uniquePatientIds);
     console.log(patients);
+
     if (patients.errors.length > 0) {
       console.error(patients.errors);
       return res.status(500).json(errors);
@@ -22,6 +30,7 @@ exports.getPatientsByUser = async (req, res) => {
       return res.json(patients.results);
     }
   } catch (e) {
+    console.error(e);
     return res.status(500).json(e);
   }
 };

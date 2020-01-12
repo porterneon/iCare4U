@@ -23,6 +23,8 @@ const {
   getPatientsByUser
 } = require("./handlers/patients");
 
+const { getGroupByUserId } = require("./handlers/userGroups");
+
 app.get("/", helloWorld);
 
 // Users routes
@@ -39,5 +41,8 @@ app.get("/patients", FBAuth, getAllPatients);
 app.get("/patients/:patientId", getPatientDetails);
 app.get("/patientsByUserId/:userId", getPatientsByUser);
 app.post("/patient", addPatientDetails);
+
+// user groups
+app.get("/groupsByUserId/:userId", getGroupByUserId);
 
 exports.api = functions.region("europe-west1").https.onRequest(app);
