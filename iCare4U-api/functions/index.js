@@ -20,7 +20,8 @@ const {
   getAllPatients,
   getPatientDetails,
   addPatientDetails,
-  getPatientsByUser
+  getPatientsByUser,
+  addPatientIntoGroup
 } = require("./handlers/patients");
 
 const { getGroupByUserId } = require("./handlers/userGroups");
@@ -41,6 +42,7 @@ app.get("/patients", FBAuth, getAllPatients);
 app.get("/patients/:patientId", getPatientDetails);
 app.get("/patientsByUserId/:userId", getPatientsByUser);
 app.post("/patient", addPatientDetails);
+app.post("/addPatientIntoGroup", addPatientIntoGroup);
 
 // user groups
 app.get("/groupsByUserId/:userId", getGroupByUserId);

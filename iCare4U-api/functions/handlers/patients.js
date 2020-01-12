@@ -1,6 +1,9 @@
 const { db } = require("../util/admin");
 
-const { reducePatientDetails } = require("../util/validators");
+const {
+  reducePatientDetails,
+  validatePatientGroupData
+} = require("../util/validators");
 
 const patientsModule = require("../modules/patients");
 const groupModule = require("../modules/userGroups");
@@ -90,8 +93,22 @@ exports.addPatientDetails = async (req, res) => {
   }
 };
 
-exports.addPatientIntoGroup = async (reg, res) => {
+exports.addPatientIntoGroup = async (req, res) => {
   try {
+    const { valid, errors } = validatePatientGroupData(req.body);
+
+    if (!valid) return res.status(400).json(errors);
+
+    let doc = await db.doc(`/userGroups/${req.body.groupId}`).get();
+    if (doc.exists) {
+      let arrUnion = doc.update({
+        patients: db.FieldValue.arrayUnion(req.body.patientId)
+      });
+
+      console.log(arrUnion);
+    } else {
+      return res.status(500).json({ error: "User group not found." });
+    }
   } catch (e) {
     console.error(e);
     return res.status(500).json({ error: e.message });
