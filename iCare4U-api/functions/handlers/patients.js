@@ -1,4 +1,5 @@
 const { db } = require("../util/admin");
+const admin = require("firebase-admin");
 
 const {
   reducePatientDetails,
@@ -95,20 +96,21 @@ exports.addPatientDetails = async (req, res) => {
 
 exports.addPatientIntoGroup = async (req, res) => {
   try {
+    console.log(req.body);
     const { valid, errors } = validatePatientGroupData(req.body);
 
     if (!valid) return res.status(400).json(errors);
 
-    let doc = await db.doc(`/userGroups/${req.body.groupId}`).get();
-    if (doc.exists) {
-      let arrUnion = doc.update({
-        patients: db.FieldValue.arrayUnion(req.body.patientId)
-      });
+    console.log(">>>");
+    let doc = db.collection("userGroups").doc(req.body.groupId);
+    console.log((await doc.get()).data());
+    let arrUnion = await doc.update({
+      patients: admin.firestore.FieldValue.arrayUnion(req.body.patientId)
+    });
 
-      console.log(arrUnion);
-    } else {
-      return res.status(500).json({ error: "User group not found." });
-    }
+    console.log(arrUnion);
+
+    return res.json(arrUnion);
   } catch (e) {
     console.error(e);
     return res.status(500).json({ error: e.message });

@@ -17,7 +17,7 @@ exports.validatePatientGroupData = data => {
 
   return {
     errors,
-    calid: Object.keys(errors).length === 0 ? true : false
+    valid: Object.keys(errors).length === 0 ? true : false
   };
 };
 
