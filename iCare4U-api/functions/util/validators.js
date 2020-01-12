@@ -11,14 +11,14 @@ const isEmpty = string => {
 
 exports.validatePatientGroupData = data => {
   let errors = {};
-  if(isEmpty(data.groupId)) errors.groupId = "Must not be empty";
+  if (isEmpty(data.groupId)) errors.groupId = "Must not be empty";
 
-  if(isEmpty(data.patientId)) errors.patientId = "Must not be empty";
+  if (isEmpty(data.patientId)) errors.patientId = "Must not be empty";
 
   return {
     errors,
-    calid: Object.keys(errors).length === 0 ? true: false;
-  }
+    calid: Object.keys(errors).length === 0 ? true : false
+  };
 };
 
 exports.validateSignupData = data => {
