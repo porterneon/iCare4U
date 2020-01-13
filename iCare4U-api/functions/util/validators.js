@@ -9,6 +9,10 @@ const isEmpty = string => {
   else return false;
 };
 
+const isArray = what => {
+  return Object.prototype.toString.call(what) === "[object Array]";
+};
+
 exports.validatePatientGroupData = data => {
   let errors = {};
   if (isEmpty(data.groupId)) errors.groupId = "Must not be empty";
@@ -82,4 +86,25 @@ exports.reducePatientDetails = data => {
     patientDetails.weightUom = data.weightUom;
 
   return patientDetails;
+};
+
+exports.validateUserGroupPayload = data => {
+  let errors = {};
+
+  if (isEmpty(data.groupName)) errors.groupName = "Must not be empty";
+  if (isEmpty(data.ownerId)) errors.ownerId = "Must not be empty";
+
+  if (data.patients == "undefined") errors.patients = "Must be an array";
+  if (data.userIds == "undefined") errors.userIds = "Must be an array";
+
+  if (!isArray(data.patients)) errors.patients = "Must be an array";
+  if (!isArray(data.userIds)) errors.userIds = "Must be an array";
+
+  if (!data.userIds.some(item => item === data.ownerId))
+    errors.userIds = "Must contain at least one owner id";
+
+  return {
+    errors,
+    valid: Object.keys(errors).length === 0 ? true : false
+  };
 };

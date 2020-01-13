@@ -2,8 +2,6 @@ const { db } = require("../util/admin");
 
 const getPatientIdsByUserId = async userId => {
   try {
-    console.log(">>> getPatientIdsByUserId <<<");
-    console.log(`userId: ${userId}`);
     const connections = await db
       .collection("connections")
       .where("userId", "==", userId)

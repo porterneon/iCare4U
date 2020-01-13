@@ -30,7 +30,51 @@ async function getPatientsIds(ids) {
   return patientIds;
 }
 
+async function getUserGroupByName(groupName, ownerId) {
+  try {
+    return await db
+      .collection("userGroups")
+      .where("groupName", "==", groupName)
+      .where("ownerId", "==", ownerId)
+      .get();
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+async function addUserGroup(data) {
+  let errors = [];
+  let result = {};
+
+  try {
+    let entities = await getUserGroupByName(data.groupName, data.ownerId);
+    // entities.forEach(e => {
+    //   console.log(e.data());
+    // });
+
+    console.log(entities.docs.length);
+
+    if (entities.docs.length > 0) {
+      errors.push({ error: "this user group is already taken" });
+    } else {
+      let doc = await db.collection("userGroups").add(data);
+
+      result.id = doc.id;
+    }
+  } catch (e) {
+    errors.push(e);
+  }
+
+  return {
+    errors: errors,
+    result: result,
+    valid: Object.keys(errors).length === 0 ? true : false
+  };
+}
+
 module.exports = {
   getUserGroups,
-  getPatientsIds
+  getPatientsIds,
+  addUserGroup,
+  getUserGroupByName
 };

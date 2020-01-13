@@ -24,7 +24,7 @@ const {
   addPatientIntoGroup
 } = require("./handlers/patients");
 
-const { getGroupByUserId } = require("./handlers/userGroups");
+const { getGroupByUserId, addUserGroup } = require("./handlers/userGroups");
 
 app.get("/", helloWorld);
 
@@ -46,5 +46,6 @@ app.post("/addPatientIntoGroup", addPatientIntoGroup);
 
 // user groups
 app.get("/groupsByUserId/:userId", getGroupByUserId);
+app.post("/userGroup", addUserGroup);
 
 exports.api = functions.region("europe-west1").https.onRequest(app);
