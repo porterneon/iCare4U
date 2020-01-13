@@ -34,3 +34,19 @@ exports.addUserGroup = async (req, res) => {
     return res.status(500).json(e);
   }
 };
+
+exports.deleteUserGroup = async (req, res) => {
+  try {
+    const { errors, results, valid } = await groupModule.deleteUserGroup(
+      req.body.groupName,
+      req.body.ownerId
+    );
+
+    if (!valid) return res.status(400).json(errors);
+
+    return res.status(200).json(results);
+  } catch (e) {
+    console.error(e);
+    return res.status(500).json(e);
+  }
+};

@@ -48,9 +48,6 @@ async function addUserGroup(data) {
 
   try {
     let entities = await getUserGroupByName(data.groupName, data.ownerId);
-    // entities.forEach(e => {
-    //   console.log(e.data());
-    // });
 
     console.log(entities.docs.length);
 
@@ -72,9 +69,50 @@ async function addUserGroup(data) {
   };
 }
 
+async function deleteUserGroup(groupName, ownerId) {
+  let queries = [];
+
+  let entities = await getUserGroupByName(groupName, ownerId);
+
+  entities.forEach(e => {
+    queries.push(
+      db
+        .collection("userGroups")
+        .doc(e.id)
+        .delete()
+    );
+  });
+
+  var errors = [];
+  var results = [];
+
+  return Promise.all(queries)
+    .then(items => {
+      items.forEach(element => {
+        results.push(element);
+      });
+
+      return {
+        errors: errors,
+        results: results,
+        valid: Object.keys(errors).length === 0 ? true : false
+      };
+    })
+    .catch(e => {
+      console.error(e);
+      errors.push(e);
+      return {
+        errors: errors,
+        results: results,
+        valid: Object.keys(errors).length === 0 ? true : false
+      };
+    });
+}
+
 module.exports = {
   getUserGroups,
   getPatientsIds,
   addUserGroup,
-  getUserGroupByName
+  getUserGroupByName,
+  deleteUserGroup
 };

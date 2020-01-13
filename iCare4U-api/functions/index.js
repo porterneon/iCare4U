@@ -24,7 +24,11 @@ const {
   addPatientIntoGroup
 } = require("./handlers/patients");
 
-const { getGroupByUserId, addUserGroup } = require("./handlers/userGroups");
+const {
+  getGroupByUserId,
+  addUserGroup,
+  deleteUserGroup
+} = require("./handlers/userGroups");
 
 app.get("/", helloWorld);
 
@@ -35,17 +39,18 @@ app.post("/user/image", FBAuth, uploadImage);
 app.get("/users", FBAuth, getAllUsers);
 app.post("/user", FBAuth, addUserDetails);
 app.get("/user", FBAuth, getAuthenticatedUser);
-app.get("/user/:handle", getUserDetails);
+app.get("/user/:handle", FBAuth, getUserDetails);
 
 // Patients routes
 app.get("/patients", FBAuth, getAllPatients);
-app.get("/patients/:patientId", getPatientDetails);
-app.get("/patientsByUserId/:userId", getPatientsByUser);
-app.post("/patient", addPatientDetails);
-app.post("/addPatientIntoGroup", addPatientIntoGroup);
+app.get("/patients/:patientId", FBAuth, getPatientDetails);
+app.get("/patientsByUserId/:userId", FBAuth, getPatientsByUser);
+app.post("/patient", FBAuth, addPatientDetails);
+app.post("/addPatientIntoGroup", FBAuth, addPatientIntoGroup);
 
 // user groups
-app.get("/groupsByUserId/:userId", getGroupByUserId);
-app.post("/userGroup", addUserGroup);
+app.get("/groupsByUserId/:userId", FBAuth, getGroupByUserId);
+app.post("/userGroup", FBAuth, addUserGroup);
+app.delete("/userGroup", FBAuth, deleteUserGroup);
 
 exports.api = functions.region("europe-west1").https.onRequest(app);
