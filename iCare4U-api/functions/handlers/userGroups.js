@@ -1,7 +1,7 @@
-const { db, admin } = require("../util/admin");
-const groupModule = require("../modules/userGroups");
+const { db, admin } = require('../util/admin');
+const groupModule = require('../modules/userGroups');
 
-const { validateUserGroupPayload } = require("../util/validators");
+const { validateUserGroupPayload } = require('../util/validators');
 
 exports.getGroupByUserId = async (req, res) => {
   try {
