@@ -1,7 +1,9 @@
-const { db, admin } = require('../util/admin');
 const groupModule = require('../modules/userGroups');
 
-const { validateUserGroupPayload } = require('../util/validators');
+const {
+  validateUserGroupPayload,
+  validateUserIntoGroupData
+} = require('../util/validators');
 
 exports.getGroupByUserId = async (req, res) => {
   try {
@@ -48,5 +50,27 @@ exports.deleteUserGroup = async (req, res) => {
   } catch (e) {
     console.error(e);
     return res.status(500).json(e);
+  }
+};
+
+exports.addUserIntoGroup = async (req, res) => {
+  try {
+    console.log(req.body);
+    const { valid, errors } = validateUserIntoGroupData(req.body);
+
+    if (!valid) return res.status(400).json(errors);
+
+    let doc = db.collection('userGroups').doc(req.body.groupId);
+    //console.log((await doc.get()).data());
+    let arrUnion = await doc.update({
+      userIds: admin.firestore.FieldValue.arrayUnion(req.body.userId)
+    });
+
+    console.log(arrUnion);
+
+    return res.json(req.body);
+  } catch (e) {
+    console.error(e);
+    return res.status(500).json({ error: e.message });
   }
 };

@@ -101,6 +101,18 @@ exports.validatePatientDetails = data => {
   };
 };
 
+exports.validateUserIntoGroupData = data => {
+  let errors = {};
+
+  if (!isEmpty(data.groupId)) errors.groupId = 'Must not be empty';
+  if (!isEmpty(data.userId)) errors.userId = 'Must not be empty';
+
+  return {
+    errors,
+    valid: Object.keys(errors).length === 0 ? true : false
+  };
+};
+
 exports.validateUserGroupPayload = data => {
   let errors = {};
 
