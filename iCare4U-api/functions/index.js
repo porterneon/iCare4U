@@ -1,9 +1,9 @@
-const functions = require('firebase-functions');
-const app = require('express')();
-const FBAuth = require('./util/fbAuth');
+const functions = require("firebase-functions");
+const app = require("express")();
+const FBAuth = require("./util/fbAuth");
 
 helloWorld = (request, response) => {
-  response.send('Hello from iCare4U!');
+  response.send("Hello from iCare4U!");
 };
 
 const {
@@ -14,7 +14,7 @@ const {
   addUserDetails,
   getAuthenticatedUser,
   getUserDetails
-} = require('./handlers/users');
+} = require("./handlers/users");
 
 const {
   getAllPatients,
@@ -23,37 +23,46 @@ const {
   getPatientsByUser,
   addPatientIntoGroup,
   deletePatient
-} = require('./handlers/patients');
+} = require("./handlers/patients");
 
 const {
   getGroupByUserId,
   addUserGroup,
   deleteUserGroup
-} = require('./handlers/userGroups');
+} = require("./handlers/userGroups");
 
-app.get('/', helloWorld);
+const {
+  addMedicine,
+  deleteMedicine,
+  getMedicineById,
+  updateMedicine
+} = require("./handlers/medicines");
+
+app.get("/", helloWorld);
 
 // Users routes
-app.post('/signup', signup);
-app.post('/login', login);
-app.post('/user/image', FBAuth, uploadImage);
-app.get('/users', FBAuth, getAllUsers);
-app.post('/user', FBAuth, addUserDetails);
-app.get('/user', FBAuth, getAuthenticatedUser);
-app.get('/user/:handle', FBAuth, getUserDetails);
+app.post("/signup", signup);
+app.post("/login", login);
+app.post("/user/image", FBAuth, uploadImage);
+app.get("/users", FBAuth, getAllUsers);
+app.post("/user", FBAuth, addUserDetails);
+app.get("/user", FBAuth, getAuthenticatedUser);
+app.get("/user/:handle", FBAuth, getUserDetails);
 
 // Patients routes
-app.get('/patients', getAllPatients);
-app.get('/patients/:patientId', getPatientDetails);
-app.get('/patientsByUserId/:userId', getPatientsByUser);
-app.post('/patients', FBAuth, addPatientDetails);
-app.post('/addPatientIntoGroup', FBAuth, addPatientIntoGroup);
-app.delete('/patients/:patientId', deletePatient);
+app.get("/patients", getAllPatients);
+app.get("/patients/:patientId", getPatientDetails);
+app.get("/patientsByUserId/:userId", getPatientsByUser);
+app.post("/patients", FBAuth, addPatientDetails);
+app.post("/addPatientIntoGroup", FBAuth, addPatientIntoGroup);
+app.delete("/patients/:patientId", deletePatient);
 
 // user groups
-app.get('/groupsByUserId/:userId', FBAuth, getGroupByUserId);
-app.post('/userGroup', FBAuth, addUserGroup);
-app.delete('/userGroup', FBAuth, deleteUserGroup);
-app.post('/userGroup/addUserIntoGroup', addUserIntoGroup);
+app.get("/groupsByUserId/:userId", FBAuth, getGroupByUserId);
+app.post("/userGroup", FBAuth, addUserGroup);
+app.delete("/userGroup", FBAuth, deleteUserGroup);
+app.post("/userGroup/addUserIntoGroup", addUserIntoGroup);
 
-exports.api = functions.region('europe-west1').https.onRequest(app);
+// medicines
+
+exports.api = functions.region("europe-west1").https.onRequest(app);
