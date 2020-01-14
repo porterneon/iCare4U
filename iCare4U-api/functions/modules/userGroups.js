@@ -1,9 +1,9 @@
-const { db } = require("../util/admin");
+const { db } = require('../util/admin');
 
 async function getUserGroups(userId) {
   const data = await db
-    .collection("userGroups")
-    .where("userIds", "array-contains", userId)
+    .collection('userGroups')
+    .where('userIds', 'array-contains', userId)
     .get();
 
   let groups = [];
@@ -17,8 +17,8 @@ async function getUserGroups(userId) {
 
 async function getPatientsIds(ids) {
   const data = await db
-    .collection("userGroups")
-    .where("userIds", "array-contains-any", ids)
+    .collection('userGroups')
+    .where('userIds', 'array-contains-any', ids)
     .get();
 
   let patientIds = [];
@@ -33,9 +33,9 @@ async function getPatientsIds(ids) {
 async function getUserGroupByName(groupName, ownerId) {
   try {
     return await db
-      .collection("userGroups")
-      .where("groupName", "==", groupName)
-      .where("ownerId", "==", ownerId)
+      .collection('userGroups')
+      .where('groupName', '==', groupName)
+      .where('ownerId', '==', ownerId)
       .get();
   } catch (e) {
     console.error(e);
@@ -52,9 +52,9 @@ async function addUserGroup(data) {
     console.log(entities.docs.length);
 
     if (entities.docs.length > 0) {
-      errors.push({ error: "this user group is already taken" });
+      errors.push({ error: 'this user group is already taken' });
     } else {
-      let doc = await db.collection("userGroups").add(data);
+      let doc = await db.collection('userGroups').add(data);
 
       result.id = doc.id;
     }
@@ -77,7 +77,7 @@ async function deleteUserGroup(groupName, ownerId) {
   entities.forEach(e => {
     queries.push(
       db
-        .collection("userGroups")
+        .collection('userGroups')
         .doc(e.id)
         .delete()
     );
@@ -86,27 +86,22 @@ async function deleteUserGroup(groupName, ownerId) {
   var errors = [];
   var results = [];
 
-  return Promise.all(queries)
+  await Promise.all(queries)
     .then(items => {
       items.forEach(element => {
         results.push(element);
       });
-
-      return {
-        errors: errors,
-        results: results,
-        valid: Object.keys(errors).length === 0 ? true : false
-      };
     })
     .catch(e => {
       console.error(e);
       errors.push(e);
-      return {
-        errors: errors,
-        results: results,
-        valid: Object.keys(errors).length === 0 ? true : false
-      };
     });
+
+  return {
+    errors: errors,
+    results: results,
+    valid: Object.keys(errors).length === 0 ? true : false
+  };
 }
 
 module.exports = {
