@@ -1,33 +1,41 @@
-const { db } = require("../util/admin");
+const { db } = require('../util/admin');
 
 async function getPatients(ids) {
   let queries = [];
   ids.forEach(id => {
-    queries.push(db.doc(`/patient/${id}`).get());
+    //console.log(id);
+    queries.push(
+      db
+        .collection('patient')
+        .doc(id)
+        .get()
+    );
   });
 
   var errors = [];
   var results = [];
 
-  return Promise.all(queries)
+  await Promise.all(queries)
     .then(items => {
       items.forEach(element => {
-        results.push(element.data());
+        if (element.data() != null) {
+          let p = element.data();
+          p.patientId = element.id;
+          results.push(p);
+        } else {
+          console.log('patient details has not been found');
+        }
       });
-
-      return {
-        errors: errors,
-        results: results
-      };
     })
     .catch(e => {
       console.error(e);
       errors.push(e);
-      return {
-        errors: errors,
-        results: results
-      };
     });
+
+  return {
+    errors: errors,
+    results: results
+  };
 }
 
 module.exports = {

@@ -17,7 +17,9 @@ exports.getPatientsByUser = async (req, res) => {
 
     let groups = await groupModule.getUserGroups(req.params.userId);
     groups.forEach(group => {
-      patientIds.push(group.patients);
+      group.patients.forEach(p => {
+        patientIds.push(p);
+      });
     });
 
     const uniquePatientIds = [...new Set(patientIds.map(i => i))];
@@ -45,7 +47,9 @@ exports.getAllPatients = async (req, res) => {
 
     let items = [];
     data.docs.forEach(doc => {
-      items.push(doc.data());
+      let patient = doc.data();
+      patient.id = doc.id;
+      items.push(patient);
     });
 
     return res.status(200).json(items);
@@ -60,8 +64,8 @@ exports.getPatientDetails = async (req, res) => {
     console.log(req.params);
     const data = await db.doc(`/patient/${req.params.patientId}`).get();
 
-    //console.log(data.data());
-    if (data) {
+    console.log(data.data());
+    if (data.exists) {
       patientDetails = data.data();
       patientDetails.patientId = data.id;
       return res.status(200).json(patientDetails);
@@ -97,6 +101,14 @@ exports.addPatientDetails = async (req, res) => {
   } catch (e) {
     console.log(e);
     return res.status(500).json({ error: 'something went wrong' });
+  }
+};
+
+exports.updatepatientDetails = async (req, res) => {
+  try {
+  } catch (e) {
+    console.log(e);
+    return res.status(500).json({ error: e.message });
   }
 };
 

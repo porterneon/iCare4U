@@ -43,9 +43,9 @@ app.get('/user', FBAuth, getAuthenticatedUser);
 app.get('/user/:handle', FBAuth, getUserDetails);
 
 // Patients routes
-app.get('/patients', FBAuth, getAllPatients);
-app.get('/patients/:patientId', FBAuth, getPatientDetails);
-app.get('/patientsByUserId/:userId', FBAuth, getPatientsByUser);
+app.get('/patients', getAllPatients);
+app.get('/patients/:patientId', getPatientDetails);
+app.get('/patientsByUserId/:userId', getPatientsByUser);
 app.post('/patients', FBAuth, addPatientDetails);
 app.post('/addPatientIntoGroup', FBAuth, addPatientIntoGroup);
 app.delete('/patients/:patientId', deletePatient);
