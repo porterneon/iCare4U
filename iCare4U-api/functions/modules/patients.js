@@ -1,4 +1,4 @@
-const { db } = require('../util/admin');
+const { db } = require("../util/admin");
 
 async function getPatients(ids) {
   let queries = [];
@@ -6,7 +6,7 @@ async function getPatients(ids) {
     //console.log(id);
     queries.push(
       db
-        .collection('patient')
+        .collection("patient")
         .doc(id)
         .get()
     );
@@ -23,7 +23,7 @@ async function getPatients(ids) {
           p.patientId = element.id;
           results.push(p);
         } else {
-          console.log('patient details has not been found');
+          console.log("patient details has not been found");
         }
       });
     })
@@ -38,6 +38,26 @@ async function getPatients(ids) {
   };
 }
 
+async function removePatientMedicine(patientId, id) {
+  var errors = [];
+  try {
+    let patientRef = db.collection("patient").doc(patientId);
+
+    await patientRef.update({
+      medicines: admin.firestore.FieldValue.arrayRemove(id)
+    });
+  } catch (e) {
+    console.error(e);
+    errors.push(e);
+  }
+
+  return {
+    errors: errors,
+    valid: Object.keys(errors).length === 0 ? true : false
+  };
+}
+
 module.exports = {
-  getPatients
+  getPatients,
+  removePatientMedicine
 };

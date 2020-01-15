@@ -1,9 +1,9 @@
-const groupModule = require('../modules/userGroups');
+const groupModule = require("../modules/userGroups");
 
 const {
   validateUserGroupPayload,
   validateUserIntoGroupData
-} = require('../util/validators');
+} = require("../util/validators");
 
 exports.getGroupByUserId = async (req, res) => {
   try {
@@ -14,7 +14,7 @@ exports.getGroupByUserId = async (req, res) => {
     return res.json(data);
   } catch (e) {
     console.error(e);
-    return res.status(500).json(e);
+    return res.status(500).json(e.code);
   }
 };
 
@@ -33,7 +33,7 @@ exports.addUserGroup = async (req, res) => {
     }
   } catch (e) {
     console.error(e);
-    return res.status(500).json(e);
+    return res.status(500).json(e.code);
   }
 };
 
@@ -49,7 +49,7 @@ exports.deleteUserGroup = async (req, res) => {
     return res.status(200).json(results);
   } catch (e) {
     console.error(e);
-    return res.status(500).json(e);
+    return res.status(500).json(e.code);
   }
 };
 
@@ -60,8 +60,7 @@ exports.addUserIntoGroup = async (req, res) => {
 
     if (!valid) return res.status(400).json(errors);
 
-    let doc = db.collection('userGroups').doc(req.body.groupId);
-    //console.log((await doc.get()).data());
+    let doc = db.collection("userGroups").doc(req.body.groupId);
     let arrUnion = await doc.update({
       userIds: admin.firestore.FieldValue.arrayUnion(req.body.userId)
     });
@@ -71,6 +70,6 @@ exports.addUserIntoGroup = async (req, res) => {
     return res.json(req.body);
   } catch (e) {
     console.error(e);
-    return res.status(500).json({ error: e.message });
+    return res.status(500).json({ error: e.code });
   }
 };

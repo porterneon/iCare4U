@@ -4,20 +4,20 @@ const isEmail = email => {
   else return false;
 };
 
-const isEmpty = string => {
-  if (string === undefined || string.trim() === '') return true;
+exports.isEmpty = string => {
+  if (string === undefined || string.trim() === "") return true;
   else return false;
 };
 
 const isArray = what => {
-  return Object.prototype.toString.call(what) === '[object Array]';
+  return Object.prototype.toString.call(what) === "[object Array]";
 };
 
 exports.validatePatientGroupData = data => {
   let errors = {};
-  if (isEmpty(data.groupId)) errors.groupId = 'Must not be empty';
+  if (isEmpty(data.groupId)) errors.groupId = "Must not be empty";
 
-  if (isEmpty(data.patientId)) errors.patientId = 'Must not be empty';
+  if (isEmpty(data.patientId)) errors.patientId = "Must not be empty";
 
   return {
     errors,
@@ -28,15 +28,15 @@ exports.validatePatientGroupData = data => {
 exports.validateSignupData = data => {
   let errors = {};
   if (isEmpty(data.email)) {
-    errors.email = 'Mast not be empty';
+    errors.email = "Mast not be empty";
   } else if (!isEmail(data.email)) {
-    errors.email = 'Must be a valid email address';
+    errors.email = "Must be a valid email address";
   }
 
-  if (isEmpty(data.password)) errors.password = 'Must not be empty';
+  if (isEmpty(data.password)) errors.password = "Must not be empty";
   if (data.password !== data.confirmPassword)
-    errors.confirmPassword = 'Password must match';
-  if (isEmpty(data.userName)) errors.userName = 'Must not be empty';
+    errors.confirmPassword = "Password must match";
+  if (isEmpty(data.userName)) errors.userName = "Must not be empty";
 
   return {
     errors,
@@ -47,8 +47,8 @@ exports.validateSignupData = data => {
 exports.validateLoginData = data => {
   let errors = {};
 
-  if (isEmpty(data.email)) errors.email = 'Must not be empty';
-  if (isEmpty(data.password)) errors.password = 'Must not be empty';
+  if (isEmpty(data.email)) errors.email = "Must not be empty";
+  if (isEmpty(data.password)) errors.password = "Must not be empty";
 
   return {
     errors,
@@ -62,7 +62,7 @@ exports.reduceUserDetails = data => {
   if (!isEmpty(data.bio.trim())) userDetails.bio = data.bio;
 
   if (!isEmpty(data.website.trim())) {
-    if (data.website.trim().substring(0, 4) !== 'http') {
+    if (data.website.trim().substring(0, 4) !== "http") {
       userDetails.website = `http://${data.website.trim()}`;
     } else userDetails.website = data.website.trim();
   }
@@ -91,9 +91,9 @@ exports.reducePatientDetails = data => {
 exports.validatePatientDetails = data => {
   let errors = {};
 
-  if (!isEmpty(data.patientName)) errors.patientName = 'Must not be empty';
-  if (!isArray(data.medicines)) errors.medicines = 'Must be an array';
-  if (!isArray(data.schedules)) errors.schedules = 'Must be an array';
+  if (!isEmpty(data.patientName)) errors.patientName = "Must not be empty";
+  if (!isArray(data.medicines)) errors.medicines = "Must be an array";
+  if (!isArray(data.schedules)) errors.schedules = "Must be an array";
 
   return {
     errors,
@@ -104,8 +104,8 @@ exports.validatePatientDetails = data => {
 exports.validateUserIntoGroupData = data => {
   let errors = {};
 
-  if (!isEmpty(data.groupId)) errors.groupId = 'Must not be empty';
-  if (!isEmpty(data.userId)) errors.userId = 'Must not be empty';
+  if (!isEmpty(data.groupId)) errors.groupId = "Must not be empty";
+  if (!isEmpty(data.userId)) errors.userId = "Must not be empty";
 
   return {
     errors,
@@ -116,20 +116,56 @@ exports.validateUserIntoGroupData = data => {
 exports.validateUserGroupPayload = data => {
   let errors = {};
 
-  if (isEmpty(data.groupName)) errors.groupName = 'Must not be empty';
-  if (isEmpty(data.ownerId)) errors.ownerId = 'Must not be empty';
+  if (isEmpty(data.groupName)) errors.groupName = "Must not be empty";
+  if (isEmpty(data.ownerId)) errors.ownerId = "Must not be empty";
 
-  if (data.patients == 'undefined') errors.patients = 'Must be an array';
-  if (data.userIds == 'undefined') errors.userIds = 'Must be an array';
+  if (data.patients == "undefined") errors.patients = "Must be an array";
+  if (data.userIds == "undefined") errors.userIds = "Must be an array";
 
-  if (!isArray(data.patients)) errors.patients = 'Must be an array';
-  if (!isArray(data.userIds)) errors.userIds = 'Must be an array';
+  if (!isArray(data.patients)) errors.patients = "Must be an array";
+  if (!isArray(data.userIds)) errors.userIds = "Must be an array";
 
   if (!data.userIds.some(item => item === data.ownerId))
-    errors.userIds = 'Must contain at least one owner id';
+    errors.userIds = "Must contain at least one owner id";
 
   return {
     errors,
     valid: Object.keys(errors).length === 0 ? true : false
   };
+};
+
+// Medicine
+exports.validateAddMedicinePayload = data => {
+  let errors = {};
+
+  if (isEmpty(data.itemName)) errors.itemName = "Must not be empty";
+
+  return {
+    errors,
+    valid: Object.keys(errors).length === 0 ? true : false
+  };
+};
+
+exports.validateDeleteMedicinePayload = data => {
+  let errors = {};
+
+  if (isEmpty(data.patientId)) errors.patientId = "Must not be empty";
+  if (isEmpty(data.medicineId)) errors.medicineId = "Must not be empty";
+
+  return {
+    errors,
+    valid: Object.keys(errors).length === 0 ? true : false
+  };
+};
+
+exports.reduceMedicineDetails = data => {
+  let details = {};
+
+  if (!isEmpty(data.itemName.trim())) details.itemName = data.itemName;
+  if (!isEmpty(data.itemDescription.trim()))
+    details.itemDescription = data.itemDescription;
+  if (!isEmpty(data.imageUrl.trim())) details.imageUrl = data.imageUrl;
+  if (!isEmpty(data.createdAt.trim())) details.createdAt = data.createdAt;
+
+  return details;
 };

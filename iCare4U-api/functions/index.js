@@ -64,5 +64,9 @@ app.delete("/userGroup", FBAuth, deleteUserGroup);
 app.post("/userGroup/addUserIntoGroup", addUserIntoGroup);
 
 // medicines
+app.get("/medicines/:medicineId", getMedicineById);
+app.post("/medicines/:patientId", addMedicine);
+app.post("/medicines/:medicineId", updateMedicine);
+app.delete("/medicines", deleteMedicine);
 
 exports.api = functions.region("europe-west1").https.onRequest(app);
