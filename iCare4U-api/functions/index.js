@@ -80,7 +80,7 @@ app.get("/medicines/:medicineId", FBAuth, getMedicineById);
 app.post("/medicines/:patientId", FBAuth, addMedicine);
 app.post("/medicines/:medicineId", FBAuth, updateMedicine);
 app.delete("/medicines", FBAuth, deleteMedicine);
-app.get("/medicinesByPatientId/:patientId", getMedicinesByPatient);
+app.get("/medicinesByPatientId/:patientId", FBAuth, getMedicinesByPatient);
 
 // schedules
 app.get("/schedules/:scheduleId", FBAuth, getScheduleById);

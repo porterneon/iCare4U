@@ -7,7 +7,7 @@ const {
 } = require("../util/validators");
 
 const { removePatientSchedule } = require("../modules/patients");
-const { getSchedules } = require("../modules/schedules");
+const { getItems } = require("../modules/generic");
 
 exports.getScheduleById = async (req, res) => {
   if (isEmpty(req.params.scheduleId)) {
@@ -126,7 +126,7 @@ exports.getSchedulesByPatient = async (req, res) => {
 
     console.log(scheduleIds);
 
-    const { errors, results, valid } = await getSchedules(scheduleIds);
+    const { errors, results, valid } = await getItems("schedules", scheduleIds);
 
     if (!valid) return res.status(400).json(errors);
 

@@ -9,7 +9,7 @@ const {
 
 const { removePatientMedicine } = require("../modules/patients");
 
-const { getMedicines } = require("../modules/medicines");
+const { getItems } = require("../modules/generic");
 
 exports.getMedicineById = async (req, res) => {
   let medicinesDetails = {};
@@ -122,7 +122,7 @@ exports.getMedicinesByPatient = async (req, res) => {
 
     let medicineIds = doc.data().medicines;
 
-    const { errors, results, valid } = await getMedicines(medicineIds);
+    const { errors, results, valid } = await getItems("medicines", medicineIds);
 
     if (!valid) return res.status(400).json(errors);
 

@@ -7,8 +7,9 @@ const {
   isEmpty
 } = require("../util/validators");
 
-const patientsModule = require("../modules/patients");
 const groupModule = require("../modules/userGroups");
+
+const { getItems } = require("../modules/generic");
 
 exports.getPatientsByUser = async (req, res) => {
   try {
@@ -27,15 +28,14 @@ exports.getPatientsByUser = async (req, res) => {
 
     console.log(uniquePatientIds);
 
-    let patients = await patientsModule.getPatients(uniquePatientIds);
-    console.log(patients);
+    const { errors, results, valid } = await getItems(
+      "patient",
+      uniquePatientIds
+    );
 
-    if (patients.errors.length > 0) {
-      console.error(patients.errors);
-      return res.status(500).json(errors);
-    } else {
-      return res.json(patients.results);
-    }
+    if (!valid) return res.status(400).json(errors);
+
+    return res.status(200).json(results);
   } catch (e) {
     console.error(e);
     return res.status(500).json(e);

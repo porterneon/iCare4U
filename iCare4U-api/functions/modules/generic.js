@@ -1,12 +1,12 @@
 const { db } = require("../util/admin");
 
-async function getSchedules(ids) {
+async function getItems(collectionName, ids) {
   let queries = [];
   ids.forEach(id => {
     //console.log(id);
     queries.push(
       db
-        .collection("schedules")
+        .collection(collectionName)
         .doc(id)
         .get()
     );
@@ -22,8 +22,10 @@ async function getSchedules(ids) {
           let p = element.data();
           p.patientId = element.id;
           results.push(p);
+
+          console.log(p);
         } else {
-          console.log("schedule details not found");
+          console.log(`${collectionName} details not found`);
         }
       });
     })
@@ -40,5 +42,5 @@ async function getSchedules(ids) {
 }
 
 module.exports = {
-  getSchedules
+  getItems
 };
