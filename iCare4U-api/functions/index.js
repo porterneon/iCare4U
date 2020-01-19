@@ -29,15 +29,25 @@ const {
 const {
   getGroupByUserId,
   addUserGroup,
-  deleteUserGroup
+  deleteUserGroup,
+  addUserIntoGroup
 } = require("./handlers/userGroups");
 
 const {
   addMedicine,
   deleteMedicine,
   getMedicineById,
-  updateMedicine
+  updateMedicine,
+  getMedicinesByPatient
 } = require("./handlers/medicines");
+
+const {
+  addSchedule,
+  deleteSchedule,
+  getScheduleById,
+  updateSchedule,
+  getSchedulesByPatient
+} = require("./handlers/schedules");
 
 app.get("/", helloWorld);
 
@@ -70,5 +80,13 @@ app.get("/medicines/:medicineId", getMedicineById);
 app.post("/medicines/:patientId", addMedicine);
 app.post("/medicines/:medicineId", updateMedicine);
 app.delete("/medicines", deleteMedicine);
+app.get("/medicinesByPatientId/:patientId", getMedicinesByPatient);
+
+// schedules
+app.get("/schedules/:scheduleId", getScheduleById);
+app.post("/schedules/:patientId", addSchedule);
+app.post("/schedules/:scheduleId", updateSchedule);
+app.delete("/schedules", deleteSchedule);
+app.get("/schedulesByPatientId/:patientId", getSchedulesByPatient);
 
 exports.api = functions.region("europe-west1").https.onRequest(app);

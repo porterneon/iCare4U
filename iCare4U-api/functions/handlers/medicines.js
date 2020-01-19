@@ -9,6 +9,8 @@ const {
 
 const { removePatientMedicine } = require("../modules/patients");
 
+const { getMedicines } = require("../modules/medicines");
+
 exports.getMedicineById = async (req, res) => {
   let medicinesDetails = {};
   try {
@@ -100,6 +102,31 @@ exports.deleteMedicine = async (req, res) => {
     if (!valid) return res.status(400).json(errors);
 
     return res.status(201).json("Ok");
+  } catch (e) {
+    console.error(e);
+    return res.status(500).json(e.code);
+  }
+};
+
+exports.getMedicinesByPatient = async (req, res) => {
+  try {
+    if (isEmpty(req.params.patientId))
+      return res
+        .status(400)
+        .json({ error: "Parameter patientId is required." });
+
+    let doc = await db
+      .collection("patient")
+      .doc(req.params.patientId)
+      .get();
+
+    let medicineIds = doc.data().medicines;
+
+    const { errors, results, valid } = await getMedicines(medicineIds);
+
+    if (!valid) return res.status(400).json(errors);
+
+    return res.status(200).json(results);
   } catch (e) {
     console.error(e);
     return res.status(500).json(e.code);

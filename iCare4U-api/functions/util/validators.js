@@ -169,3 +169,38 @@ exports.reduceMedicineDetails = data => {
 
   return details;
 };
+
+// schedules
+
+exports.reduceScheduleDetails = data => {
+  let details = {};
+
+  if (!isEmpty(data.medicineId.trim())) details.medicineId = data.medicineId;
+  if (!isEmpty(data.repeatEvery.trim())) details.repeatEvery = data.repeatEvery;
+  if (!isEmpty(data.endDate.trim())) details.endDate = data.endDate;
+  if (!isEmpty(data.repeatUom.trim())) details.repeatUom = data.repeatUom;
+  if (!isEmpty(data.scheduleDateTime.trim()))
+    details.scheduleDateTime = data.scheduleDateTime;
+  if (!isEmpty(data.createdAt.trim())) details.createdAt = data.createdAt;
+
+  if (isEmpty(data.repeatEvery)) data.repeatEvery = "0";
+
+  if (data.repeatEvery === "0") details.endDate = "";
+
+  return details;
+};
+
+exports.validateAddSchedulePayload = data => {
+  let errors = {};
+
+  if (isEmpty(data.scheduleDateTime))
+    errors.scheduleDateTime = "Must not be empty";
+  if (isEmpty(data.medicineId)) errors.medicineId = "Must not be empty";
+
+  if (isEmpty(data.repeatEvery)) errors.repeatEvery = "Must not be empty";
+
+  return {
+    errors,
+    valid: Object.keys(errors).length === 0 ? true : false
+  };
+};

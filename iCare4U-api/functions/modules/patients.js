@@ -57,7 +57,27 @@ async function removePatientMedicine(patientId, id) {
   };
 }
 
+async function removePatientSchedule(patientId, id) {
+  var errors = [];
+  try {
+    let patientRef = db.collection("patient").doc(patientId);
+
+    await patientRef.update({
+      schedules: admin.firestore.FieldValue.arrayRemove(id)
+    });
+  } catch (e) {
+    console.error(e);
+    errors.push(e);
+  }
+
+  return {
+    errors: errors,
+    valid: Object.keys(errors).length === 0 ? true : false
+  };
+}
+
 module.exports = {
   getPatients,
-  removePatientMedicine
+  removePatientMedicine,
+  removePatientSchedule
 };
