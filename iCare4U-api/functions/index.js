@@ -61,32 +61,32 @@ app.get("/user", FBAuth, getAuthenticatedUser);
 app.get("/user/:handle", FBAuth, getUserDetails);
 
 // Patients routes
-app.get("/patients", getAllPatients);
-app.get("/patients/:patientId", getPatientDetails);
-app.get("/patientsByUserId/:userId", getPatientsByUser);
+app.get("/patients", FBAuth, getAllPatients);
+app.get("/patients/:patientId", FBAuth, getPatientDetails);
+app.get("/patientsByUserId/:userId", FBAuth, getPatientsByUser);
 app.post("/patients", FBAuth, addPatientDetails);
 app.post("/addPatientIntoGroup", FBAuth, addPatientIntoGroup);
-app.delete("/patients/:patientId", deletePatient);
-app.post("/patients/:patientId", updatePatientDetails);
+app.delete("/patients/:patientId", FBAuth, deletePatient);
+app.post("/patients/:patientId", FBAuth, updatePatientDetails);
 
 // user groups
 app.get("/groupsByUserId/:userId", FBAuth, getGroupByUserId);
 app.post("/userGroup", FBAuth, addUserGroup);
 app.delete("/userGroup", FBAuth, deleteUserGroup);
-app.post("/userGroup/addUserIntoGroup", addUserIntoGroup);
+app.post("/userGroup/addUserIntoGroup", FBAuth, addUserIntoGroup);
 
 // medicines
-app.get("/medicines/:medicineId", getMedicineById);
-app.post("/medicines/:patientId", addMedicine);
-app.post("/medicines/:medicineId", updateMedicine);
-app.delete("/medicines", deleteMedicine);
+app.get("/medicines/:medicineId", FBAuth, getMedicineById);
+app.post("/medicines/:patientId", FBAuth, addMedicine);
+app.post("/medicines/:medicineId", FBAuth, updateMedicine);
+app.delete("/medicines", FBAuth, deleteMedicine);
 app.get("/medicinesByPatientId/:patientId", getMedicinesByPatient);
 
 // schedules
-app.get("/schedules/:scheduleId", getScheduleById);
-app.post("/schedules/:patientId", addSchedule);
-app.post("/schedules/:scheduleId", updateSchedule);
-app.delete("/schedules", deleteSchedule);
-app.get("/schedulesByPatientId/:patientId", getSchedulesByPatient);
+app.get("/schedules/:scheduleId", FBAuth, getScheduleById);
+app.post("/schedules/:patientId", FBAuth, addSchedule);
+app.post("/schedules/:scheduleId", FBAuth, updateSchedule);
+app.delete("/schedules", FBAuth, deleteSchedule);
+app.get("/schedulesByPatientId/:patientId", FBAuth, getSchedulesByPatient);
 
 exports.api = functions.region("europe-west1").https.onRequest(app);
