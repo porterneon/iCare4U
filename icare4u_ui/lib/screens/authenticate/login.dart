@@ -130,6 +130,7 @@ class _LoginScreenState extends State<LoginScreen> {
       child: RaisedButton(
         elevation: 5.0,
         onPressed: () async {
+          print('run signing in');
           dynamic result = await _authService.signInAnon();
           if (result == null) {
             print('error signing in');
