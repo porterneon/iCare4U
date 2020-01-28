@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:icare4u_ui/services/auth.dart';
+import 'package:icare4u_ui/services/login_button.dart';
 
 class SignIn extends StatefulWidget {
   @override
@@ -30,28 +31,7 @@ class _SignInState extends State<SignIn> {
           border:
               OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
     );
-    final loginButon = Material(
-      elevation: 5.0,
-      borderRadius: BorderRadius.circular(30.0),
-      color: Color(0xff01A0C7),
-      child: MaterialButton(
-        minWidth: MediaQuery.of(context).size.width,
-        padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-        onPressed: () async {
-          dynamic result = await _authService.signInAnon();
-          if (result == null) {
-            print('error signing in');
-          } else {
-            print('signed in');
-            print(result);
-          }
-        },
-        child: Text("Login",
-            textAlign: TextAlign.center,
-            style: style.copyWith(
-                color: Colors.white, fontWeight: FontWeight.bold)),
-      ),
-    );
+    final loginButon = LoginButton(authService: _authService, style: style);
 
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
