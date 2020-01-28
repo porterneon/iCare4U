@@ -52,7 +52,7 @@ class _SignInState extends State<SignIn> {
                 SizedBox(
                   height: 155.0,
                   child: Image.asset(
-                    'images/logo.png',
+                    'assets/logos//logo.png',
                     fit: BoxFit.contain,
                   ),
                 ),
