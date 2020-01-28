@@ -8,6 +8,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: 'iCare4U',
       home: Wrapper(),
       theme: ThemeData(
           backgroundColor: Colors.white,
