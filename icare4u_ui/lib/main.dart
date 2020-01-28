@@ -11,6 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamProvider<User>.value(
+      value: AuthService().user,
       child: MaterialApp(
         title: 'iCare4U',
         home: Wrapper(),
@@ -18,7 +19,6 @@ class MyApp extends StatelessWidget {
             backgroundColor: Colors.white,
             appBarTheme: AppBarTheme(color: Color(0xff01A0C7))),
       ),
-      value: AuthService().user,
     );
   }
 }
