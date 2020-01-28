@@ -11,6 +11,8 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   bool _rememberMe = false;
   final AuthService _authService = AuthService();
+  String email = '';
+  String password = '';
 
   Widget _buildEmailTF() {
     return Column(
@@ -26,6 +28,9 @@ class _LoginScreenState extends State<LoginScreen> {
           decoration: kBoxDecorationStyle,
           height: 60.0,
           child: TextField(
+            onChanged: (val) {
+              setState(() => email = val);
+            },
             keyboardType: TextInputType.emailAddress,
             style: TextStyle(
               color: Colors.white,
@@ -61,6 +66,9 @@ class _LoginScreenState extends State<LoginScreen> {
           decoration: kBoxDecorationStyle,
           height: 60.0,
           child: TextField(
+            onChanged: (val) {
+              setState(() => password = val);
+            },
             obscureText: true,
             style: TextStyle(
               color: Colors.white,
@@ -130,7 +138,8 @@ class _LoginScreenState extends State<LoginScreen> {
       child: RaisedButton(
         elevation: 5.0,
         onPressed: () async {
-          print('run signing in');
+          print(email);
+          print(password);
           dynamic result = await _authService.signInAnon();
           if (result == null) {
             print('error signing in');
