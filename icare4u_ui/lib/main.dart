@@ -9,6 +9,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Wrapper(),
+      theme: ThemeData(
+          backgroundColor: Colors.white,
+          appBarTheme: AppBarTheme(color: Color(0xff01A0C7))),
     );
   }
 }

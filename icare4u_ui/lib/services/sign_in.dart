@@ -11,9 +11,9 @@ class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.brown[100],
+      backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
-        backgroundColor: Colors.brown[400],
+        backgroundColor: Theme.of(context).appBarTheme.color,
         elevation: 0.0,
         title: Text('Sign in to iCare4U'),
       ),
