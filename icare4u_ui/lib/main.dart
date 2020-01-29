@@ -16,7 +16,8 @@ class MyApp extends StatelessWidget {
         title: 'iCare4U',
         home: Wrapper(),
         theme: ThemeData(
-            backgroundColor: Colors.white,
+            // backgroundColor: Colors.white,
+            brightness: Brightness.dark,
             appBarTheme: AppBarTheme(color: Color(0xff01A0C7)),
             fontFamily: 'OpenSans'),
       ),
