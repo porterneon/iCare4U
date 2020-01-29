@@ -85,7 +85,7 @@ class _LoginScreenState extends State<LoginScreen> {
             letterSpacing: 1.5,
             fontSize: 18.0,
             fontWeight: FontWeight.bold,
-            fontFamily: 'OpenSans',
+            // fontFamily: 'OpenSans',
           ),
         ),
       ),

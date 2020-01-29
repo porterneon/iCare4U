@@ -17,7 +17,8 @@ class MyApp extends StatelessWidget {
         home: Wrapper(),
         theme: ThemeData(
             backgroundColor: Colors.white,
-            appBarTheme: AppBarTheme(color: Color(0xff01A0C7))),
+            appBarTheme: AppBarTheme(color: Color(0xff01A0C7)),
+            fontFamily: 'OpenSans'),
       ),
     );
   }

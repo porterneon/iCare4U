@@ -40,7 +40,7 @@ class InputTextField extends StatelessWidget {
             keyboardType: TextInputType.emailAddress,
             style: TextStyle(
               color: Colors.white,
-              fontFamily: 'OpenSans',
+              // fontFamily: 'OpenSans',
             ),
             decoration: InputDecoration(
               border: InputBorder.none,
