@@ -22,8 +22,21 @@ class Home extends StatelessWidget {
           )
         ],
       ),
-      body: Container(
-        child: Text('home'),
+      body: Center(
+        child: Column(
+          children: <Widget>[
+            Container(
+              child: Text('home'),
+            ),
+            RaisedButton(
+              child: Text('Launch screen'),
+              onPressed: () {
+                // Navigate to the second screen using a named route.
+                Navigator.pushNamed(context, '/second');
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
