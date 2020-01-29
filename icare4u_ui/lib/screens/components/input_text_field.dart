@@ -6,12 +6,16 @@ class InputTextField extends StatelessWidget {
   final String hintText;
   final ValueChanged<String> onChanged;
   final IconData iconData;
+  final bool obscureText;
+  final TextInputType textInputType;
 
   InputTextField(
       {Key key,
       this.labelText,
       this.hintText,
       this.iconData,
+      this.obscureText,
+      this.textInputType,
       @required this.onChanged})
       : super(key: key);
 
@@ -37,7 +41,8 @@ class InputTextField extends StatelessWidget {
             onChanged: (val) {
               _handleChange(val);
             },
-            keyboardType: TextInputType.emailAddress,
+            obscureText: this.obscureText,
+            keyboardType: this.textInputType,
             style: TextStyle(
               color: Colors.white,
               // fontFamily: 'OpenSans',

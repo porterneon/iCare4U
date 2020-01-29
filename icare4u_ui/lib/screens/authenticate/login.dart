@@ -219,6 +219,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     labelText: 'Email',
                     hintText: 'Enter your Email',
                     iconData: Icons.email,
+                    obscureText: false,
+                    textInputType: TextInputType.emailAddress,
                     onChanged: (val) {
                       setState(() => email = val);
                     },
@@ -230,6 +232,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     labelText: 'Password',
                     hintText: 'Enter your Password',
                     iconData: Icons.lock,
+                    obscureText: true,
+                    textInputType: TextInputType.text,
                     onChanged: (val) {
                       setState(() => password = val);
                     },
