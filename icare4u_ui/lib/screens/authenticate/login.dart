@@ -71,6 +71,7 @@ class _LoginScreenState extends State<LoginScreen> {
           } else {
             print('signed in');
             print(result);
+            Navigator.pushNamed(context, '/');
           }
         },
         padding: EdgeInsets.all(15.0),
@@ -101,6 +102,7 @@ class _LoginScreenState extends State<LoginScreen> {
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
           child: Container(
+            decoration: globalGradientDecorationStyle,
             height: double.infinity,
             child: SingleChildScrollView(
               physics: AlwaysScrollableScrollPhysics(),

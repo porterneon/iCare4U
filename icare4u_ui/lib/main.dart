@@ -1,4 +1,5 @@
 import 'package:icare4u_ui/models/user.dart';
+import 'package:icare4u_ui/screens/authenticate/login.dart';
 import 'package:icare4u_ui/screens/home/second_screen.dart';
 import 'package:icare4u_ui/screens/wrapper.dart';
 import 'package:flutter/material.dart';
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget {
           '/': (context) => Wrapper(),
           // When navigating to the "/second" route, build the SecondScreen widget.
           '/second': (context) => SecondScreen(),
+          '/loginScreen': (context) => LoginScreen(),
         },
       ),
     );
