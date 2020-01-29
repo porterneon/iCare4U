@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:icare4u_ui/utilities/constants.dart';
 
-class EmailTextField extends StatelessWidget {
-  final String txt;
+class InputTextField extends StatelessWidget {
+  final String labelText;
+  final String hintText;
   final ValueChanged<String> onChanged;
+  final IconData iconData;
 
-  EmailTextField({Key key, this.txt, @required this.onChanged})
+  InputTextField(
+      {Key key,
+      this.labelText,
+      this.hintText,
+      this.iconData,
+      @required this.onChanged})
       : super(key: key);
 
   void _handleChange(val) {
@@ -18,7 +25,7 @@ class EmailTextField extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
-          this.txt,
+          this.labelText,
           style: kLabelStyle,
         ),
         SizedBox(height: 10.0),
@@ -39,10 +46,10 @@ class EmailTextField extends StatelessWidget {
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 14.0),
               prefixIcon: Icon(
-                Icons.email,
+                this.iconData,
                 color: Colors.white,
               ),
-              hintText: 'Enter your Email',
+              hintText: this.hintText,
               hintStyle: kHintTextStyle,
             ),
           ),

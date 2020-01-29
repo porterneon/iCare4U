@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:icare4u_ui/screens/components/email_text_field.dart';
+import 'package:icare4u_ui/screens/components/input_text_field.dart';
 import 'package:icare4u_ui/services/auth.dart';
 import 'package:icare4u_ui/utilities/constants.dart';
 
@@ -254,8 +254,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   SizedBox(height: 30.0),
                   //_buildEmailTF(),
-                  EmailTextField(
-                    txt: 'Email',
+                  InputTextField(
+                    labelText: 'Email',
+                    hintText: 'Enter your Email',
+                    iconData: Icons.email,
                     onChanged: (val) {
                       setState(() => email = val);
                     },
