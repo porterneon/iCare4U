@@ -15,44 +15,6 @@ class _LoginScreenState extends State<LoginScreen> {
   String email = '';
   String password = '';
 
-  Widget _buildPasswordTF() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Text(
-          'Password',
-          style: kLabelStyle,
-        ),
-        SizedBox(height: 10.0),
-        Container(
-          alignment: Alignment.centerLeft,
-          decoration: kBoxDecorationStyle,
-          height: 60.0,
-          child: TextField(
-            onChanged: (val) {
-              setState(() => password = val);
-            },
-            obscureText: true,
-            style: TextStyle(
-              color: Colors.white,
-              fontFamily: 'OpenSans',
-            ),
-            decoration: InputDecoration(
-              border: InputBorder.none,
-              contentPadding: EdgeInsets.only(top: 14.0),
-              prefixIcon: Icon(
-                Icons.lock,
-                color: Colors.white,
-              ),
-              hintText: 'Enter your Password',
-              hintStyle: kHintTextStyle,
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
   Widget _buildForgotPasswordBtn() {
     return Container(
       alignment: Alignment.centerRight,
@@ -253,7 +215,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   SizedBox(height: 30.0),
-                  //_buildEmailTF(),
                   InputTextField(
                     labelText: 'Email',
                     hintText: 'Enter your Email',
@@ -265,7 +226,14 @@ class _LoginScreenState extends State<LoginScreen> {
                   SizedBox(
                     height: 30.0,
                   ),
-                  _buildPasswordTF(),
+                  InputTextField(
+                    labelText: 'Password',
+                    hintText: 'Enter your Password',
+                    iconData: Icons.lock,
+                    onChanged: (val) {
+                      setState(() => password = val);
+                    },
+                  ),
                   _buildForgotPasswordBtn(),
                   _buildRememberMeCheckbox(),
                   _buildLoginBtn(),
