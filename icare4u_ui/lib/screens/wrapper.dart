@@ -22,7 +22,7 @@ class Wrapper extends StatelessWidget {
   }
 
   Widget buildCenter(User user) {
-    if (user == null) {
+    if (user == null) {      
       return WelcomeScreen();
       // return LoginScreen();
     } else {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:icare4u_ui/screens/components/input_text_field.dart';
+import 'package:icare4u_ui/screens/wrapper.dart';
 import 'package:icare4u_ui/services/auth.dart';
 import 'package:icare4u_ui/utilities/constants.dart';
 
@@ -71,7 +72,10 @@ class _LoginScreenState extends State<LoginScreen> {
           } else {
             print('signed in');
             print(result);
-            Navigator.pushNamed(context, '/');
+            Navigator.pushReplacement(
+                context,
+                new MaterialPageRoute(
+                    builder: (BuildContext context) => new Wrapper()));
           }
         },
         padding: EdgeInsets.all(15.0),

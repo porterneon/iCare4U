@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:icare4u_ui/screens/authenticate/login.dart';
 import 'package:icare4u_ui/utilities/constants.dart';
 
 class WelcomeScreen extends StatefulWidget {
@@ -25,7 +26,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       child: RaisedButton(
         elevation: 5.0,
         onPressed: () {
-          Navigator.pushNamed(context, '/loginScreen');
+          // Navigator.pushNamed(context, '/loginScreen');
+          Navigator.pushReplacement(
+              context,
+              new MaterialPageRoute(
+                  builder: (BuildContext context) => new LoginScreen()));
         },
         padding: EdgeInsets.all(15.0),
         shape: RoundedRectangleBorder(
