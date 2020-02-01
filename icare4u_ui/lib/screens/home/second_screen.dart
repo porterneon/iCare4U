@@ -7,11 +7,11 @@ class SecondScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.transparent,
-      // appBar: AppBar(
-      //   title: Text('Second screen'),
-      //   backgroundColor: Color(0xFF398AE5),
-      //   elevation: 0.0,
-      // ),
+      appBar: AppBar(
+        title: Text('Second screen'),
+        backgroundColor: Color(0xFF73AEF5),
+        elevation: 0.0,
+      ),
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),

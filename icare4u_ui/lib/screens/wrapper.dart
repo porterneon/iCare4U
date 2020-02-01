@@ -15,36 +15,48 @@ class Wrapper extends StatelessWidget {
 
     // return either the Home or Authenticate widget
     return Scaffold(
-      drawer: Drawer(
-        child: ListView(
-          children: <Widget>[
-            DrawerHeader(
-              child: Text('Drawer Header'),
+      drawer: Theme(
+        data: Theme.of(context).copyWith(
+            // canvasColor: Color(0xFF73AEF5),
+            // textTheme: new TextTheme(
+            //   body1: new TextStyle(color: Colors.red),
+            //   title: new TextStyle(color: Colors.red),
+            // ),
             ),
-            ListTile(
-              leading: Icon(Icons.message),
-              title: Text('Messages'),
-            ),
-            ListTile(
-              leading: Icon(Icons.account_circle),
-              title: Text('Profile'),
-            ),
-            ListTile(
-              leading: Icon(Icons.settings),
-              title: Text('Settings'),
-            ),
-            ListTile(
-              title: Text('Logout'),
-              leading: Icon(Icons.person),
-              onTap: () async {
-                await _auth.signOut();
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
+        child: Drawer(
+          child: ListView(
+            children: <Widget>[
+              DrawerHeader(
+                child: Text('Drawer Header'),
+              ),
+              ListTile(
+                leading: Icon(Icons.message),
+                title: Text('Messages'),
+              ),
+              ListTile(
+                leading: Icon(Icons.account_circle),
+                title: Text('Profile'),
+              ),
+              ListTile(
+                leading: Icon(Icons.settings),
+                title: Text('Settings'),
+              ),
+              ListTile(
+                title: Text('Logout'),
+                leading: Icon(Icons.person),
+                onTap: () async {
+                  await _auth.signOut();
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          ),
         ),
       ),
-      // appBar: AppBar(),
+      appBar: AppBar(
+        backgroundColor: Color(0xFF73AEF5),
+        elevation: 0.0,
+      ),
       body: Container(
         // Add box decoration
         decoration: globalGradientDecorationStyle,
