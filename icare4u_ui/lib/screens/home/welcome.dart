@@ -26,7 +26,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       child: RaisedButton(
         elevation: 5.0,
         onPressed: () {
-          // Navigator.pushNamed(context, '/loginScreen');
           Navigator.pushReplacement(
               context,
               new MaterialPageRoute(

@@ -1,42 +1,38 @@
 import 'dart:async';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:icare4u_ui/models/user.dart';
+// import 'package:icare4u_ui/models/user.dart';
+import 'package:icare4u_ui/services/token_change_controller.dart';
 
 class SecureStorage {
   final storage = new FlutterSecureStorage();
 
-  User _userFromFirebaseUser(String token) {
-    print("user token: $token");
-    return token != null ? User(uid: token) : null;
+  TokenChangeController _tokenChangeController;
+
+  // Future _doneFuture;
+  SecureStorage(TokenChangeController tck) {
+    // _doneFuture = readUserToken();
+    this._tokenChangeController = tck;
   }
 
-  final changeController = new StreamController<String>();
-  Stream<User> get onChange {
-    print("user stream changed value");
-    return changeController.stream
-        .map((String token) => _userFromFirebaseUser(token));
-  }
+  // Future get initializationDone => _doneFuture;
 
-  Future _doneFuture;
-  SecureStorage() {
-    _doneFuture = readUserToken();
-  }
-
-  Future get initializationDone => _doneFuture;
-
-  Future readUserToken() async {
+  Future<String> readUserToken() async {
     var token = await storage.read(key: 'jwt');
-    changeController.add(token);
+    _tokenChangeController.changeController.add(token);
+    print("initialized storage class");
+    return token;
   }
 
   Future write(String key, String token) async {
     await storage.write(key: key, value: token);
-    changeController.add(token);
+    print("token saved in sorage");
+    _tokenChangeController.changeController.add(token);
+    print("token change added");
     return token;
   }
 
   Future delete(String key) async {
     await storage.delete(key: 'jwt');
-    changeController.add(null);
+    _tokenChangeController.changeController.add(null);
   }
 }

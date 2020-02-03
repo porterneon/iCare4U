@@ -1,23 +1,19 @@
 import 'package:http/http.dart' as http;
-import 'package:icare4u_ui/models/user.dart';
 import 'package:icare4u_ui/services/global_settings.dart';
 import 'dart:convert';
 
 import 'package:icare4u_ui/services/secure_storage.dart';
+import 'package:icare4u_ui/services/token_change_controller.dart';
 
-class UserService {
+class UserAuthService {
   String apiUrl;
   String userApiPath;
-  GlobalSettings _globalSettings = GlobalSettings();
-  final SecureStorage _storage = SecureStorage();
+  final GlobalSettings _globalSettings = GlobalSettings();
+  SecureStorage storage;
 
-  UserService() {
+  UserAuthService(TokenChangeController tck) {
     this.apiUrl = _globalSettings.getApiUrl();
-  }
-
-  User _userFromFirebaseUser(String token) {
-    print("user token: $token");
-    return token != null ? User(uid: token) : null;
+    this.storage = new SecureStorage(tck);
   }
 
   Future getAllUsersDetails() async {
@@ -43,9 +39,7 @@ class UserService {
       var result = await client.post(path, body: credentials);
 
       Map<String, dynamic> user = jsonDecode(result.body);
-      // print(user['token']);
-      var token = await _storage.write('jwt', user['token']);
-      return _userFromFirebaseUser(token);
+      return await storage.write('jwt', user['token']);
     } catch (e) {
       print(e.toString());
       return null;
@@ -56,7 +50,7 @@ class UserService {
   Future signOut() async {
     try {
       print("signing out...");
-      await _storage.delete('jwt');
+      await storage.delete('jwt');
       return;
     } catch (e) {
       print(e.toString());

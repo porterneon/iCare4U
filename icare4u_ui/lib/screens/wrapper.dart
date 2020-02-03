@@ -2,16 +2,17 @@ import 'package:icare4u_ui/screens/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:icare4u_ui/models/user.dart';
 import 'package:icare4u_ui/screens/home/welcome.dart';
-import 'package:icare4u_ui/services/user.dart';
+import 'package:icare4u_ui/services/token_change_controller.dart';
+import 'package:icare4u_ui/services/user_auth.dart';
 import 'package:icare4u_ui/utilities/constants.dart';
 import 'package:provider/provider.dart';
 
 class Wrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final tokenChangeController = Provider.of<TokenChangeController>(context);
+    final UserAuthService _userService = UserAuthService(tokenChangeController);
     final user = Provider.of<User>(context);
-    // final AuthService _auth = AuthService();
-    final UserService _userService = UserService();
 
     // return either the Home or Authenticate widget
     return Scaffold(
@@ -38,7 +39,6 @@ class Wrapper extends StatelessWidget {
               title: Text('Logout'),
               leading: Icon(Icons.person),
               onTap: () async {
-                // await _auth.signOut();
                 await _userService.signOut();
                 Navigator.of(context).pop();
               },
