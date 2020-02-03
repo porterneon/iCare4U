@@ -66,7 +66,8 @@ class _LoginScreenState extends State<LoginScreen> {
         onPressed: () async {
           print(email);
           print(password);
-          dynamic result = await _authService.signInAnon();
+          dynamic result =
+              await _authService.signInWithEmailAndPassword(email, password);
           if (result == null) {
             print('error signing in');
           } else {
