@@ -9,7 +9,7 @@ class SecondScreen extends StatelessWidget {
       backgroundColor: Colors.transparent,
       appBar: AppBar(
         title: Text('Second screen'),
-        backgroundColor: Color(0xFF398AE5),
+        backgroundColor: Color(0xFF73AEF5),
         elevation: 0.0,
       ),
       body: AnnotatedRegion<SystemUiOverlayStyle>(
@@ -28,6 +28,7 @@ class SecondScreen extends StatelessWidget {
                 ),
                 child: Column(
                   children: <Widget>[
+                    SizedBox(height: 40.0),
                     Text('second screen'),
                     RaisedButton(
                       onPressed: () {
