@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:icare4u_ui/screens/components/input_text_field.dart';
 import 'package:icare4u_ui/screens/wrapper.dart';
-// import 'package:icare4u_ui/services/auth.dart';
 import 'package:icare4u_ui/services/user.dart';
 import 'package:icare4u_ui/utilities/constants.dart';
 

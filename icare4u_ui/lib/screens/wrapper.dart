@@ -1,9 +1,7 @@
-// import 'package:icare4u_ui/screens/authenticate/login.dart';
 import 'package:icare4u_ui/screens/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:icare4u_ui/models/user.dart';
 import 'package:icare4u_ui/screens/home/welcome.dart';
-// import 'package:icare4u_ui/services/auth.dart';
 import 'package:icare4u_ui/services/user.dart';
 import 'package:icare4u_ui/utilities/constants.dart';
 import 'package:provider/provider.dart';
@@ -61,6 +59,7 @@ class Wrapper extends StatelessWidget {
   }
 
   Widget buildCenter(User user) {
+    print(">>>> User: $user");
     if (user == null) {
       return WelcomeScreen();
       // return LoginScreen();
