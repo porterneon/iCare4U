@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:icare4u_ui/services/user.dart';
 import 'package:icare4u_ui/utilities/constants.dart';
 
 class SecondScreen extends StatelessWidget {
+  final UserService _userService = UserService();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,10 +34,12 @@ class SecondScreen extends StatelessWidget {
                     SizedBox(height: 40.0),
                     Text('second screen'),
                     RaisedButton(
-                      onPressed: () {
+                      onPressed: () async {
                         // Navigate back to the first screen by popping the current route
                         // off the stack.
-                        Navigator.pop(context);
+                        // Navigator.pop(context);
+                        var result = await _userService.getAllUsersDetails();
+                        print(result);
                       },
                       child: Text('Go back!'),
                     ),
