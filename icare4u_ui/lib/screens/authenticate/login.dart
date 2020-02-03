@@ -134,7 +134,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     iconData: Icons.email,
                     textInputType: TextInputType.emailAddress,
                     onChanged: (val) {
-                      setState(() => email = val);
+                      setState(() => email = val.trim());
                     },
                   ),
                   SizedBox(
@@ -146,7 +146,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     iconData: Icons.lock,
                     obscureText: true,
                     onChanged: (val) {
-                      setState(() => password = val);
+                      setState(() => password = val.trim());
                     },
                   ),
                   _buildForgotPasswordBtn(),
