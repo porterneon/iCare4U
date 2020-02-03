@@ -3,7 +3,8 @@ import 'package:icare4u_ui/screens/authenticate/login.dart';
 import 'package:icare4u_ui/screens/home/second_screen.dart';
 import 'package:icare4u_ui/screens/wrapper.dart';
 import 'package:flutter/material.dart';
-import 'package:icare4u_ui/services/auth.dart';
+import 'package:icare4u_ui/services/user.dart';
+// import 'package:icare4u_ui/services/auth.dart';
 import 'package:provider/provider.dart';
 
 void main() => runApp(MyApp());
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         StreamProvider<User>.value(
-          value: AuthService().user,
+          value: UserService().user,
         )
       ],
       child: MaterialApp(

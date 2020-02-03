@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:icare4u_ui/screens/components/input_text_field.dart';
 import 'package:icare4u_ui/screens/wrapper.dart';
-import 'package:icare4u_ui/services/auth.dart';
+// import 'package:icare4u_ui/services/auth.dart';
+import 'package:icare4u_ui/services/user.dart';
 import 'package:icare4u_ui/utilities/constants.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -12,7 +13,8 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   bool _rememberMe = false;
-  final AuthService _authService = AuthService();
+  // final AuthService _authService = AuthService();
+  final UserService _userService = UserService();
   String email = '';
   String password = '';
 
@@ -66,8 +68,9 @@ class _LoginScreenState extends State<LoginScreen> {
         onPressed: () async {
           print(email);
           print(password);
-          dynamic result =
-              await _authService.signInWithEmailAndPassword(email, password);
+          dynamic result = await _userService.logIn(email, password);
+          // dynamic result =
+          //     await _authService.signInWithEmailAndPassword(email, password);
           if (result == null) {
             print('error signing in');
           } else {
