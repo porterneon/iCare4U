@@ -32,9 +32,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               new MaterialPageRoute(
                   builder: (BuildContext context) => new LoginScreen()));
         },
-        padding: EdgeInsets.all(15.0),
+        padding: EdgeInsets.all(12.0),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30.0),
+          borderRadius: BorderRadius.circular(6.0),
         ),
         color: Colors.white,
         child: Text(
@@ -58,9 +58,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       child: RaisedButton(
         elevation: 5.0,
         onPressed: () async {},
-        padding: EdgeInsets.all(15.0),
+        padding: EdgeInsets.all(12.0),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30.0),
+          borderRadius: BorderRadius.circular(6.0),
         ),
         color: Colors.white,
         child: Text(

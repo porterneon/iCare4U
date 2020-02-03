@@ -78,9 +78,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     builder: (BuildContext context) => new Wrapper()));
           }
         },
-        padding: EdgeInsets.all(15.0),
+        padding: EdgeInsets.all(12.0),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30.0),
+          borderRadius: BorderRadius.circular(6.0),
         ),
         color: Colors.white,
         child: Text(
