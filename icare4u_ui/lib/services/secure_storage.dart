@@ -8,13 +8,9 @@ class SecureStorage {
 
   TokenChangeController _tokenChangeController;
 
-  // Future _doneFuture;
   SecureStorage(TokenChangeController tck) {
-    // _doneFuture = readUserToken();
     this._tokenChangeController = tck;
   }
-
-  // Future get initializationDone => _doneFuture;
 
   Future<String> readUserToken() async {
     var token = await storage.read(key: 'jwt');

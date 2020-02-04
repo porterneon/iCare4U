@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:icare4u_ui/services/user_auth.dart';
+// import 'package:icare4u_ui/services/user_auth.dart';
 import 'package:icare4u_ui/utilities/constants.dart';
 
 class SecondScreen extends StatelessWidget {
