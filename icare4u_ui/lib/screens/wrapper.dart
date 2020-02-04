@@ -44,7 +44,9 @@ class Wrapper extends StatelessWidget {
           ],
         ),
       ),
-      // appBar: AppBar(),
+      appBar: AppBar(
+        backgroundColor: Color(0xFF73AEF5),
+      ),
       body: Container(
         // Add box decoration
         decoration: globalGradientDecorationStyle,
