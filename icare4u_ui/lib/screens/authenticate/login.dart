@@ -14,8 +14,6 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   bool _rememberMe = true;
-  // final AuthService _authService = AuthService();
-
   String email = '';
   String password = '';
 
@@ -73,8 +71,6 @@ class _LoginScreenState extends State<LoginScreen> {
           print(password);
           dynamic result =
               await _userService.logIn(email, password, _rememberMe);
-          // dynamic result =
-          //     await _authService.signInWithEmailAndPassword(email, password);
           if (result == null) {
             print('error signing in');
           } else {
@@ -107,6 +103,20 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Color(0xFF73AEF5),
+        elevation: 0.0,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          tooltip: 'Back',
+          onPressed: () {
+            Navigator.pushReplacement(
+                context,
+                new MaterialPageRoute(
+                    builder: (BuildContext context) => new Wrapper()));
+          },
+        ),
+      ),
       backgroundColor: Colors.transparent,
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.light,
@@ -119,7 +129,7 @@ class _LoginScreenState extends State<LoginScreen> {
               physics: AlwaysScrollableScrollPhysics(),
               padding: EdgeInsets.symmetric(
                 horizontal: 40.0,
-                vertical: 120.0,
+                vertical: 30.0,
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,

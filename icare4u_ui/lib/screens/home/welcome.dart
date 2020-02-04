@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:icare4u_ui/screens/authenticate/login.dart';
+import 'package:icare4u_ui/screens/authenticate/register.dart';
 import 'package:icare4u_ui/utilities/constants.dart';
 
 class WelcomeScreen extends StatefulWidget {
@@ -37,7 +38,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         ),
         color: Colors.white,
         child: Text(
-          'Login',
+          'Sign In',
           style: TextStyle(
             color: Color(0xFF527DAA),
             letterSpacing: 1.5,
@@ -50,27 +51,65 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     );
   }
 
+  // Widget _buildSignUpBtn() {
+  //   return Container(
+  //     padding: EdgeInsets.symmetric(vertical: 25.0),
+  //     width: double.infinity,
+  //     child: RaisedButton(
+  //       elevation: 5.0,
+  //       onPressed: () {
+  //         Navigator.pushReplacement(
+  //             context,
+  //             new MaterialPageRoute(
+  //                 builder: (BuildContext context) => new Register()));
+  //       },
+  //       padding: EdgeInsets.all(12.0),
+  //       shape: RoundedRectangleBorder(
+  //         borderRadius: BorderRadius.circular(6.0),
+  //       ),
+  //       color: Colors.white,
+  //       child: Text(
+  //         'Sign Up',
+  //         style: TextStyle(
+  //           color: Color(0xFF527DAA),
+  //           letterSpacing: 1.5,
+  //           fontSize: 18.0,
+  //           fontWeight: FontWeight.bold,
+  //           // fontFamily: 'OpenSans',
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
+
   Widget _buildSignUpBtn() {
-    return Container(
-      padding: EdgeInsets.symmetric(vertical: 25.0),
-      width: double.infinity,
-      child: RaisedButton(
-        elevation: 5.0,
-        onPressed: () async {},
-        padding: EdgeInsets.all(12.0),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(6.0),
-        ),
-        color: Colors.white,
-        child: Text(
-          'Sign Up',
-          style: TextStyle(
-            color: Color(0xFF527DAA),
-            letterSpacing: 1.5,
-            fontSize: 18.0,
-            fontWeight: FontWeight.bold,
-            // fontFamily: 'OpenSans',
-          ),
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushReplacement(
+            context,
+            new MaterialPageRoute(
+                builder: (BuildContext context) => new Register()));
+      },
+      child: RichText(
+        text: TextSpan(
+          children: [
+            TextSpan(
+              text: 'Don\'t have an Account? ',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 18.0,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+            TextSpan(
+              text: 'Sign Up',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 18.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
         ),
       ),
     );

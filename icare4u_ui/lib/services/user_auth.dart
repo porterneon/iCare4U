@@ -30,6 +30,15 @@ class UserAuthService {
     }
   }
 
+  Future signUp(String email, String password) {
+    try {
+      return null;
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
+  }
+
   Future logIn(String email, String password, bool rememberMe) async {
     try {
       final credentials = {"email": email, "password": password};
