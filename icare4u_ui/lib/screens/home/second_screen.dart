@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+// import 'package:icare4u_ui/services/user_auth.dart';
 import 'package:icare4u_ui/utilities/constants.dart';
 
 class SecondScreen extends StatelessWidget {
+  // final tokenChangeController = Provider.of<TokenChangeController>(context);
+  // final UserAuthService _userService = UserAuthService();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.transparent,
-      // appBar: AppBar(
-      //   title: Text('Second screen'),
-      //   backgroundColor: Color(0xFF398AE5),
-      //   elevation: 0.0,
-      // ),
+      appBar: AppBar(
+        title: Text('Second screen'),
+        backgroundColor: Color(0xFF73AEF5),
+        elevation: 0.0,
+      ),
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
@@ -31,10 +35,12 @@ class SecondScreen extends StatelessWidget {
                     SizedBox(height: 40.0),
                     Text('second screen'),
                     RaisedButton(
-                      onPressed: () {
+                      onPressed: () async {
                         // Navigate back to the first screen by popping the current route
                         // off the stack.
-                        Navigator.pop(context);
+                        // Navigator.pop(context);
+                        // var result = await _userService.getAllUsersDetails();
+                        // print(result);
                       },
                       child: Text('Go back!'),
                     ),

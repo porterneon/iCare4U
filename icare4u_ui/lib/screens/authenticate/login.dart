@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:icare4u_ui/screens/components/input_text_field.dart';
 import 'package:icare4u_ui/screens/wrapper.dart';
-import 'package:icare4u_ui/services/auth.dart';
+import 'package:icare4u_ui/services/token_change_controller.dart';
+import 'package:icare4u_ui/services/user_auth.dart';
 import 'package:icare4u_ui/utilities/constants.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -12,7 +14,8 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   bool _rememberMe = false;
-  final AuthService _authService = AuthService();
+  // final AuthService _authService = AuthService();
+
   String email = '';
   String password = '';
 
@@ -58,6 +61,8 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Widget _buildLoginBtn() {
+    final tokenChangeController = Provider.of<TokenChangeController>(context);
+    final UserAuthService _userService = UserAuthService(tokenChangeController);
     return Container(
       padding: EdgeInsets.symmetric(vertical: 25.0),
       width: double.infinity,
@@ -66,21 +71,22 @@ class _LoginScreenState extends State<LoginScreen> {
         onPressed: () async {
           print(email);
           print(password);
-          dynamic result = await _authService.signInAnon();
+          dynamic result = await _userService.logIn(email, password);
+          // dynamic result =
+          //     await _authService.signInWithEmailAndPassword(email, password);
           if (result == null) {
             print('error signing in');
           } else {
             print('signed in');
-            print(result);
             Navigator.pushReplacement(
                 context,
                 new MaterialPageRoute(
                     builder: (BuildContext context) => new Wrapper()));
           }
         },
-        padding: EdgeInsets.all(15.0),
+        padding: EdgeInsets.all(12.0),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30.0),
+          borderRadius: BorderRadius.circular(6.0),
         ),
         color: Colors.white,
         child: Text(
@@ -133,7 +139,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     iconData: Icons.email,
                     textInputType: TextInputType.emailAddress,
                     onChanged: (val) {
-                      setState(() => email = val);
+                      setState(() => email = val.trim());
                     },
                   ),
                   SizedBox(
@@ -145,7 +151,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     iconData: Icons.lock,
                     obscureText: true,
                     onChanged: (val) {
-                      setState(() => password = val);
+                      setState(() => password = val.trim());
                     },
                   ),
                   _buildForgotPasswordBtn(),
