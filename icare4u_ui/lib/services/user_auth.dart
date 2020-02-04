@@ -10,6 +10,7 @@ class UserAuthService {
   String userApiPath;
   final GlobalSettings _globalSettings = GlobalSettings();
   SecureStorage storage;
+  final String tokenKey = 'jwt';
 
   UserAuthService(TokenChangeController tck) {
     this.apiUrl = _globalSettings.getApiUrl();
@@ -29,7 +30,7 @@ class UserAuthService {
     }
   }
 
-  Future logIn(String email, String password) async {
+  Future logIn(String email, String password, bool rememberMe) async {
     try {
       final credentials = {"email": email, "password": password};
 
@@ -39,7 +40,8 @@ class UserAuthService {
       var result = await client.post(path, body: credentials);
 
       Map<String, dynamic> user = jsonDecode(result.body);
-      return await storage.write('jwt', user['token']);
+
+      return await storage.write(tokenKey, user['token'], rememberMe);
     } catch (e) {
       print(e.toString());
       return null;
@@ -50,7 +52,7 @@ class UserAuthService {
   Future signOut() async {
     try {
       print("signing out...");
-      await storage.delete('jwt');
+      await storage.delete(tokenKey);
       return;
     } catch (e) {
       print(e.toString());

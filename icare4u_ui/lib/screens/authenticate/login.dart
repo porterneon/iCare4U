@@ -13,7 +13,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  bool _rememberMe = false;
+  bool _rememberMe = true;
   // final AuthService _authService = AuthService();
 
   String email = '';
@@ -71,7 +71,8 @@ class _LoginScreenState extends State<LoginScreen> {
         onPressed: () async {
           print(email);
           print(password);
-          dynamic result = await _userService.logIn(email, password);
+          dynamic result =
+              await _userService.logIn(email, password, _rememberMe);
           // dynamic result =
           //     await _authService.signInWithEmailAndPassword(email, password);
           if (result == null) {

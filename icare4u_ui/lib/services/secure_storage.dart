@@ -19,11 +19,13 @@ class SecureStorage {
     return token;
   }
 
-  Future write(String key, String token) async {
-    await storage.write(key: key, value: token);
+  Future write(String key, String token, bool rememberMe) async {
     print("token saved in sorage");
     _tokenChangeController.changeController.add(token);
     print("token change added");
+    if (rememberMe) {
+      await storage.write(key: key, value: token);
+    }
     return token;
   }
 
