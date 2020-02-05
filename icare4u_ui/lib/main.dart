@@ -42,8 +42,8 @@ class MyApp extends StatelessWidget {
           GlobalWidgetsLocalizations.delegate,
         ],
         supportedLocales: [
-          const Locale('en', ''),
-          const Locale('pl', ''),
+          const Locale('en', 'US'),
+          const Locale('pl', 'PL'),
         ],
         title: 'iCare4U',
         // home: Wrapper(),

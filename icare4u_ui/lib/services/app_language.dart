@@ -19,10 +19,12 @@ class AppLanguage extends ChangeNotifier {
   void changeLanguage(Locale type) async {
     var prefs = await SharedPreferences.getInstance();
 
-    print("change language");
+    print('appLocal: $_appLocale input type: $type');
+
     if (_appLocale == type) {
       return;
     }
+    print("change language");
     if (type == Locale("pl")) {
       _appLocale = Locale("pl");
       await prefs.setString('language_code', 'pl');
@@ -32,6 +34,7 @@ class AppLanguage extends ChangeNotifier {
       await prefs.setString('language_code', 'en');
       await prefs.setString('countryCode', 'US');
     }
+    print("send language change notification");
     notifyListeners();
   }
 }
