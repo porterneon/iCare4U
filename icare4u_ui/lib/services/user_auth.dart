@@ -1,20 +1,18 @@
 import 'package:http/http.dart' as http;
+import 'package:icare4u_ui/service_locator.dart';
 import 'package:icare4u_ui/services/global_settings.dart';
 import 'dart:convert';
-
 import 'package:icare4u_ui/services/secure_storage.dart';
-import 'package:icare4u_ui/services/token_change_controller.dart';
 
 class UserAuthService {
   String apiUrl;
   String userApiPath;
   final GlobalSettings _globalSettings = GlobalSettings();
-  SecureStorage storage;
+  final SecureStorage _storage = locator<SecureStorage>();
   final String tokenKey = 'jwt';
 
-  UserAuthService(TokenChangeController tck) {
+  UserAuthService() {
     this.apiUrl = _globalSettings.getApiUrl();
-    this.storage = new SecureStorage(tck);
   }
 
   Future getAllUsersDetails() async {
@@ -50,7 +48,7 @@ class UserAuthService {
 
       Map<String, dynamic> user = jsonDecode(result.body);
 
-      return await storage.write(tokenKey, user['token'], rememberMe);
+      return await _storage.write(tokenKey, user['token'], rememberMe);
     } catch (e) {
       print(e.toString());
       return null;
@@ -61,7 +59,7 @@ class UserAuthService {
   Future signOut() async {
     try {
       print("signing out...");
-      await storage.delete(tokenKey);
+      await _storage.delete(tokenKey);
       return;
     } catch (e) {
       print(e.toString());

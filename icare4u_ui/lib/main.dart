@@ -3,27 +3,28 @@ import 'package:icare4u_ui/screens/authenticate/login.dart';
 import 'package:icare4u_ui/screens/home/second_screen.dart';
 import 'package:icare4u_ui/screens/wrapper.dart';
 import 'package:flutter/material.dart';
+import 'package:icare4u_ui/service_locator.dart';
 import 'package:icare4u_ui/services/secure_storage.dart';
 import 'package:icare4u_ui/services/token_change_controller.dart';
 import 'package:provider/provider.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  setupLocator();
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
-  final TokenChangeController _tokenChangeController =
-      new TokenChangeController();
-
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        Provider<TokenChangeController>(create: (_) => _tokenChangeController),
+        // Provider<TokenChangeController>(
+        //     create: (_) => locator<TokenChangeController>()),
         StreamProvider<User>.value(
-          value: _tokenChangeController.onChange,
+          value: locator<TokenChangeController>().onChange,
         ),
         FutureProvider<String>.value(
-            value: SecureStorage(_tokenChangeController).readUserToken())
+            value: locator<SecureStorage>().readUserToken())
       ],
       child: MaterialApp(
         title: 'iCare4U',

@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:icare4u_ui/screens/components/input_text_field.dart';
 import 'package:icare4u_ui/screens/wrapper.dart';
-import 'package:icare4u_ui/services/token_change_controller.dart';
+import 'package:icare4u_ui/service_locator.dart';
 import 'package:icare4u_ui/services/user_auth.dart';
 import 'package:icare4u_ui/utilities/constants.dart';
-import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -13,6 +12,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final UserAuthService _userService = locator<UserAuthService>();
   bool _rememberMe = true;
   String email = '';
   String password = '';
@@ -59,8 +59,6 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Widget _buildLoginBtn() {
-    final tokenChangeController = Provider.of<TokenChangeController>(context);
-    final UserAuthService _userService = UserAuthService(tokenChangeController);
     return Container(
       padding: EdgeInsets.symmetric(vertical: 25.0),
       width: double.infinity,

@@ -1,16 +1,13 @@
 import 'dart:async';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:icare4u_ui/service_locator.dart';
 // import 'package:icare4u_ui/models/user.dart';
 import 'package:icare4u_ui/services/token_change_controller.dart';
 
 class SecureStorage {
   final storage = new FlutterSecureStorage();
 
-  TokenChangeController _tokenChangeController;
-
-  SecureStorage(TokenChangeController tck) {
-    this._tokenChangeController = tck;
-  }
+  var _tokenChangeController = locator<TokenChangeController>();
 
   Future<String> readUserToken() async {
     var token = await storage.read(key: 'jwt');

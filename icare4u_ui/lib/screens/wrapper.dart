@@ -2,16 +2,16 @@ import 'package:icare4u_ui/screens/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:icare4u_ui/models/user.dart';
 import 'package:icare4u_ui/screens/home/welcome.dart';
-import 'package:icare4u_ui/services/token_change_controller.dart';
+import 'package:icare4u_ui/service_locator.dart';
 import 'package:icare4u_ui/services/user_auth.dart';
 import 'package:icare4u_ui/utilities/constants.dart';
 import 'package:provider/provider.dart';
 
 class Wrapper extends StatelessWidget {
+  final UserAuthService _userService = locator<UserAuthService>();
+
   @override
   Widget build(BuildContext context) {
-    final tokenChangeController = Provider.of<TokenChangeController>(context);
-    final UserAuthService _userService = UserAuthService(tokenChangeController);
     final user = Provider.of<User>(context);
 
     // return either the Home or Authenticate widget

@@ -3,10 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:icare4u_ui/screens/authenticate/login.dart';
 import 'package:icare4u_ui/screens/components/input_text_field.dart';
 import 'package:icare4u_ui/screens/wrapper.dart';
-import 'package:icare4u_ui/services/token_change_controller.dart';
+import 'package:icare4u_ui/service_locator.dart';
 import 'package:icare4u_ui/services/user_auth.dart';
 import 'package:icare4u_ui/utilities/constants.dart';
-import 'package:provider/provider.dart';
 
 class Register extends StatefulWidget {
   @override
@@ -14,13 +13,13 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
+  final UserAuthService _userService = locator<UserAuthService>();
+
   String email = '';
   String password = '';
   String confirmPassword = '';
 
   Widget _buildSignUpBtn() {
-    final tokenChangeController = Provider.of<TokenChangeController>(context);
-    final UserAuthService _userService = UserAuthService(tokenChangeController);
     return Container(
       padding: EdgeInsets.symmetric(vertical: 25.0),
       width: double.infinity,
