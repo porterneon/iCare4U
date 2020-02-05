@@ -89,7 +89,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       backgroundColor: Colors.transparent,
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
+          // onTap: () => FocusScope.of(context).unfocus(),
           child: Container(
               width: double.infinity,
               height: double.infinity,
@@ -113,7 +113,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 ),
               )),
         ),
-        value: SystemUiOverlayStyle.light,
+        value: SystemUiOverlayStyle.dark,
       ),
     );
   }

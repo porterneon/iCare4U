@@ -7,6 +7,7 @@ import 'package:icare4u_ui/service_locator.dart';
 import 'package:icare4u_ui/services/app_language.dart';
 import 'package:icare4u_ui/services/auth.dart';
 import 'package:icare4u_ui/services/localizations.dart';
+import 'package:icare4u_ui/utilities/constants.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:splashscreen/splashscreen.dart';
@@ -29,18 +30,19 @@ class _MyAppState extends State<AplashApp> {
   @override
   Widget build(BuildContext context) {
     return new SplashScreen(
-        seconds: 3,
+        seconds: 1,
         navigateAfterSeconds: new MyApp(),
         title: new Text(
           'Welcome In iCare4U',
           style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
         ),
         image: new Image.asset('assets/logos/logo.png'),
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.lightBlue[50],
+        gradientBackground: globalGradientDecorationStyle.gradient,
         styleTextUnderTheLoader: new TextStyle(),
         photoSize: 100.0,
         // onClick: () => print("Flutter Egypt"),
-        loaderColor: Colors.red);
+        loaderColor: Colors.white);
   }
 }
 
