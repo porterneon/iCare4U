@@ -5,9 +5,8 @@ import 'package:icare4u_ui/screens/wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:icare4u_ui/service_locator.dart';
 import 'package:icare4u_ui/services/app_language.dart';
+import 'package:icare4u_ui/services/auth.dart';
 import 'package:icare4u_ui/services/localizations.dart';
-import 'package:icare4u_ui/services/secure_storage.dart';
-import 'package:icare4u_ui/services/token_change_controller.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
@@ -27,10 +26,7 @@ class MyApp extends StatelessWidget {
           create: (context) => locator<AppLanguage>(),
         ),
         StreamProvider<User>.value(
-          value: locator<TokenChangeController>().onChange,
-        ),
-        FutureProvider<String>.value(
-          value: locator<SecureStorage>().readUserToken(),
+          value: locator<AuthService>().user,
         ),
       ],
       child: Consumer<AppLanguage>(builder: (context, model, child) {
@@ -46,7 +42,7 @@ class MyApp extends StatelessWidget {
             const Locale('pl', 'PL'),
           ],
           title: 'iCare4U',
-          // home: Wrapper(),
+          // home: await getLandingPage(),
           theme: ThemeData(
             backgroundColor: Colors.black,
             brightness: Brightness.dark,

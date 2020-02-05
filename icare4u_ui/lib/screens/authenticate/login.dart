@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:icare4u_ui/screens/components/input_text_field.dart';
 import 'package:icare4u_ui/screens/wrapper.dart';
 import 'package:icare4u_ui/service_locator.dart';
-import 'package:icare4u_ui/services/user_auth.dart';
+import 'package:icare4u_ui/services/auth.dart';
 import 'package:icare4u_ui/utilities/constants.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -12,8 +12,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final UserAuthService _userService = locator<UserAuthService>();
-  bool _rememberMe = true;
+  final AuthService _auth = locator<AuthService>();
+
   String email = '';
   String password = '';
 
@@ -31,33 +31,6 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Widget _buildRememberMeCheckbox() {
-    return Container(
-      height: 20.0,
-      child: Row(
-        children: <Widget>[
-          Theme(
-            data: ThemeData(unselectedWidgetColor: Colors.white),
-            child: Checkbox(
-              value: _rememberMe,
-              checkColor: Colors.green,
-              activeColor: Colors.white,
-              onChanged: (value) {
-                setState(() {
-                  _rememberMe = value;
-                });
-              },
-            ),
-          ),
-          Text(
-            'Remember me',
-            style: kLabelStyle,
-          ),
-        ],
-      ),
-    );
-  }
-
   Widget _buildLoginBtn() {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 25.0),
@@ -65,18 +38,17 @@ class _LoginScreenState extends State<LoginScreen> {
       child: RaisedButton(
         elevation: 5.0,
         onPressed: () async {
-          print(email);
-          print(password);
           dynamic result =
-              await _userService.logIn(email, password, _rememberMe);
+              await _auth.signInWithEmailAndPassword(email, password);
           if (result == null) {
             print('error signing in');
           } else {
             print('signed in');
+            // var landingPage = await getLandingPage();
             Navigator.pushReplacement(
                 context,
                 new MaterialPageRoute(
-                    builder: (BuildContext context) => new Wrapper()));
+                    builder: (BuildContext context) => Wrapper()));
           }
         },
         padding: EdgeInsets.all(12.0),
@@ -164,11 +136,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     },
                   ),
                   _buildForgotPasswordBtn(),
-                  _buildRememberMeCheckbox(),
+                  // _buildRememberMeCheckbox(),
                   _buildLoginBtn(),
-                  // _buildSignInWithText(),
-                  // _buildSocialBtnRow(),
-                  // _buildSignupBtn(),
                 ],
               ),
             ),
@@ -178,97 +147,3 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 }
-
-// Widget _buildSignInWithText() {
-//   return Column(
-//     children: <Widget>[
-//       Text(
-//         '- OR -',
-//         style: TextStyle(
-//           color: Colors.white,
-//           fontWeight: FontWeight.w400,
-//         ),
-//       ),
-//       SizedBox(height: 20.0),
-//       Text(
-//         'Sign in with',
-//         style: kLabelStyle,
-//       ),
-//     ],
-//   );
-// }
-
-// Widget _buildSocialBtn(Function onTap, AssetImage logo) {
-//   return GestureDetector(
-//     onTap: onTap,
-//     child: Container(
-//       height: 60.0,
-//       width: 60.0,
-//       decoration: BoxDecoration(
-//         shape: BoxShape.circle,
-//         color: Colors.white,
-//         boxShadow: [
-//           BoxShadow(
-//             color: Colors.black26,
-//             offset: Offset(0, 2),
-//             blurRadius: 6.0,
-//           ),
-//         ],
-//         image: DecorationImage(
-//           image: logo,
-//         ),
-//       ),
-//     ),
-//   );
-// }
-
-// Widget _buildSocialBtnRow() {
-//   return Padding(
-//     padding: EdgeInsets.symmetric(vertical: 30.0),
-//     child: Row(
-//       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//       children: <Widget>[
-//         _buildSocialBtn(
-//           () => print('Login with Facebook'),
-//           AssetImage(
-//             'assets/logos/facebook.jpg',
-//           ),
-//         ),
-//         _buildSocialBtn(
-//           () => print('Login with Google'),
-//           AssetImage(
-//             'assets/logos/google.jpg',
-//           ),
-//         ),
-//       ],
-//     ),
-//   );
-// }
-
-// Widget _buildSignupBtn() {
-//   return GestureDetector(
-//     onTap: () => print('Sign Up Button Pressed'),
-//     child: RichText(
-//       text: TextSpan(
-//         children: [
-//           TextSpan(
-//             text: 'Don\'t have an Account? ',
-//             style: TextStyle(
-//               color: Colors.white,
-//               fontSize: 18.0,
-//               fontWeight: FontWeight.w400,
-//             ),
-//           ),
-//           TextSpan(
-//             text: 'Sign Up',
-//             style: TextStyle(
-//               color: Colors.white,
-//               fontSize: 18.0,
-//               fontWeight: FontWeight.bold,
-//             ),
-//           ),
-//         ],
-//       ),
-//     ),
-//   );
-// }

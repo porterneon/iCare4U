@@ -4,18 +4,18 @@ import 'package:icare4u_ui/models/user.dart';
 import 'package:icare4u_ui/screens/home/welcome.dart';
 import 'package:icare4u_ui/service_locator.dart';
 import 'package:icare4u_ui/services/app_language.dart';
+import 'package:icare4u_ui/services/auth.dart';
 import 'package:icare4u_ui/services/localizations.dart';
-import 'package:icare4u_ui/services/user_auth.dart';
 import 'package:icare4u_ui/utilities/constants.dart';
 import 'package:provider/provider.dart';
 
 class Wrapper extends StatelessWidget {
-  final UserAuthService _userService = locator<UserAuthService>();
+  final auth = locator<AuthService>();
 
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context);
-    var appLanguage = Provider.of<AppLanguage>(context);
+    final appLanguage = Provider.of<AppLanguage>(context);
 
     // return either the Home or Authenticate widget
     return Scaffold(
@@ -39,7 +39,8 @@ class Wrapper extends StatelessWidget {
               title: Text(r'Logout'),
               leading: Icon(Icons.person),
               onTap: () async {
-                await _userService.signOut();
+                // await _userService.signOut();
+                await auth.signOut();
                 Navigator.of(context).pop();
               },
             ),
