@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:icare4u_ui/service_locator.dart';
-// import 'package:icare4u_ui/models/user.dart';
 import 'package:icare4u_ui/services/token_change_controller.dart';
 
 class SecureStorage {

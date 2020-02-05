@@ -11,8 +11,10 @@ import 'package:icare4u_ui/services/token_change_controller.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-void main() {
+void main() async {
   setupLocator();
+  WidgetsFlutterBinding.ensureInitialized();
+  await locator<AppLanguage>().fetchLocale();
   runApp(MyApp());
 }
 
@@ -34,36 +36,38 @@ class MyApp extends StatelessWidget {
           value: locator<SecureStorage>().readUserToken(),
         ),
       ],
-      child: MaterialApp(
-        locale: locator<AppLanguage>().appLocal,
-        localizationsDelegates: [
-          AppLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-        ],
-        supportedLocales: [
-          const Locale('en', 'US'),
-          const Locale('pl', 'PL'),
-        ],
-        title: 'iCare4U',
-        // home: Wrapper(),
-        theme: ThemeData(
-          backgroundColor: Colors.black,
-          brightness: Brightness.dark,
-          appBarTheme: AppBarTheme(
-            color: Color(0xff01A0C7),
-            elevation: 0.0,
+      child: Consumer<AppLanguage>(builder: (context, model, child) {
+        return MaterialApp(
+          locale: model.appLocal,
+          localizationsDelegates: [
+            AppLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+          ],
+          supportedLocales: [
+            const Locale('en', 'US'),
+            const Locale('pl', 'PL'),
+          ],
+          title: 'iCare4U',
+          // home: Wrapper(),
+          theme: ThemeData(
+            backgroundColor: Colors.black,
+            brightness: Brightness.dark,
+            appBarTheme: AppBarTheme(
+              color: Color(0xff01A0C7),
+              elevation: 0.0,
+            ),
+            fontFamily: 'OpenSans',
           ),
-          fontFamily: 'OpenSans',
-        ),
-        routes: {
-          // When navigating to the "/" route, build the FirstScreen widget.
-          '/': (context) => Wrapper(),
-          // When navigating to the "/second" route, build the SecondScreen widget.
-          '/second': (context) => SecondScreen(),
-          '/loginScreen': (context) => LoginScreen(),
-        },
-      ),
+          routes: {
+            // When navigating to the "/" route, build the FirstScreen widget.
+            '/': (context) => Wrapper(),
+            // When navigating to the "/second" route, build the SecondScreen widget.
+            '/second': (context) => SecondScreen(),
+            '/loginScreen': (context) => LoginScreen(),
+          },
+        );
+      }),
     );
   }
 }
