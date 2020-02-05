@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:icare4u_ui/models/user.dart';
 import 'package:icare4u_ui/screens/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:icare4u_ui/screens/home/welcome.dart';
@@ -26,13 +27,14 @@ class Wrapper extends StatelessWidget {
       body: Container(
         // Add box decoration
         decoration: globalGradientDecorationStyle,
-        child: buildCenter(),
+        child: buildCenter(context),
       ),
     );
   }
 
-  Widget buildCenter() {
-    if (FirebaseAuth.instance.currentUser() == null) {
+  Widget buildCenter(BuildContext context) {
+    var user = Provider.of<User>(context);
+    if (user == null) {
       return WelcomeScreen();
     } else {
       return Home();

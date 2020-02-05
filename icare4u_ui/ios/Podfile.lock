@@ -116,6 +116,12 @@ PODS:
   - nanopb/decode (0.3.9011)
   - nanopb/encode (0.3.9011)
   - PromisesObjC (1.2.8)
+  - shared_preferences (0.0.1):
+    - Flutter
+  - shared_preferences_macos (0.0.1):
+    - Flutter
+  - shared_preferences_web (0.0.1):
+    - Flutter
 
 DEPENDENCIES:
   - Firebase/Analytics
@@ -127,6 +133,9 @@ DEPENDENCIES:
   - flutter_secure_storage (from `.symlinks/plugins/flutter_secure_storage/ios`)
   - google_sign_in (from `.symlinks/plugins/google_sign_in/ios`)
   - google_sign_in_web (from `.symlinks/plugins/google_sign_in_web/ios`)
+  - shared_preferences (from `.symlinks/plugins/shared_preferences/ios`)
+  - shared_preferences_macos (from `.symlinks/plugins/shared_preferences_macos/ios`)
+  - shared_preferences_web (from `.symlinks/plugins/shared_preferences_web/ios`)
 
 SPEC REPOS:
   trunk:
@@ -167,6 +176,12 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/google_sign_in/ios"
   google_sign_in_web:
     :path: ".symlinks/plugins/google_sign_in_web/ios"
+  shared_preferences:
+    :path: ".symlinks/plugins/shared_preferences/ios"
+  shared_preferences_macos:
+    :path: ".symlinks/plugins/shared_preferences_macos/ios"
+  shared_preferences_web:
+    :path: ".symlinks/plugins/shared_preferences_web/ios"
 
 SPEC CHECKSUMS:
   AppAuth: 73574f3013a1e65b9601a3ddc8b3158cce68c09d
@@ -196,6 +211,9 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: cea130bbfe5a7edc8d06d3f0d17288c32ffe9925
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
+  shared_preferences: 430726339841afefe5142b9c1f50cb6bd7793e01
+  shared_preferences_macos: f3f29b71ccbb56bf40c9dd6396c9acf15e214087
+  shared_preferences_web: 141cce0c3ed1a1c5bf2a0e44f52d31eeb66e5ea9
 
 PODFILE CHECKSUM: c2349b416f15da5a0e5ae1622f61e3b2a58899b7
 
