@@ -44,43 +44,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             letterSpacing: 1.5,
             fontSize: 18.0,
             fontWeight: FontWeight.bold,
-            // fontFamily: 'OpenSans',
           ),
         ),
       ),
     );
   }
-
-  // Widget _buildSignUpBtn() {
-  //   return Container(
-  //     padding: EdgeInsets.symmetric(vertical: 25.0),
-  //     width: double.infinity,
-  //     child: RaisedButton(
-  //       elevation: 5.0,
-  //       onPressed: () {
-  //         Navigator.pushReplacement(
-  //             context,
-  //             new MaterialPageRoute(
-  //                 builder: (BuildContext context) => new Register()));
-  //       },
-  //       padding: EdgeInsets.all(12.0),
-  //       shape: RoundedRectangleBorder(
-  //         borderRadius: BorderRadius.circular(6.0),
-  //       ),
-  //       color: Colors.white,
-  //       child: Text(
-  //         'Sign Up',
-  //         style: TextStyle(
-  //           color: Color(0xFF527DAA),
-  //           letterSpacing: 1.5,
-  //           fontSize: 18.0,
-  //           fontWeight: FontWeight.bold,
-  //           // fontFamily: 'OpenSans',
-  //         ),
-  //       ),
-  //     ),
-  //   );
-  // }
 
   Widget _buildSignUpBtn() {
     return GestureDetector(

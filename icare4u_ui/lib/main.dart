@@ -22,7 +22,8 @@ class MyApp extends StatelessWidget {
           value: locator<TokenChangeController>().onChange,
         ),
         FutureProvider<String>.value(
-            value: locator<SecureStorage>().readUserToken())
+          value: locator<SecureStorage>().readUserToken(),
+        ),
       ],
       child: MaterialApp(
         title: 'iCare4U',
