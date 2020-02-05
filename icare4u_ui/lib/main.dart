@@ -23,9 +23,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        FutureProvider.value(
-          value: locator<AppLanguage>().fetchLocale(),
-        ),
         ChangeNotifierProvider<AppLanguage>(
           create: (context) => locator<AppLanguage>(),
         ),
