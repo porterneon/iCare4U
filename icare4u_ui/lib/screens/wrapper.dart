@@ -1,6 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:icare4u_ui/screens/home/home.dart';
 import 'package:flutter/material.dart';
-import 'package:icare4u_ui/models/user.dart';
 import 'package:icare4u_ui/screens/home/welcome.dart';
 import 'package:icare4u_ui/service_locator.dart';
 import 'package:icare4u_ui/services/app_language.dart';
@@ -14,7 +14,6 @@ class Wrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final user = Provider.of<User>(context);
     final appLanguage = Provider.of<AppLanguage>(context);
 
     // return either the Home or Authenticate widget
@@ -27,14 +26,13 @@ class Wrapper extends StatelessWidget {
       body: Container(
         // Add box decoration
         decoration: globalGradientDecorationStyle,
-        child: buildCenter(user),
+        child: buildCenter(),
       ),
     );
   }
 
-  Widget buildCenter(User user) {
-    print(">>>> User: $user");
-    if (user == null) {
+  Widget buildCenter() {
+    if (FirebaseAuth.instance.currentUser() == null) {
       return WelcomeScreen();
     } else {
       return Home();
