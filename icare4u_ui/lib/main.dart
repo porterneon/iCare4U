@@ -18,8 +18,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        // Provider<TokenChangeController>(
-        //     create: (_) => locator<TokenChangeController>()),
         StreamProvider<User>.value(
           value: locator<TokenChangeController>().onChange,
         ),

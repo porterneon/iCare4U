@@ -7,7 +7,7 @@ import 'package:icare4u_ui/services/secure_storage.dart';
 class UserAuthService {
   String apiUrl;
   String userApiPath;
-  final GlobalSettings _globalSettings = GlobalSettings();
+  final GlobalSettings _globalSettings = locator<GlobalSettings>();
   final SecureStorage _storage = locator<SecureStorage>();
   final String tokenKey = 'jwt';
 
