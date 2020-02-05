@@ -36,7 +36,6 @@ class Wrapper extends StatelessWidget {
     print(">>>> User: $user");
     if (user == null) {
       return WelcomeScreen();
-      // return LoginScreen();
     } else {
       return Home();
     }

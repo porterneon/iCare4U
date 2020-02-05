@@ -113,7 +113,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 ),
               )),
         ),
-        value: SystemUiOverlayStyle.dark,
+        value: SystemUiOverlayStyle.light,
       ),
     );
   }
