@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:icare4u_ui/models/user.dart';
 import 'package:icare4u_ui/screens/home/welcome.dart';
 import 'package:icare4u_ui/service_locator.dart';
+import 'package:icare4u_ui/services/app_language.dart';
+import 'package:icare4u_ui/services/localizations.dart';
 import 'package:icare4u_ui/services/user_auth.dart';
 import 'package:icare4u_ui/utilities/constants.dart';
 import 'package:provider/provider.dart';
@@ -13,6 +15,7 @@ class Wrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context);
+    var appLanguage = Provider.of<AppLanguage>(context);
 
     // return either the Home or Authenticate widget
     return Scaffold(
@@ -25,19 +28,46 @@ class Wrapper extends StatelessWidget {
             ),
             ListTile(
               leading: Icon(Icons.account_circle),
-              title: Text('Profile'),
+              // title: Text('Profile'),
+              title: Text(AppLocalizations.of(context).translate('Profile')),
             ),
             ListTile(
               leading: Icon(Icons.settings),
-              title: Text('Settings'),
+              title: Text(r'Settings'),
             ),
             ListTile(
-              title: Text('Logout'),
+              title: Text(r'Logout'),
               leading: Icon(Icons.person),
               onTap: () async {
                 await _userService.signOut();
                 Navigator.of(context).pop();
               },
+            ),
+            ListTile(
+              leading: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  RaisedButton(
+                    onPressed: () {
+                      appLanguage.changeLanguage(Locale("en"));
+                    },
+                    child: Text('English'),
+                  ),
+                ],
+              ),
+            ),
+            ListTile(
+              leading: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  RaisedButton(
+                    onPressed: () {
+                      appLanguage.changeLanguage(Locale("pl"));
+                    },
+                    child: Text('Polski'),
+                  ),
+                ],
+              ),
             ),
           ],
         ),

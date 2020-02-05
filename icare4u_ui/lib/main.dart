@@ -4,9 +4,12 @@ import 'package:icare4u_ui/screens/home/second_screen.dart';
 import 'package:icare4u_ui/screens/wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:icare4u_ui/service_locator.dart';
+import 'package:icare4u_ui/services/app_language.dart';
+import 'package:icare4u_ui/services/localizations.dart';
 import 'package:icare4u_ui/services/secure_storage.dart';
 import 'package:icare4u_ui/services/token_change_controller.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() {
   setupLocator();
@@ -18,6 +21,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        FutureProvider.value(
+          value: locator<AppLanguage>().fetchLocale(),
+        ),
+        ChangeNotifierProvider<AppLanguage>(
+          create: (context) => locator<AppLanguage>(),
+        ),
         StreamProvider<User>.value(
           value: locator<TokenChangeController>().onChange,
         ),
@@ -26,6 +35,16 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
+        locale: locator<AppLanguage>().appLocal,
+        localizationsDelegates: [
+          AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+        ],
+        supportedLocales: [
+          const Locale('en', ''),
+          const Locale('pl', ''),
+        ],
         title: 'iCare4U',
         // home: Wrapper(),
         theme: ThemeData(
