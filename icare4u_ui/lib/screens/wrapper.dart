@@ -51,15 +51,15 @@ class Wrapper extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Row(
+                  Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       new CircularProgressIndicator(
                         valueColor:
                             new AlwaysStoppedAnimation<Color>(Colors.white),
                       ),
-                      SizedBox(width: 20.0),
-                      new Text("Loading"),
+                      SizedBox(height: 20.0),
+                      new Text("Loading..."),
                     ],
                   ),
                 ],
