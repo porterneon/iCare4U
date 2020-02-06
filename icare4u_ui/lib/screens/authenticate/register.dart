@@ -4,9 +4,8 @@ import 'package:icare4u_ui/screens/authenticate/login.dart';
 import 'package:icare4u_ui/screens/components/input_text_field.dart';
 import 'package:icare4u_ui/screens/wrapper.dart';
 import 'package:icare4u_ui/service_locator.dart';
-import 'package:icare4u_ui/services/auth.dart';
+import 'package:icare4u_ui/services/firebase_auth.dart';
 // import 'package:icare4u_ui/service_locator.dart';
-// import 'package:icare4u_ui/services/user_auth.dart';
 import 'package:icare4u_ui/utilities/constants.dart';
 
 class Register extends StatefulWidget {
@@ -15,7 +14,6 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
-  // final UserAuthService _userService = locator<UserAuthService>();
   final AuthService _auth = locator<AuthService>();
 
   String email = '';

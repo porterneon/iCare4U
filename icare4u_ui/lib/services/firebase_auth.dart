@@ -9,8 +9,8 @@ class AuthService {
     if (user == null) return null;
 
     var token = (await user.getIdToken())?.token;
-    print(token);
-    return user != null ? User(uid: token) : null;
+    // print(token);
+    return user != null ? User(uid: user.uid, token: token) : null;
   }
 
   // auth change user stream
@@ -40,7 +40,6 @@ class AuthService {
       AuthResult result = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
       FirebaseUser user = result.user;
-      print(user.uid);
 
       return await _userFromFirebaseUser(user);
     } catch (e) {
@@ -55,7 +54,7 @@ class AuthService {
       AuthResult result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       FirebaseUser user = result.user;
-      print(user.uid);
+
       return await _userFromFirebaseUser(user);
     } catch (e) {
       print(e.toString());
