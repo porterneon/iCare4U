@@ -50,8 +50,7 @@ class _LoginScreenState extends State<LoginScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 new CircularProgressIndicator(
-                  value: null,
-                  strokeWidth: 7.0,
+                  valueColor: new AlwaysStoppedAnimation<Color>(Colors.white),
                 ),
                 SizedBox(height: 20.0),
                 new Text("Loading"),

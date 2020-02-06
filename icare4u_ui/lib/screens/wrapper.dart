@@ -26,8 +26,8 @@ class Wrapper extends StatelessWidget {
       body: Container(
         // Add box decoration
         decoration: globalGradientDecorationStyle,
-        // child: buildWidget(Provider.of<User>(context)),
-        child: buildCenter(Provider.of<User>(context)),
+        child: buildWidget(Provider.of<User>(context)),
+        // child: buildCenter(Provider.of<User>(context)),
       ),
     );
   }
@@ -42,7 +42,7 @@ class Wrapper extends StatelessWidget {
 
   FutureBuilder onLoading(User user) {
     return FutureBuilder(
-      future: Future.delayed(Duration(seconds: 1)),
+      future: Future.delayed(Duration(seconds: 2)),
       builder: (c, s) => s.connectionState == ConnectionState.done
           ? buildCenter(user)
           : Container(
@@ -54,7 +54,10 @@ class Wrapper extends StatelessWidget {
                   Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      new CircularProgressIndicator(),
+                      new CircularProgressIndicator(
+                        valueColor:
+                            new AlwaysStoppedAnimation<Color>(Colors.white),
+                      ),
                       SizedBox(width: 20.0),
                       new Text("Loading"),
                     ],
