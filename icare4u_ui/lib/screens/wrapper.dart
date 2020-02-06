@@ -20,8 +20,8 @@ class Wrapper extends StatelessWidget {
     return Scaffold(
       drawer: AppDrawer(auth: auth, appLanguage: appLanguage),
       appBar: AppBar(
-        backgroundColor: Color(0xFF73AEF5),
-        elevation: 0.0,
+        backgroundColor: appBarDecoration.color,
+        elevation: appBarDecoration.elevation,
       ),
       body: Container(
         // Add box decoration

@@ -38,3 +38,8 @@ final globalGradientDecorationStyle = BoxDecoration(
     stops: [0.1, 0.4, 0.7, 0.9],
   ),
 );
+
+final appBarDecoration = AppBarTheme(
+  elevation: 0.0,
+  color: Color(0xFF73AEF5),
+);

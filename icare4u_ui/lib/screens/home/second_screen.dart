@@ -13,8 +13,8 @@ class SecondScreen extends StatelessWidget {
       backgroundColor: Colors.transparent,
       appBar: AppBar(
         title: Text('Second screen'),
-        backgroundColor: Color(0xFF73AEF5),
-        elevation: 0.0,
+        backgroundColor: appBarDecoration.color,
+        elevation: appBarDecoration.elevation,
       ),
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         child: GestureDetector(
