@@ -31,26 +31,54 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
+  void onLogging() async {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return Dialog(
+          child: Container(
+            decoration: new BoxDecoration(
+              color: Colors.blue[200],
+              borderRadius: new BorderRadius.circular(10.0),
+            ),
+            width: 300.0,
+            height: 200.0,
+            alignment: AlignmentDirectional.center,
+            child: new Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                new CircularProgressIndicator(
+                  value: null,
+                  strokeWidth: 7.0,
+                ),
+                SizedBox(height: 20.0),
+                new Text("Loading"),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+    dynamic result = await _auth.signInWithEmailAndPassword(email, password);
+    if (result == null) {
+      print('error signing in');
+    } else {
+      print('signed in');
+      // var landingPage = await getLandingPage();
+      Navigator.pushReplacement(context,
+          new MaterialPageRoute(builder: (BuildContext context) => Wrapper()));
+    }
+  }
+
   Widget _buildLoginBtn() {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 25.0),
       width: double.infinity,
       child: RaisedButton(
         elevation: 5.0,
-        onPressed: () async {
-          dynamic result =
-              await _auth.signInWithEmailAndPassword(email, password);
-          if (result == null) {
-            print('error signing in');
-          } else {
-            print('signed in');
-            // var landingPage = await getLandingPage();
-            Navigator.pushReplacement(
-                context,
-                new MaterialPageRoute(
-                    builder: (BuildContext context) => Wrapper()));
-          }
-        },
+        onPressed: () => onLogging(),
         padding: EdgeInsets.all(12.0),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(6.0),

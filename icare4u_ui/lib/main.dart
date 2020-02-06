@@ -16,9 +16,10 @@ void main() async {
   setupLocator();
   WidgetsFlutterBinding.ensureInitialized();
   await locator<AppLanguage>().fetchLocale();
-  runApp(new MaterialApp(
-    home: AplashApp(),
-  ));
+  // runApp(new MaterialApp(
+  //   home: AplashApp(),
+  // ));
+  runApp(MyApp());
 }
 
 class AplashApp extends StatefulWidget {

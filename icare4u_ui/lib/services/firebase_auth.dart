@@ -17,7 +17,6 @@ class AuthService {
   Stream<User> get user {
     return _auth.onAuthStateChanged.asyncMap(
         (FirebaseUser firebaseUser) => _userFromFirebaseUser(firebaseUser));
-    // .map(_userFromFirebaseUser);
   }
 
   // // sign in anon

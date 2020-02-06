@@ -26,13 +26,47 @@ class Wrapper extends StatelessWidget {
       body: Container(
         // Add box decoration
         decoration: globalGradientDecorationStyle,
-        child: buildCenter(context),
+        child: buildWidget(context),
       ),
     );
   }
 
-  Widget buildCenter(BuildContext context) {
+  Widget buildWidget(BuildContext context) {
     var user = Provider.of<User>(context);
+    if (user == null) {
+      return onLoading(context);
+    } else {
+      return buildCenter(user);
+    }
+  }
+
+  FutureBuilder onLoading(BuildContext context) {
+    var user = Provider.of<User>(context);
+    return FutureBuilder(
+      future: Future.delayed(Duration(seconds: 1)),
+      builder: (c, s) => s.connectionState == ConnectionState.done
+          ? buildCenter(user)
+          : Container(
+              width: double.infinity,
+              height: double.infinity,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      new CircularProgressIndicator(),
+                      SizedBox(width: 20.0),
+                      new Text("Loading"),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+    );
+  }
+
+  Widget buildCenter(User user) {
     if (user == null) {
       return WelcomeScreen();
     } else {

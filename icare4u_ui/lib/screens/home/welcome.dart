@@ -93,6 +93,28 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     );
   }
 
+  // FutureBuilder onLoading() {
+  //   return FutureBuilder(
+  //     future: Future.delayed(Duration(seconds: 1)),
+  //     builder: (c, s) => s.connectionState == ConnectionState.done
+  //         ? Column(
+  //             mainAxisAlignment: MainAxisAlignment.center,
+  //             children: <Widget>[
+  //               _buildLoginBtn(),
+  //               _buildSignUpBtn(),
+  //             ],
+  //           )
+  //         : Row(
+  //             mainAxisSize: MainAxisSize.min,
+  //             children: [
+  //               new CircularProgressIndicator(),
+  //               SizedBox(width: 20.0),
+  //               new Text("Loading"),
+  //             ],
+  //           ),
+  //   );
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -116,8 +138,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   children: <Widget>[
                     logo,
                     SizedBox(height: 30.0),
+                    // onLoading(),
                     _buildLoginBtn(),
-                    // SizedBox(height: 10.0),
                     _buildSignUpBtn(),
                   ],
                 ),
