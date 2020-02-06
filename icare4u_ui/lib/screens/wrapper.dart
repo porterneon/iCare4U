@@ -70,7 +70,8 @@ class AppDrawer extends StatelessWidget {
             title: Text(r'Settings'),
           ),
           ListTile(
-            title: Text(r'Logout'),
+            // title: Text(r'Logout'),
+            title: Text(AppLocalizations.of(context).translate('logout')),
             leading: Icon(Icons.person),
             onTap: () async {
               // await _userService.signOut();

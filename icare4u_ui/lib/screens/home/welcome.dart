@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:icare4u_ui/screens/authenticate/login.dart';
 import 'package:icare4u_ui/screens/authenticate/register.dart';
+import 'package:icare4u_ui/services/localizations.dart';
 import 'package:icare4u_ui/utilities/constants.dart';
 
 class WelcomeScreen extends StatefulWidget {
@@ -16,7 +17,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       backgroundColor: Colors.transparent,
       radius: 100.0,
       backgroundImage: AssetImage('assets/logos/logo.png'),
-      // child: Image.asset('assets/logos/logo.png'),
     ),
   );
 
@@ -38,7 +38,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         ),
         color: Colors.white,
         child: Text(
-          'Sign In',
+          AppLocalizations.of(context).translate('sign_in'),
           style: TextStyle(
             color: Color(0xFF527DAA),
             letterSpacing: 1.5,
@@ -60,21 +60,31 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       },
       child: RichText(
         text: TextSpan(
-          children: [
-            TextSpan(
-              text: 'Don\'t have an Account? ',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 18.0,
-                fontWeight: FontWeight.w400,
+          children: <InlineSpan>[
+            WidgetSpan(
+              child: Container(
+                padding: EdgeInsets.all(8.0),
+                child: Text(
+                  AppLocalizations.of(context).translate('dont_have_account'),
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
               ),
             ),
-            TextSpan(
-              text: 'Sign Up',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 18.0,
-                fontWeight: FontWeight.bold,
+            WidgetSpan(
+              child: Container(
+                padding: EdgeInsets.all(8.0),
+                child: Text(
+                  AppLocalizations.of(context).translate('sign_up'),
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
             ),
           ],
