@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:icare4u_ui/screens/components/input_text_field.dart';
+import 'package:icare4u_ui/screens/components/progress_dialog_indicator.dart';
 import 'package:icare4u_ui/screens/wrapper.dart';
 import 'package:icare4u_ui/service_locator.dart';
 import 'package:icare4u_ui/services/firebase_auth.dart';
@@ -36,28 +37,7 @@ class _LoginScreenState extends State<LoginScreen> {
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
-        return Dialog(
-          child: Container(
-            decoration: new BoxDecoration(
-              color: Colors.blue[200],
-              borderRadius: new BorderRadius.circular(10.0),
-            ),
-            width: 300.0,
-            height: 200.0,
-            alignment: AlignmentDirectional.center,
-            child: new Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                new CircularProgressIndicator(
-                  valueColor: new AlwaysStoppedAnimation<Color>(Colors.white),
-                ),
-                SizedBox(height: 20.0),
-                new Text("Loading"),
-              ],
-            ),
-          ),
-        );
+        return ProgressDialogIndicator();
       },
     );
     dynamic result = await _auth.signInWithEmailAndPassword(email, password);
