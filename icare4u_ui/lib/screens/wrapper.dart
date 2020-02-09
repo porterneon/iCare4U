@@ -42,7 +42,7 @@ class Wrapper extends StatelessWidget {
 
   FutureBuilder onLoading(User user) {
     return FutureBuilder(
-      future: Future.delayed(Duration(seconds: 2)),
+      future: Future.delayed(Duration(seconds: 1)),
       builder: (c, s) => s.connectionState == ConnectionState.done
           ? buildCenter(user)
           : Container(

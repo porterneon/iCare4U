@@ -33,16 +33,13 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void onLogging() async {
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (BuildContext context) {
-        return ProgressDialogIndicator();
-      },
-    );
+    _buildIndicatorDialog(context);
     dynamic result = await _auth.signInWithEmailAndPassword(email, password);
     if (result == null) {
       print('error signing in');
+      Navigator.of(context).pop();
+      _buildErrorDialog(context,
+          "Could not sign in. Please check if email and password are correct.");
     } else {
       print('signed in');
       // var landingPage = await getLandingPage();
@@ -143,7 +140,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     },
                   ),
                   _buildForgotPasswordBtn(),
-                  // _buildRememberMeCheckbox(),
                   _buildLoginBtn(),
                 ],
               ),
@@ -153,4 +149,32 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
+}
+
+Future _buildIndicatorDialog(BuildContext context) {
+  return showDialog(
+    builder: (context) {
+      return ProgressDialogIndicator();
+    },
+    context: context,
+  );
+}
+
+Future _buildErrorDialog(BuildContext context, _message) {
+  return showDialog(
+    builder: (context) {
+      return AlertDialog(
+        title: Text('Error Message'),
+        content: Text(_message),
+        actions: <Widget>[
+          FlatButton(
+              child: Text('Cancel'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              })
+        ],
+      );
+    },
+    context: context,
+  );
 }
