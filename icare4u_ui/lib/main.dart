@@ -49,8 +49,7 @@ class MyApp extends StatelessWidget {
           title: 'iCare4U',
           // home: await getLandingPage(),
           theme: ThemeData(
-            backgroundColor: Colors.black,
-            brightness: Brightness.dark,
+            brightness: Brightness.light,
             appBarTheme: AppBarTheme(
               color: Color(0xff01A0C7),
               elevation: 0.0,

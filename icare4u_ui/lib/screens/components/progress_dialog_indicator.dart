@@ -4,6 +4,7 @@ class ProgressDialogIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
+      backgroundColor: Colors.white,
       child: Container(
         decoration: new BoxDecoration(
           color: Colors.blue[200],
