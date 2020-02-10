@@ -8,6 +8,7 @@ class InputTextField extends StatelessWidget {
   final IconData iconData;
   final bool obscureText;
   final TextInputType textInputType;
+  final bool isRequired;
 
   InputTextField(
       {Key key,
@@ -16,6 +17,7 @@ class InputTextField extends StatelessWidget {
       this.iconData,
       this.obscureText = false,
       this.textInputType = TextInputType.text,
+      this.isRequired = false,
       @required this.onChanged})
       : super(key: key);
 
@@ -39,7 +41,9 @@ class InputTextField extends StatelessWidget {
           // height: 60.0,
           child: TextFormField(
             validator: (String value) {
-              return value.isEmpty ? 'Field is required.' : null;
+              if (!isRequired) return null;
+
+              return value.isEmpty ? '$labelText is required.' : null;
             },
             onChanged: (val) {
               _handleChange(val);

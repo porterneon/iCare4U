@@ -143,6 +143,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       hintText: 'Enter your Password',
                       iconData: Icons.lock,
                       obscureText: true,
+                      isRequired: true,
                       onChanged: (val) {
                         setState(() => password = val.trim());
                       },
