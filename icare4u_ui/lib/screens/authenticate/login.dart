@@ -14,6 +14,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final AuthService _auth = locator<AuthService>();
+  final _formKey = GlobalKey<FormState>();
 
   String email = '';
   String password = '';
@@ -33,18 +34,22 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void onLogging() async {
-    _buildIndicatorDialog(context);
-    dynamic result = await _auth.signInWithEmailAndPassword(email, password);
-    if (result == null) {
-      print('error signing in');
-      Navigator.of(context).pop();
-      _buildErrorDialog(context,
-          "Could not sign in. Please check if email and password are correct.");
-    } else {
-      print('signed in');
-      // var landingPage = await getLandingPage();
-      Navigator.pushReplacement(context,
-          new MaterialPageRoute(builder: (BuildContext context) => Wrapper()));
+    if (_formKey.currentState.validate()) {
+      _buildIndicatorDialog(context);
+      dynamic result = await _auth.signInWithEmailAndPassword(email, password);
+      if (result == null) {
+        print('error signing in');
+        Navigator.of(context).pop();
+        _buildErrorDialog(
+            context, "Could not sign in. Email and password are incorrect.");
+      } else {
+        print('signed in');
+        // var landingPage = await getLandingPage();
+        Navigator.pushReplacement(
+            context,
+            new MaterialPageRoute(
+                builder: (BuildContext context) => Wrapper()));
+      }
     }
   }
 
@@ -105,43 +110,46 @@ class _LoginScreenState extends State<LoginScreen> {
                 horizontal: 40.0,
                 vertical: 30.0,
               ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text(
-                    'Sign In',
-                    style: TextStyle(
-                      color: Colors.white,
-                      // fontFamily: 'OpenSans',
-                      fontSize: 30.0,
-                      fontWeight: FontWeight.bold,
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      'Sign In',
+                      style: TextStyle(
+                        color: Colors.white,
+                        // fontFamily: 'OpenSans',
+                        fontSize: 30.0,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                  SizedBox(height: 30.0),
-                  InputTextField(
-                    labelText: 'Email',
-                    hintText: 'Enter your Email',
-                    iconData: Icons.email,
-                    textInputType: TextInputType.emailAddress,
-                    onChanged: (val) {
-                      setState(() => email = val.trim());
-                    },
-                  ),
-                  SizedBox(
-                    height: 30.0,
-                  ),
-                  InputTextField(
-                    labelText: 'Password',
-                    hintText: 'Enter your Password',
-                    iconData: Icons.lock,
-                    obscureText: true,
-                    onChanged: (val) {
-                      setState(() => password = val.trim());
-                    },
-                  ),
-                  _buildForgotPasswordBtn(),
-                  _buildLoginBtn(),
-                ],
+                    SizedBox(height: 30.0),
+                    InputTextField(
+                      labelText: 'Email',
+                      hintText: 'Enter your Email',
+                      iconData: Icons.email,
+                      textInputType: TextInputType.emailAddress,
+                      onChanged: (val) {
+                        setState(() => email = val.trim());
+                      },
+                    ),
+                    SizedBox(
+                      height: 30.0,
+                    ),
+                    InputTextField(
+                      labelText: 'Password',
+                      hintText: 'Enter your Password',
+                      iconData: Icons.lock,
+                      obscureText: true,
+                      onChanged: (val) {
+                        setState(() => password = val.trim());
+                      },
+                    ),
+                    _buildForgotPasswordBtn(),
+                    _buildLoginBtn(),
+                  ],
+                ),
               ),
             ),
           ),

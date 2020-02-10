@@ -37,7 +37,10 @@ class InputTextField extends StatelessWidget {
           alignment: Alignment.centerLeft,
           decoration: kBoxDecorationStyle,
           height: 60.0,
-          child: TextField(
+          child: TextFormField(
+            validator: (String value) {
+              return value.isEmpty ? 'Field is required.' : null;
+            },
             onChanged: (val) {
               _handleChange(val);
             },
