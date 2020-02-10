@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:icare4u_ui/utilities/constants.dart';
 
-class InputTextField extends StatelessWidget {
+class InputEmailField extends StatelessWidget {
   final String labelText;
   final String hintText;
   final ValueChanged<String> onChanged;
@@ -9,7 +9,7 @@ class InputTextField extends StatelessWidget {
   final bool obscureText;
   final TextInputType textInputType;
 
-  InputTextField(
+  InputEmailField(
       {Key key,
       this.labelText,
       this.hintText,
@@ -25,6 +25,9 @@ class InputTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String emailRegex =
+        r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$";
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -39,7 +42,16 @@ class InputTextField extends StatelessWidget {
           // height: 60.0,
           child: TextFormField(
             validator: (String value) {
-              return value.isEmpty ? 'Field is required.' : null;
+              var errorMessage = "";
+              bool isValid = true;
+              if (!RegExp(emailRegex).hasMatch(value)) {
+                errorMessage = "Email has incorrect format.";
+                isValid = false;
+              }
+
+              // add more validation conditions
+
+              return !isValid ? errorMessage : null;
             },
             onChanged: (val) {
               _handleChange(val);

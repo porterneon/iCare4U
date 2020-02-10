@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:icare4u_ui/screens/components/imput_email_field.dart';
 import 'package:icare4u_ui/screens/components/input_text_field.dart';
 import 'package:icare4u_ui/screens/components/progress_dialog_indicator.dart';
 import 'package:icare4u_ui/screens/wrapper.dart';
@@ -125,7 +126,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                     SizedBox(height: 30.0),
-                    InputTextField(
+                    InputEmailField(
                       labelText: 'Email',
                       hintText: 'Enter your Email',
                       iconData: Icons.email,
