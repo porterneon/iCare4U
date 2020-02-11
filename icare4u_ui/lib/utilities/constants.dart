@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 final kHintTextStyle = TextStyle(
   color: Colors.white54,
@@ -43,3 +44,5 @@ final appBarDecoration = AppBarTheme(
   elevation: 0.0,
   color: Color(0xFF73AEF5),
 );
+
+final getSystemUiOverlayStyle = SystemUiOverlayStyle.light;

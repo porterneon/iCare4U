@@ -99,7 +99,7 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
       backgroundColor: Colors.transparent,
       body: AnnotatedRegion<SystemUiOverlayStyle>(
-        value: SystemUiOverlayStyle.light,
+        value: getSystemUiOverlayStyle,
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
           child: Container(
