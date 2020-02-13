@@ -1,25 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:icare4u_ui/bloc/authentication_bloc/authentication_bloc.dart';
 import 'package:icare4u_ui/bloc/user_details_bloc/user_details_bloc.dart';
 import 'package:icare4u_ui/repositories/repositories.dart';
 import 'package:icare4u_ui/screens/components/user_details_component.dart';
 import 'package:icare4u_ui/service_locator.dart';
 import 'package:icare4u_ui/services/app_language.dart';
-import 'package:icare4u_ui/services/firebase_auth.dart';
+// import 'package:icare4u_ui/services/firebase_auth.dart';
 import 'package:icare4u_ui/services/localizations.dart';
+import 'package:provider/provider.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({
     Key key,
-    @required this.auth,
-    @required this.appLanguage,
   }) : super(key: key);
-
-  final AuthService auth;
-  final AppLanguage appLanguage;
 
   @override
   Widget build(BuildContext context) {
+    final appLanguage = Provider.of<AppLanguage>(context);
     return Drawer(
       elevation: 20.0,
       child: ListView(
@@ -45,10 +43,11 @@ class AppDrawer extends StatelessWidget {
             title: Text(AppLocalizations.of(context).translate('logout')),
             leading: Icon(Icons.person),
             onTap: () async {
-              // await _userService.signOut();
-              await auth.signOut();
-              // await locator<UserDetailsRepository>().deleteLocalUserDetails();
-              Navigator.of(context).pop();
+              // await auth.signOut();
+              // Navigator.of(context).pop();
+              BlocProvider.of<AuthenticationBloc>(context).add(
+                LoggedOut(),
+              );
             },
           ),
           ListTile(

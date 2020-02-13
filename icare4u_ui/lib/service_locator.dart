@@ -2,6 +2,7 @@ import 'package:get_it/get_it.dart';
 import 'package:icare4u_ui/models/user_details.dart';
 import 'package:icare4u_ui/repositories/repositories.dart';
 import 'package:icare4u_ui/repositories/rest_call.dart';
+import 'package:icare4u_ui/repositories/user_repository.dart';
 import 'package:icare4u_ui/services/app_language.dart';
 import 'package:icare4u_ui/services/app_shared_preferences.dart';
 import 'package:icare4u_ui/services/firebase_auth.dart';
@@ -20,4 +21,5 @@ void setupLocator() {
       apiClient: UserDetailsApiClient(httpClient: http.Client())));
   locator.registerLazySingleton<UserDetails>(() => new UserDetails());
   locator.registerFactory<AppSharedPreferences>(() => AppSharedPreferences());
+  locator.registerFactory<UserRepository>(() => UserRepository());
 }

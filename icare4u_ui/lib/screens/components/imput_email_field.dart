@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:icare4u_ui/service_locator.dart';
 import 'package:icare4u_ui/services/validators.dart';
 import 'package:icare4u_ui/utilities/constants.dart';
 

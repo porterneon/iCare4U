@@ -11,6 +11,7 @@ class Validators {
   }
 
   static isValidPassword(String password) {
-    return _passwordRegExp.hasMatch(password);
+    // return _passwordRegExp.hasMatch(password);
+    return password.isEmpty ? false : true;
   }
 }

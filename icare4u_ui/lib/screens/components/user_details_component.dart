@@ -2,10 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:icare4u_ui/bloc/user_details_bloc/user_details_bloc.dart';
-import 'package:icare4u_ui/models/user.dart';
+// import 'package:icare4u_ui/models/user.dart';
 import 'package:icare4u_ui/models/user_details.dart';
+import 'package:icare4u_ui/repositories/user_repository.dart';
 import 'package:icare4u_ui/service_locator.dart';
-import 'package:provider/provider.dart';
+// import 'package:provider/provider.dart';
+import 'package:icare4u_ui/repositories/repositories.dart';
 
 class UserDetailsComponent extends StatefulWidget {
   @override
@@ -16,9 +18,11 @@ class _UserDetailsComponentState extends State<UserDetailsComponent> {
   UserDetails userDetails = locator<UserDetails>();
 
   Future getUserDetails(BuildContext context) async {
-    final userId = Provider.of<User>(context).uid;
+    // final userId = Provider.of<User>(context).uid;
+
+    final user = await locator<UserRepository>().getUser();
     BlocProvider.of<UserDetailsBloc>(context)
-        .add(FetchUserDetails(userId: userId));
+        .add(FetchUserDetails(userId: user.uid));
   }
 
   @override

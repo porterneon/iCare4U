@@ -1,12 +1,14 @@
 import 'package:bloc/bloc.dart';
-import 'package:icare4u_ui/models/user.dart';
-import 'package:icare4u_ui/screens/authenticate/login.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:icare4u_ui/bloc/authentication_bloc/authentication_bloc.dart';
+import 'package:icare4u_ui/login/login_screen.dart';
+import 'package:icare4u_ui/repositories/user_repository.dart';
+import 'package:icare4u_ui/screens/home/home.dart';
 import 'package:icare4u_ui/screens/home/second_screen.dart';
-import 'package:icare4u_ui/screens/wrapper.dart';
+import 'package:icare4u_ui/screens/home/welcome.dart';
 import 'package:flutter/material.dart';
 import 'package:icare4u_ui/service_locator.dart';
 import 'package:icare4u_ui/services/app_language.dart';
-import 'package:icare4u_ui/services/firebase_auth.dart';
 import 'package:icare4u_ui/services/localizations.dart';
 import 'package:icare4u_ui/simple_bloc_delegate.dart';
 import 'package:icare4u_ui/utilities/constants.dart';
@@ -15,9 +17,9 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:splashscreen/splashscreen.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   BlocSupervisor.delegate = SimpleBlocDelegate();
   setupLocator();
-  WidgetsFlutterBinding.ensureInitialized();
   await locator<AppLanguage>().fetchLocale();
   // runApp(new MaterialApp(
   //   home: AplashApp(),
@@ -33,12 +35,32 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<AppLanguage>(
           create: (context) => locator<AppLanguage>(),
         ),
-        StreamProvider<User>.value(
-          value: locator<AuthService>().user,
+        // StreamProvider<User>.value(
+        //   value: locator<AuthService>().user,
+        // ),
+        BlocProvider(
+          create: (context) =>
+              AuthenticationBloc(userRepository: locator<UserRepository>())
+                ..add(AppStarted()),
         ),
       ],
       child: Consumer<AppLanguage>(builder: (context, model, child) {
         return MaterialApp(
+          home: BlocBuilder<AuthenticationBloc, AuthenticationState>(
+            builder: (context, state) {
+              if (state is Uninitialized) {
+                return WelcomeScreen();
+              }
+              if (state is Unauthenticated) {
+                return LoginScreen();
+              }
+              if (state is Authenticated) {
+                return Home();
+              } else {
+                return WelcomeScreen();
+              }
+            },
+          ),
           locale: model.appLocal,
           localizationsDelegates: [
             AppLocalizations.delegate,
@@ -60,7 +82,7 @@ class MyApp extends StatelessWidget {
           ),
           routes: {
             // When navigating to the "/" route, build the FirstScreen widget.
-            '/': (context) => Wrapper(),
+            // '/': (context) => Wrapper(),
             // When navigating to the "/second" route, build the SecondScreen widget.
             '/second': (context) => SecondScreen(),
             '/loginScreen': (context) => LoginScreen(),
