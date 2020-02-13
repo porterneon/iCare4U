@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:icare4u_ui/utilities/constants.dart';
 
 class ProgressDialogIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      backgroundColor: Colors.white,
+      backgroundColor: globalBackgroundColor,
       child: Container(
         decoration: new BoxDecoration(
           color: Colors.blue[200],
