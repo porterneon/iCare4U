@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:icare4u_ui/bloc/user_details_bloc/user_details_bloc.dart';
+import 'package:icare4u_ui/repositories/repositories.dart';
+import 'package:icare4u_ui/screens/components/user_details_component.dart';
+import 'package:icare4u_ui/service_locator.dart';
 import 'package:icare4u_ui/utilities/constants.dart';
 
 class Home extends StatelessWidget {
@@ -44,6 +49,12 @@ class Home extends StatelessWidget {
                       // Navigate to the second screen using a named route.
                       Navigator.pushNamed(context, '/second');
                     },
+                  ),
+                  BlocProvider(
+                    create: (context) => UserDetailsBloc(
+                        userDetailsRepository:
+                            locator<UserDetailsRepository>()),
+                    child: UserDetailsComponent(),
                   ),
                 ],
               ),

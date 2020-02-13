@@ -1,9 +1,13 @@
 class GlobalSettings {
   String getApiUrl() {
-    return 'https://europe-west1-icare4uapi.cloudfunctions.net/api';
+    return 'https://europe-west1-icare4uapi.cloudfunctions.net';
   }
 
   String getUsersApiPath() {
-    return '/users';
+    return '/api/users';
+  }
+
+  String getUseretailsApiPath() {
+    return '/api/user/';
   }
 }

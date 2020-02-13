@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:icare4u_ui/repositories/firebase_auth.dart';
 import 'package:icare4u_ui/services/app_language.dart';
-import 'package:icare4u_ui/services/firebase_auth.dart';
 import 'package:icare4u_ui/services/localizations.dart';
 
 class AppDrawer extends StatelessWidget {

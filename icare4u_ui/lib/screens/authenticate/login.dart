@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:icare4u_ui/repositories/firebase_auth.dart';
 import 'package:icare4u_ui/screens/components/imput_email_field.dart';
 import 'package:icare4u_ui/screens/components/input_text_field.dart';
 import 'package:icare4u_ui/screens/components/progress_dialog_indicator.dart';
 import 'package:icare4u_ui/screens/wrapper.dart';
 import 'package:icare4u_ui/service_locator.dart';
-import 'package:icare4u_ui/services/firebase_auth.dart';
 import 'package:icare4u_ui/utilities/constants.dart';
 
 class LoginScreen extends StatefulWidget {
