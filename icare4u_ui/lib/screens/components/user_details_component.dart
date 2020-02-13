@@ -3,26 +3,43 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:icare4u_ui/bloc/user_details_bloc/user_details_bloc.dart';
 import 'package:icare4u_ui/models/user.dart';
+import 'package:icare4u_ui/models/user_details.dart';
+import 'package:icare4u_ui/service_locator.dart';
 import 'package:provider/provider.dart';
 
-class UserDetailsComponent extends StatelessWidget {
+class UserDetailsComponent extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
+  _UserDetailsComponentState createState() => _UserDetailsComponentState();
+}
+
+class _UserDetailsComponentState extends State<UserDetailsComponent> {
+  var userDetails = locator<UserDetails>();
+
+  Future getUserDetails(BuildContext context) async {
     final userId = Provider.of<User>(context).uid;
     BlocProvider.of<UserDetailsBloc>(context)
         .add(FetchUserDetails(userId: userId));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (userDetails.userName == null) {
+      getUserDetails(context);
+    }
+
     return Container(
       child: Center(
         child: BlocBuilder<UserDetailsBloc, UserDetailsState>(
           builder: (context, state) {
             if (state is UserDetailsEmpty) {
-              return Center(child: Text('Please Select a Location'));
+              return Center(child: Text('Please LogIn to load user details.'));
             }
             if (state is UserDetailsLoading) {
               return Center(child: CircularProgressIndicator());
             }
             if (state is UserDetailsLoaded) {
-              final userDetails = state.userDetails;
+              userDetails = state.userDetails;
+              print(userDetails.userName);
 
               return ListView(
                 children: <Widget>[
@@ -34,7 +51,6 @@ class UserDetailsComponent extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w200,
-                          color: Colors.white,
                         ),
                       ),
                     ),

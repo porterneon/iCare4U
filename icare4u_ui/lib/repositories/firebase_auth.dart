@@ -9,6 +9,7 @@ class AuthService {
     if (user == null) return null;
 
     var token = (await user.getIdToken())?.token;
+
     // print(token);
     return user != null ? User(uid: user.uid, token: token) : null;
   }

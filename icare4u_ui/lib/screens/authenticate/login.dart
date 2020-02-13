@@ -164,7 +164,10 @@ class _LoginScreenState extends State<LoginScreen> {
 Future _buildIndicatorDialog(BuildContext context) {
   return showDialog(
     builder: (context) {
-      return ProgressDialogIndicator();
+      return Container(
+        decoration: BoxDecoration(color: globalBackgroundColor),
+        child: ProgressDialogIndicator(),
+      );
     },
     context: context,
   );

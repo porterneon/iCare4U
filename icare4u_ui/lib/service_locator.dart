@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:icare4u_ui/models/user_details.dart';
 import 'package:icare4u_ui/repositories/firebase_auth.dart';
 import 'package:icare4u_ui/repositories/repositories.dart';
 import 'package:icare4u_ui/repositories/rest_call.dart';
@@ -15,4 +16,5 @@ void setupLocator() {
   locator.registerFactory<RestService>(() => RestService());
   locator.registerFactory<UserDetailsRepository>(() => UserDetailsRepository(
       apiClient: UserDetailsApiClient(httpClient: http.Client())));
+  locator.registerLazySingleton<UserDetails>(() => new UserDetails());
 }

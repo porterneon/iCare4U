@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:icare4u_ui/bloc/user_details_bloc/user_details_bloc.dart';
+import 'package:icare4u_ui/models/user.dart';
 import 'package:icare4u_ui/repositories/firebase_auth.dart';
+import 'package:icare4u_ui/repositories/repositories.dart';
+import 'package:icare4u_ui/screens/components/user_details_component.dart';
+import 'package:icare4u_ui/service_locator.dart';
 import 'package:icare4u_ui/services/app_language.dart';
 import 'package:icare4u_ui/services/localizations.dart';
 
@@ -20,7 +26,11 @@ class AppDrawer extends StatelessWidget {
       child: ListView(
         children: <Widget>[
           DrawerHeader(
-            child: Text('Drawer Header'),
+            child: BlocProvider(
+              create: (context) => UserDetailsBloc(
+                  userDetailsRepository: locator<UserDetailsRepository>()),
+              child: UserDetailsComponent(),
+            ),
           ),
           ListTile(
             leading: Icon(Icons.account_circle),
