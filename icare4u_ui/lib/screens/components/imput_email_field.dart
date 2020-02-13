@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:icare4u_ui/service_locator.dart';
+import 'package:icare4u_ui/services/validators.dart';
 import 'package:icare4u_ui/utilities/constants.dart';
 
 class InputEmailField extends StatelessWidget {
@@ -25,9 +27,6 @@ class InputEmailField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String emailRegex =
-        r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$";
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -44,7 +43,7 @@ class InputEmailField extends StatelessWidget {
             validator: (String value) {
               var errorMessage = "";
               bool isValid = true;
-              if (!RegExp(emailRegex).hasMatch(value)) {
+              if (!Validators.isValidEmail(value)) {
                 errorMessage = "Email has incorrect format.";
                 isValid = false;
               }
