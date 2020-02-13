@@ -50,7 +50,6 @@ class MyApp extends StatelessWidget {
             const Locale('pl', 'PL'),
           ],
           title: 'iCare4U',
-          // home: await getLandingPage(),
           theme: ThemeData(
             brightness: Brightness.light,
             appBarTheme: AppBarTheme(

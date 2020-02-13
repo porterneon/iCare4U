@@ -15,7 +15,6 @@ class Wrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appLanguage = Provider.of<AppLanguage>(context);
-
     // return either the Home or Authenticate widget
     return Scaffold(
       drawer: AppDrawer(auth: auth, appLanguage: appLanguage),

@@ -47,7 +47,7 @@ class AppDrawer extends StatelessWidget {
             onTap: () async {
               // await _userService.signOut();
               await auth.signOut();
-              await locator<UserDetailsRepository>().deleteLocalUserDetails();
+              // await locator<UserDetailsRepository>().deleteLocalUserDetails();
               Navigator.of(context).pop();
             },
           ),

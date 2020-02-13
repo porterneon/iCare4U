@@ -26,7 +26,7 @@ class UserDetailsBloc extends Bloc<UserDetailsEvent, UserDetailsState> {
       yield UserDetailsLoading();
       try {
         final UserDetails userDetails =
-            await userDetailsRepository.getuserDetals(event.userId);
+            await userDetailsRepository.getUserDetals(event.userId);
         yield UserDetailsLoaded(userDetails: userDetails);
       } catch (_) {
         yield UserDetailsError();

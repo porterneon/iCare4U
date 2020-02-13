@@ -11,7 +11,7 @@ class UserDetailsRepository {
 
   UserDetailsRepository({@required this.apiClient}) : assert(apiClient != null);
 
-  Future<UserDetails> getuserDetals(String userId) async {
+  Future<UserDetails> getUserDetals(String userId) async {
     var localDetails = await locator<AppSharedPreferences>().getUserDetails();
 
     if (localDetails == null || localDetails.userName == null) {

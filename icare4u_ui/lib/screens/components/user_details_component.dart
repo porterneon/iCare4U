@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:icare4u_ui/bloc/user_details_bloc/user_details_bloc.dart';
 import 'package:icare4u_ui/models/user.dart';
 import 'package:icare4u_ui/models/user_details.dart';
-// import 'package:icare4u_ui/service_locator.dart';
+import 'package:icare4u_ui/service_locator.dart';
 import 'package:provider/provider.dart';
 
 class UserDetailsComponent extends StatefulWidget {
@@ -13,7 +13,7 @@ class UserDetailsComponent extends StatefulWidget {
 }
 
 class _UserDetailsComponentState extends State<UserDetailsComponent> {
-  UserDetails userDetails;
+  UserDetails userDetails = locator<UserDetails>();
 
   Future getUserDetails(BuildContext context) async {
     final userId = Provider.of<User>(context).uid;

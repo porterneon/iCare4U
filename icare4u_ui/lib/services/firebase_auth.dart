@@ -1,12 +1,17 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:icare4u_ui/models/user.dart';
+import 'package:icare4u_ui/service_locator.dart';
+import 'package:icare4u_ui/services/app_shared_preferences.dart';
 
 class AuthService {
   final String tokenKey = 'jwt';
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   Future<User> _userFromFirebaseUser(FirebaseUser user) async {
-    if (user == null) return null;
+    if (user == null) {
+      locator<AppSharedPreferences>().deleteUserDetails();
+      return null;
+    }
 
     var token = (await user.getIdToken())?.token;
 
