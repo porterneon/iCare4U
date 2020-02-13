@@ -30,6 +30,10 @@ class UserDetailsApiClient {
       throw Exception('error getting user details');
     }
 
+    if (response.body.length == 0) {
+      throw Exception('user details not found');
+    }
+
     final json = jsonDecode(response.body);
 
     return UserDetails.fromJson(json);
