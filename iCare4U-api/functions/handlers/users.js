@@ -132,7 +132,7 @@ exports.addUserDetails = (req, res) => {
 exports.getUserDetails = (req, res) => {
   let userData = {};
 
-  db.doc(`/users/${req.params.uid}`)
+  db.doc(`/users/${req.params.handle}`)
     .get()
     .then(data => {
       console.log(data.data());
