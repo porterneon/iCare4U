@@ -27,7 +27,7 @@ class UserDetailsComponent extends StatelessWidget {
               return ListView(
                 children: <Widget>[
                   Padding(
-                    padding: EdgeInsets.only(top: 100.0),
+                    padding: EdgeInsets.only(top: 10.0),
                     child: Center(
                       child: Text(
                         userDetails.userName,
