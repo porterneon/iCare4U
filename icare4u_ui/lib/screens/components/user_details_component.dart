@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:icare4u_ui/bloc/user_details_bloc/user_details_bloc.dart';
 import 'package:icare4u_ui/models/user.dart';
 import 'package:icare4u_ui/models/user_details.dart';
-import 'package:icare4u_ui/service_locator.dart';
+// import 'package:icare4u_ui/service_locator.dart';
 import 'package:provider/provider.dart';
 
 class UserDetailsComponent extends StatefulWidget {
@@ -13,7 +13,7 @@ class UserDetailsComponent extends StatefulWidget {
 }
 
 class _UserDetailsComponentState extends State<UserDetailsComponent> {
-  var userDetails = locator<UserDetails>();
+  UserDetails userDetails;
 
   Future getUserDetails(BuildContext context) async {
     final userId = Provider.of<User>(context).uid;
@@ -23,7 +23,7 @@ class _UserDetailsComponentState extends State<UserDetailsComponent> {
 
   @override
   Widget build(BuildContext context) {
-    if (userDetails.userName == null) {
+    if (userDetails == null || userDetails.userName == null) {
       getUserDetails(context);
     }
 
@@ -48,6 +48,18 @@ class _UserDetailsComponentState extends State<UserDetailsComponent> {
                     child: Center(
                       child: Text(
                         userDetails.userName,
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w200,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(top: 10.0),
+                    child: Center(
+                      child: Text(
+                        userDetails.email,
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w200,

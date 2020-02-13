@@ -1,11 +1,11 @@
 import 'package:icare4u_ui/models/user.dart';
-import 'package:icare4u_ui/repositories/firebase_auth.dart';
 import 'package:icare4u_ui/screens/components/app_drawer.dart';
 import 'package:icare4u_ui/screens/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:icare4u_ui/screens/home/welcome.dart';
 import 'package:icare4u_ui/service_locator.dart';
 import 'package:icare4u_ui/services/app_language.dart';
+import 'package:icare4u_ui/services/firebase_auth.dart';
 import 'package:icare4u_ui/utilities/constants.dart';
 import 'package:provider/provider.dart';
 

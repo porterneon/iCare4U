@@ -1,6 +1,6 @@
 import 'package:icare4u_ui/models/models.dart';
-import 'package:icare4u_ui/repositories/firebase_auth.dart';
 import 'package:icare4u_ui/service_locator.dart';
+import 'package:icare4u_ui/services/firebase_auth.dart';
 import 'package:icare4u_ui/services/global_settings.dart';
 import 'package:meta/meta.dart';
 import 'package:http/http.dart' as http;
