@@ -8,6 +8,7 @@ import 'package:icare4u_ui/login/create_account_button.dart';
 import 'package:icare4u_ui/login/google_login_button.dart';
 import 'package:icare4u_ui/login/login_button.dart';
 import 'package:icare4u_ui/repositories/repositories.dart';
+import 'package:icare4u_ui/screens/home/home_screen.dart';
 
 class LoginForm extends StatefulWidget {
   final UserRepository _userRepository;
@@ -77,6 +78,12 @@ class _LoginFormState extends State<LoginForm> {
         }
         if (state.isSuccess) {
           BlocProvider.of<AuthenticationBloc>(context).add(LoggedIn());
+          Navigator.pushReplacement(
+            context,
+            new MaterialPageRoute(
+              builder: (BuildContext context) => new Home(),
+            ),
+          );
         }
       },
       child: BlocBuilder<LoginBloc, LoginState>(
