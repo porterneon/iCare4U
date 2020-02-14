@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:icare4u_ui/repositories/rest_call.dart';
-import 'package:icare4u_ui/service_locator.dart';
 import 'package:icare4u_ui/utilities/constants.dart';
 
 class SecondScreen extends StatelessWidget {
-  final RestService _restService = locator<RestService>();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,8 +35,6 @@ class SecondScreen extends StatelessWidget {
                         // Navigate back to the first screen by popping the current route
                         // off the stack.
                         // Navigator.pop(context);
-                        var result = await _restService.getAllUsersDetails();
-                        print(result);
                       },
                       child: Text('Go back!'),
                     ),

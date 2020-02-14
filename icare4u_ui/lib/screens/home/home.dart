@@ -1,15 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:icare4u_ui/screens/components/app_drawer.dart';
-import 'package:icare4u_ui/service_locator.dart';
-// import 'package:icare4u_ui/services/app_language.dart';
-import 'package:icare4u_ui/services/firebase_auth.dart';
 import 'package:icare4u_ui/utilities/constants.dart';
-// import 'package:provider/provider.dart';
 
 class Home extends StatelessWidget {
-  final auth = locator<AuthService>();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
