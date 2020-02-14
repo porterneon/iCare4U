@@ -30,9 +30,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         elevation: 5.0,
         onPressed: () {
           Navigator.pushReplacement(
-              context,
-              new MaterialPageRoute(
-                  builder: (BuildContext context) => new LoginScreen()));
+            context,
+            new MaterialPageRoute(
+              builder: (BuildContext context) => new LoginScreen(
+                userRepository: locator<UserRepository>(),
+              ),
+            ),
+          );
         },
         padding: EdgeInsets.all(12.0),
         shape: RoundedRectangleBorder(
@@ -40,6 +44,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         ),
         color: Colors.white,
         child: Text(
+          // 'Sign In',
           AppLocalizations.of(context).translate('sign_in'),
           style: TextStyle(
             color: Color(0xFF527DAA),
@@ -71,6 +76,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               child: Container(
                 padding: EdgeInsets.all(8.0),
                 child: Text(
+                  // 'dont_have_account',
                   AppLocalizations.of(context).translate('dont_have_account'),
                   style: TextStyle(
                     color: Colors.white,
@@ -84,6 +90,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               child: Container(
                 padding: EdgeInsets.all(8.0),
                 child: Text(
+                  // 'sign_up',
                   AppLocalizations.of(context).translate('sign_up'),
                   style: TextStyle(
                     color: Colors.white,
@@ -105,7 +112,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       backgroundColor: Colors.transparent,
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         child: GestureDetector(
-          // onTap: () => FocusScope.of(context).unfocus(),
           child: Container(
               width: double.infinity,
               height: double.infinity,

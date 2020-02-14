@@ -3,10 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:icare4u_ui/bloc/authentication_bloc/authentication_bloc.dart';
 import 'package:icare4u_ui/login/login_screen.dart';
 import 'package:icare4u_ui/repositories/user_repository.dart';
-import 'package:icare4u_ui/screens/home/home.dart';
+import 'package:icare4u_ui/screens/home/home_screen.dart';
 import 'package:icare4u_ui/screens/home/second_screen.dart';
 import 'package:icare4u_ui/screens/home/splash_screen.dart';
-import 'package:icare4u_ui/screens/home/welcome.dart';
+import 'package:icare4u_ui/screens/home/welcome_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:icare4u_ui/service_locator.dart';
 import 'package:icare4u_ui/services/app_language.dart';
@@ -20,7 +20,18 @@ void main() async {
   BlocSupervisor.delegate = SimpleBlocDelegate();
   setupLocator();
   await locator<AppLanguage>().fetchLocale();
+
   runApp(MyApp());
+  // runApp(
+  //   BlocProvider(
+  //     create: (context) =>
+  //         AuthenticationBloc(userRepository: locator<UserRepository>())
+  //           ..add(
+  //             AppStarted(),
+  //           ),
+  //     child: App(),
+  //   ),
+  // );
 }
 
 class MyApp extends StatelessWidget {
@@ -34,7 +45,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) =>
               AuthenticationBloc(userRepository: locator<UserRepository>())
-                ..add(AppStarted()),
+                ..add(
+                  AppStarted(),
+                ),
         ),
       ],
       child: Consumer<AppLanguage>(builder: (context, model, child) {
@@ -45,7 +58,7 @@ class MyApp extends StatelessWidget {
                 return SplashScreen();
               }
               if (state is Unauthenticated) {
-                return LoginScreen();
+                return WelcomeScreen();
               }
               if (state is Authenticated) {
                 return Home();
@@ -78,10 +91,41 @@ class MyApp extends StatelessWidget {
             // '/': (context) => Wrapper(),
             // When navigating to the "/second" route, build the SecondScreen widget.
             '/second': (context) => SecondScreen(),
-            '/loginScreen': (context) => LoginScreen(),
+            '/loginScreen': (context) => LoginScreen(
+                  userRepository: locator<UserRepository>(),
+                ),
           },
         );
       }),
     );
   }
 }
+
+// class App extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       home: BlocBuilder<AuthenticationBloc, AuthenticationState>(
+//         builder: (context, state) {
+//           return MaterialApp(
+//             home: BlocBuilder<AuthenticationBloc, AuthenticationState>(
+//               builder: (context, state) {
+//                 if (state is Uninitialized) {
+//                   return SplashScreen();
+//                 }
+//                 if (state is Unauthenticated) {
+//                   return WelcomeScreen();
+//                 }
+//                 if (state is Authenticated) {
+//                   return Home();
+//                 } else {
+//                   return WelcomeScreen();
+//                 }
+//               },
+//             ),
+//           );
+//         },
+//       ),
+//     );
+//   }
+// }

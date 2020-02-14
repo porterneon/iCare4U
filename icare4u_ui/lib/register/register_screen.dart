@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:icare4u_ui/register/bloc/bloc.dart';
 import 'package:icare4u_ui/register/register_form.dart';
 import 'package:icare4u_ui/repositories/repositories.dart';
-import 'package:icare4u_ui/screens/home/welcome.dart';
+import 'package:icare4u_ui/screens/home/welcome_screen.dart';
 import 'package:icare4u_ui/utilities/constants.dart';
 
 class RegisterScreen extends StatelessWidget {

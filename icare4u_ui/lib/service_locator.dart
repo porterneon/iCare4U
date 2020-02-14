@@ -13,15 +13,15 @@ GetIt locator = GetIt.instance;
 void setupLocator() {
   locator.registerFactory<GlobalSettings>(() => GlobalSettings());
   locator.registerSingleton(AppLanguage());
+  locator.registerLazySingleton<UserRepository>(() => UserRepository());
   locator.registerFactory<UserDetailsRepository>(
     () => UserDetailsRepository(
       apiClient: UserDetailsApiClient(
         httpClient: http.Client(),
-        userRepository: UserRepository(),
+        userRepository: locator<UserRepository>(),
       ),
     ),
   );
   locator.registerLazySingleton<UserDetails>(() => new UserDetails());
   locator.registerFactory<AppSharedPreferences>(() => AppSharedPreferences());
-  locator.registerFactory<UserRepository>(() => UserRepository());
 }

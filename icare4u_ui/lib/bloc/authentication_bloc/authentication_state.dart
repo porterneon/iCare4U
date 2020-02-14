@@ -21,10 +21,10 @@ class Authenticated extends AuthenticationState {
   });
 
   @override
-  List<Object> get props => [userId];
+  List<Object> get props => [userId, email, token];
 
   @override
-  String toString() => 'Authenticated { displayName: $email }';
+  String toString() => 'Authenticated { displayName: $email, userId: $userId }';
 }
 
 class Unauthenticated extends AuthenticationState {}

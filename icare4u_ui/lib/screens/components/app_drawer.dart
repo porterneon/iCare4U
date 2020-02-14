@@ -43,8 +43,6 @@ class AppDrawer extends StatelessWidget {
             title: Text(AppLocalizations.of(context).translate('logout')),
             leading: Icon(Icons.person),
             onTap: () async {
-              // await auth.signOut();
-              // Navigator.of(context).pop();
               BlocProvider.of<AuthenticationBloc>(context).add(
                 LoggedOut(),
               );
