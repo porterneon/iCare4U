@@ -14,13 +14,12 @@ description: A new Flutter project.
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: '>=2.1.0 <3.0.0'
 
 dependencies:
   flutter:
     sdk: flutter
 
-  splashscreen:
   provider: ^4.0.2
   firebase_auth: ^0.15.4
   google_sign_in: ^4.1.1
