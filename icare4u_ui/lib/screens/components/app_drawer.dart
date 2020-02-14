@@ -4,6 +4,7 @@ import 'package:icare4u_ui/bloc/authentication_bloc/authentication_bloc.dart';
 import 'package:icare4u_ui/bloc/user_details_bloc/user_details_bloc.dart';
 import 'package:icare4u_ui/repositories/repositories.dart';
 import 'package:icare4u_ui/screens/components/user_details_component.dart';
+import 'package:icare4u_ui/screens/home/welcome_screen.dart';
 import 'package:icare4u_ui/service_locator.dart';
 import 'package:icare4u_ui/services/app_language.dart';
 // import 'package:icare4u_ui/services/firebase_auth.dart';
@@ -43,9 +44,15 @@ class AppDrawer extends StatelessWidget {
             title: Text(AppLocalizations.of(context).translate('logout')),
             leading: Icon(Icons.person),
             onTap: () async {
-              Navigator.pop(context);
               BlocProvider.of<AuthenticationBloc>(context).add(
                 LoggedOut(),
+              );
+              // Navigator.pop(context);
+              Navigator.pushReplacement(
+                context,
+                new MaterialPageRoute(
+                  builder: (BuildContext context) => new WelcomeScreen(),
+                ),
               );
             },
           ),
