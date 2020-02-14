@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:icare4u_ui/bloc/authentication_bloc/authentication_bloc.dart';
 import 'package:icare4u_ui/register/bloc/bloc.dart';
 import 'package:icare4u_ui/register/register_button.dart';
+import 'package:icare4u_ui/screens/home/home_screen.dart';
 
 class RegisterForm extends StatefulWidget {
   State<RegisterForm> createState() => _RegisterFormState();
@@ -50,7 +51,13 @@ class _RegisterFormState extends State<RegisterForm> {
         }
         if (state.isSuccess) {
           BlocProvider.of<AuthenticationBloc>(context).add(LoggedIn());
-          Navigator.of(context).pop();
+          // Navigator.of(context).pop();
+          Navigator.pushReplacement(
+            context,
+            new MaterialPageRoute(
+              builder: (BuildContext context) => new Home(),
+            ),
+          );
         }
         if (state.isFailure) {
           Scaffold.of(context)

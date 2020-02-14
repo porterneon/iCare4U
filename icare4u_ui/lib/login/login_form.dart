@@ -78,6 +78,7 @@ class _LoginFormState extends State<LoginForm> {
         }
         if (state.isSuccess) {
           BlocProvider.of<AuthenticationBloc>(context).add(LoggedIn());
+          // Navigator.of(context).pop();
           Navigator.pushReplacement(
             context,
             new MaterialPageRoute(
