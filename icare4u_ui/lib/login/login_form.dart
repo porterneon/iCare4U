@@ -100,8 +100,14 @@ class _LoginFormState extends State<LoginForm> {
                   ),
                   TextFormField(
                     controller: _emailController,
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
                     decoration: InputDecoration(
-                      icon: Icon(Icons.email),
+                      icon: Icon(
+                        Icons.email,
+                        color: Colors.white70,
+                      ),
                       labelText: 'Email',
                     ),
                     keyboardType: TextInputType.emailAddress,
@@ -113,8 +119,14 @@ class _LoginFormState extends State<LoginForm> {
                   ),
                   TextFormField(
                     controller: _passwordController,
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
                     decoration: InputDecoration(
-                      icon: Icon(Icons.lock),
+                      icon: Icon(
+                        Icons.lock,
+                        color: Colors.white70,
+                      ),
                       labelText: 'Password',
                     ),
                     obscureText: true,
