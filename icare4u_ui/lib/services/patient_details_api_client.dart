@@ -1,4 +1,4 @@
-import 'package:icare4u_ui/models/models.dart';
+import 'package:icare4u_ui/models/patient.dart';
 import 'package:icare4u_ui/service_locator.dart';
 import 'package:icare4u_ui/services/global_settings.dart';
 import 'package:icare4u_ui/services/http_request_helper.dart';
@@ -6,38 +6,42 @@ import 'package:meta/meta.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-class UserDetailsApiClient {
+class PatientDetailsApiClient {
   String apiUrl;
   final http.Client httpClient;
   final HttpRequestHelper requestHelper;
 
   final GlobalSettings _globalSettings = locator<GlobalSettings>();
 
-  UserDetailsApiClient({
+  PatientDetailsApiClient({
     @required this.httpClient,
     @required this.requestHelper,
-  }) : assert(httpClient != null && requestHelper != null);
+  })  : assert(httpClient != null),
+        assert(requestHelper != null);
 
-  Future<UserDetails> fetchUserDetails(String userId) async {
+  Future<List<Patient>> fetchUsersPatientsDetails(String userId) async {
     this.apiUrl = _globalSettings.getApiUrl();
-    var apiPath = _globalSettings.getUseretailsApiPath();
-
-    final userDetailsUrl = '$apiUrl$apiPath$userId';
+    var apiPath = _globalSettings.getPatientsByUserIdApiPath(userId);
     var headerParams = await requestHelper.getRequestAuthenticateHeader();
 
+    final requestUrl = '$apiUrl$apiPath';
+
     final response =
-        await this.httpClient.get(userDetailsUrl, headers: headerParams);
+        await this.httpClient.get(requestUrl, headers: headerParams);
 
     if (response.statusCode != 200) {
-      throw Exception('error getting user details');
+      throw Exception('error getting patient collection');
     }
 
     if (response.body.length == 0) {
-      throw Exception('user details not found');
+      throw Exception('patients not found');
     }
 
-    final json = jsonDecode(response.body);
+    var body = response.body;
+    print('print patient colection: $body');
 
-    return UserDetails.fromJson(json);
+    var patients = (jsonDecode(response.body) as List<dynamic>).cast<Patient>();
+
+    return patients;
   }
 }
