@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 
 class Patient extends Equatable {
   final double weight;
@@ -15,7 +16,7 @@ class Patient extends Equatable {
   final List<String> schedules;
 
   Patient({
-    this.patientId,
+    @required this.patientId,
     this.name,
     this.weight,
     this.weightUom,
@@ -25,7 +26,7 @@ class Patient extends Equatable {
     this.medicines,
     this.schedules,
     this.createdAt,
-  });
+  }) : assert(patientId != null);
 
   @override
   List<Object> get props => [patientId];
