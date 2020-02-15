@@ -11,4 +11,16 @@ class PatientDetailsRepository {
   Future<List<Patient>> fetchPatientCollection(String userId) async {
     return apiClient.fetchUsersPatientsDetails(userId);
   }
+
+  Future<String> addPatientDetails(Patient patient) async {
+    return apiClient.addPatientDetails(patient);
+  }
+
+  Future<String> updatePatientDetails(Patient patient) async {
+    return apiClient.updatePatientDetails(patient);
+  }
+
+  Future<bool> deletePatientDetails(String patientId) async {
+    return apiClient.deletePatientDetails(patientId);
+  }
 }

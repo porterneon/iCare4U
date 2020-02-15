@@ -44,4 +44,19 @@ class PatientDetailsApiClient {
 
     return patients;
   }
+
+  Future<String> addPatientDetails(Patient patient) async {
+    // TODO: return entity id
+    return null;
+  }
+
+  Future<String> updatePatientDetails(Patient patient) async {
+    // TODO: return entity id
+    return null;
+  }
+
+  Future<bool> deletePatientDetails(String patientId) async {
+    //await locator<AppSharedPreferences>().deleteUserDetails();
+    return true;
+  }
 }
