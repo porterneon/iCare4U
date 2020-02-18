@@ -39,7 +39,7 @@ dependencies:
   equatable: ^1.1.0
   json_annotation: ^3.0.1
   font_awesome_flutter: ^8.4.0
-  collection: ^1.14.12
+  collection: ^1.14.11
 
 dev_dependencies:
   flutter_test:
