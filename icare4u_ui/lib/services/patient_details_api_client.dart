@@ -59,4 +59,9 @@ class PatientDetailsApiClient {
     //await locator<AppSharedPreferences>().deleteUserDetails();
     return true;
   }
+
+  Future<Patient> fetchPatientDetails(
+      String userId, String groupId, String patientId) async {
+    return null;
+  }
 }
