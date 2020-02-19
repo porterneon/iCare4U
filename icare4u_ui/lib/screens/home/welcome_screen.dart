@@ -5,7 +5,7 @@ import 'package:icare4u_ui/register/register_screen.dart';
 import 'package:icare4u_ui/repositories/user_repository.dart';
 import 'package:icare4u_ui/service_locator.dart';
 import 'package:icare4u_ui/services/localizations.dart';
-import 'package:icare4u_ui/utilities/constants.dart';
+import 'package:icare4u_ui/constants.dart';
 
 class WelcomeScreen extends StatefulWidget {
   @override

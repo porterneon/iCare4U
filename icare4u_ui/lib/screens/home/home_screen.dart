@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:icare4u_ui/screens/components/app_drawer.dart';
-import 'package:icare4u_ui/utilities/constants.dart';
+import 'package:icare4u_ui/constants.dart';
 
 class Home extends StatelessWidget {
   @override

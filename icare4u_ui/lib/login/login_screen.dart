@@ -5,7 +5,7 @@ import 'package:icare4u_ui/login/bloc/bloc.dart';
 import 'package:icare4u_ui/login/login_form.dart';
 import 'package:icare4u_ui/repositories/user_repository.dart';
 import 'package:icare4u_ui/screens/home/welcome_screen.dart';
-import 'package:icare4u_ui/utilities/constants.dart';
+import 'package:icare4u_ui/constants.dart';
 
 class LoginScreen extends StatelessWidget {
   final UserRepository _userRepository;

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:icare4u_ui/utilities/constants.dart';
+import 'package:icare4u_ui/constants.dart';
 
 class InputTextField extends StatelessWidget {
   final String labelText;

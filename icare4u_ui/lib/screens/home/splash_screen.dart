@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:icare4u_ui/utilities/constants.dart';
+import 'package:icare4u_ui/constants.dart';
 
 class SplashScreen extends StatelessWidget {
   @override
