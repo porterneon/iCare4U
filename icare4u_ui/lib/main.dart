@@ -22,16 +22,6 @@ void main() async {
   await locator<AppLanguage>().fetchLocale();
 
   runApp(MyApp());
-  // runApp(
-  //   BlocProvider(
-  //     create: (context) =>
-  //         AuthenticationBloc(userRepository: locator<UserRepository>())
-  //           ..add(
-  //             AppStarted(),
-  //           ),
-  //     child: App(),
-  //   ),
-  // );
 }
 
 class MyApp extends StatelessWidget {
@@ -100,32 +90,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-// class App extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       home: BlocBuilder<AuthenticationBloc, AuthenticationState>(
-//         builder: (context, state) {
-//           return MaterialApp(
-//             home: BlocBuilder<AuthenticationBloc, AuthenticationState>(
-//               builder: (context, state) {
-//                 if (state is Uninitialized) {
-//                   return SplashScreen();
-//                 }
-//                 if (state is Unauthenticated) {
-//                   return WelcomeScreen();
-//                 }
-//                 if (state is Authenticated) {
-//                   return Home();
-//                 } else {
-//                   return WelcomeScreen();
-//                 }
-//               },
-//             ),
-//           );
-//         },
-//       ),
-//     );
-//   }
-// }
