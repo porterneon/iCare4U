@@ -19,6 +19,7 @@ class UserDetailsRepository {
       await saveLocalUserDetails(userDetails);
       return userDetails;
     }
+
     return localDetails;
   }
 

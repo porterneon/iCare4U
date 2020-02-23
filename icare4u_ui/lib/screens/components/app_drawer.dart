@@ -7,7 +7,6 @@ import 'package:icare4u_ui/screens/components/user_details_component.dart';
 import 'package:icare4u_ui/screens/home/welcome_screen.dart';
 import 'package:icare4u_ui/service_locator.dart';
 import 'package:icare4u_ui/services/app_language.dart';
-// import 'package:icare4u_ui/services/firebase_auth.dart';
 import 'package:icare4u_ui/services/localizations.dart';
 import 'package:provider/provider.dart';
 

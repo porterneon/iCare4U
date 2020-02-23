@@ -9,6 +9,8 @@ class PatientDetailsRepository {
       : assert(apiClient != null);
 
   Future<List<Patient>> fetchPatientCollection(String userId) async {
+    if (userId == null || userId.length == 0) return new List<Patient>();
+
     return apiClient.fetchUsersPatientsDetails(userId);
   }
 

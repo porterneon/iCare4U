@@ -2,7 +2,9 @@ import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:json_annotation/json_annotation.dart';
 
+@JsonSerializable()
 class Patient extends Equatable {
   final double weight;
   final String name;
@@ -33,7 +35,7 @@ class Patient extends Equatable {
 
   Map<String, dynamic> toJson() => {
         'patientId': patientId,
-        'name': name,
+        'patientName': name,
         'weight': weight,
         'weightUom': weightUom,
         'height': height,
@@ -47,16 +49,14 @@ class Patient extends Equatable {
   static Patient fromJson(dynamic json) {
     return Patient(
       patientId: json['patientId'],
-      name: json['name'],
-      age: json['age'],
-      height: json['height'],
+      name: json['patientName'],
+      age: int.parse(json['age']),
+      height: double.parse(json['height']),
       heightUom: json['heightUom'],
-      weight: json['weight'],
+      weight: double.parse(json['weight']),
       weightUom: json['weightUom'],
-      medicines:
-          (jsonDecode(json['medicines']) as List<dynamic>).cast<String>(),
-      schedules:
-          (jsonDecode(json['schedules']) as List<dynamic>).cast<String>(),
+      medicines: new List<String>.from(json['medicines']),
+      schedules: new List<String>.from(json['schedules']),
       createdAt: DateTime.parse(json['createdAt']),
     );
   }

@@ -39,8 +39,9 @@ class PatientDetailsApiClient {
 
     var body = response.body;
     print('print patient colection: $body');
-
-    var patients = (jsonDecode(response.body) as List<dynamic>).cast<Patient>();
+    final parsed = json.decode(response.body).cast<Map<String, dynamic>>();
+    var patients =
+        parsed.map<Patient>((json) => Patient.fromJson(json)).toList();
 
     return patients;
   }

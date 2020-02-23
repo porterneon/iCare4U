@@ -51,7 +51,10 @@ class MyApp extends StatelessWidget {
                 return WelcomeScreen();
               }
               if (state is Authenticated) {
-                return Home();
+                var userId = state.userId;
+                return Home(
+                  userId: userId,
+                );
               } else {
                 return WelcomeScreen();
               }

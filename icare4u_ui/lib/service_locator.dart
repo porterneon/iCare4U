@@ -7,6 +7,7 @@ import 'package:icare4u_ui/services/app_shared_preferences.dart';
 import 'package:icare4u_ui/services/global_settings.dart';
 import 'package:http/http.dart' as http;
 import 'package:icare4u_ui/services/http_request_helper.dart';
+import 'package:icare4u_ui/services/patient_details_api_client.dart';
 import 'package:icare4u_ui/services/user_details_api_client.dart';
 
 GetIt locator = GetIt.instance;
@@ -16,6 +17,7 @@ void setupLocator() {
 
   locator.registerSingleton(AppLanguage());
   locator.registerLazySingleton<UserRepository>(() => UserRepository());
+  locator.registerLazySingleton<UserDetails>(() => UserDetails());
 
   locator.registerFactory<HttpRequestHelper>(
       () => HttpRequestHelper(userRepository: locator<UserRepository>()));
@@ -27,6 +29,14 @@ void setupLocator() {
       ),
     ),
   );
-  locator.registerLazySingleton<UserDetails>(() => new UserDetails());
   locator.registerFactory<AppSharedPreferences>(() => AppSharedPreferences());
+
+  locator.registerFactory<PatientDetailsRepository>(
+    () => PatientDetailsRepository(
+      apiClient: PatientDetailsApiClient(
+        httpClient: http.Client(),
+        requestHelper: locator<HttpRequestHelper>(),
+      ),
+    ),
+  );
 }

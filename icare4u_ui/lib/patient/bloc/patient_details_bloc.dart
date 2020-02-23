@@ -27,6 +27,7 @@ class PatientDetailsBloc
       try {
         final List<Patient> patientCollection =
             await repository.fetchPatientCollection(event.userId);
+
         yield PatientCollectionLoaded(patients: patientCollection);
       } catch (e) {
         print(e);
