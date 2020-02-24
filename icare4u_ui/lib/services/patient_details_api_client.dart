@@ -37,8 +37,8 @@ class PatientDetailsApiClient {
       throw Exception('patients not found');
     }
 
-    var body = response.body;
-    print('print patient colection: $body');
+    // var body = response.body;
+    // print('print patient colection: $body');
     final parsed = json.decode(response.body).cast<Map<String, dynamic>>();
     var patients =
         parsed.map<Patient>((json) => Patient.fromJson(json)).toList();

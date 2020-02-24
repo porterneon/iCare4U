@@ -22,10 +22,8 @@ class PatientsScreen extends StatelessWidget {
     return BlocProvider<PatientDetailsBloc>(
       create: (context) =>
           PatientDetailsBloc(repository: _patientDetailsRepository),
-      child: Center(
-        child: PatientList(
-          userId: _userId,
-        ),
+      child: PatientList(
+        userId: _userId,
       ),
     );
   }

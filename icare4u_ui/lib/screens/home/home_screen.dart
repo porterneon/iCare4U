@@ -26,48 +26,45 @@ class Home extends StatelessWidget {
       // backgroundColor: Colors.white,
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: getSystemUiOverlayStyle,
-        child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
-          child: Container(
-            decoration: globalGradientDecorationStyle,
-            child: Center(
-              child: Column(
-                children: <Widget>[
-                  Container(
-                    height: 80,
-                    width: double.infinity,
-                    decoration: new BoxDecoration(
-                      color: appBarDecoration.color,
-                      borderRadius: new BorderRadius.only(
-                          bottomLeft: const Radius.circular(30.0)),
-                    ),
-                    child: Text(
-                      "This is temporary text...",
-                      style: TextStyle(
-                        color: Colors.white,
-                        letterSpacing: 1.5,
-                        fontSize: 18.0,
-                        fontWeight: FontWeight.bold,
-                        // fontFamily: 'OpenSans',
-                      ),
+        child: Container(
+          decoration: globalGradientDecorationStyle,
+          child: Center(
+            child: Column(
+              children: <Widget>[
+                Container(
+                  height: 80,
+                  width: double.infinity,
+                  decoration: new BoxDecoration(
+                    color: appBarDecoration.color,
+                    borderRadius: new BorderRadius.only(
+                        bottomLeft: const Radius.circular(30.0)),
+                  ),
+                  child: Text(
+                    "This is temporary text...",
+                    style: TextStyle(
+                      color: Colors.white,
+                      letterSpacing: 1.5,
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.bold,
+                      // fontFamily: 'OpenSans',
                     ),
                   ),
-                  Container(
-                    child: PatientsScreen(
-                      patientDetailsRepository:
-                          locator<PatientDetailsRepository>(),
-                      userId: _userId,
-                    ),
+                ),
+                Expanded(
+                  child: PatientsScreen(
+                    patientDetailsRepository:
+                        locator<PatientDetailsRepository>(),
+                    userId: _userId,
                   ),
-                  RaisedButton(
-                    child: Text('Launch screen'),
-                    onPressed: () {
-                      // Navigate to the second screen using a named route.
-                      Navigator.pushNamed(context, '/second');
-                    },
-                  ),
-                ],
-              ),
+                ),
+                // RaisedButton(
+                //   child: Text('Launch screen'),
+                //   onPressed: () {
+                //     // Navigate to the second screen using a named route.
+                //     Navigator.pushNamed(context, '/second');
+                //   },
+                // ),
+              ],
             ),
           ),
         ),

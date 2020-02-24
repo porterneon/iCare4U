@@ -72,7 +72,9 @@ class _PatientListState extends State<PatientList> {
           }
 
           if (state is PatientCollectionLoaded) {
-            return buildPatientList(state.patients);
+            return Center(
+              child: buildPatientList(state.patients),
+            );
           } else {
             return Container();
           }
@@ -82,26 +84,28 @@ class _PatientListState extends State<PatientList> {
   }
 
   Widget buildPatientList(List<Patient> data) {
-    return Container(
-      height: 300,
-      width: double.infinity,
-      child: ListView.builder(
-          itemCount: data.length,
-          itemBuilder: (BuildContext context, int index) {
-            return _tile(data[index].name, data[index].patientId, Icons.work);
-          }),
-    );
+    return ListView.builder(
+        physics: AlwaysScrollableScrollPhysics(),
+        itemCount: data.length,
+        itemBuilder: (BuildContext context, int index) {
+          return Card(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: _tile(data[index], Icons.work),
+            ),
+          );
+        });
   }
 
-  ListTile _tile(String title, String subtitle, IconData icon) => ListTile(
+  ListTile _tile(Patient patient, IconData icon) => ListTile(
         title: Text(
-          title,
+          patient.name,
           style: TextStyle(
             fontWeight: FontWeight.w500,
             fontSize: 20,
           ),
         ),
-        subtitle: Text(subtitle),
+        subtitle: Text(patient.patientId),
         leading: Icon(
           icon,
           color: Colors.blue[500],
