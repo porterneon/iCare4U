@@ -98,6 +98,9 @@ class _PatientListState extends State<PatientList> {
   }
 
   ListTile _tile(Patient patient, IconData icon) => ListTile(
+        onTap: () => {
+          print(patient.name),
+        },
         title: Text(
           patient.name,
           style: TextStyle(
