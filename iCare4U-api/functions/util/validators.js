@@ -1,4 +1,4 @@
-const isEmail = email => {
+exports.isEmail = email => {
   const regEx = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   if (email.match(regEx)) return true;
   else return false;
@@ -9,8 +9,15 @@ exports.isEmpty = string => {
   else return false;
 };
 
-const isArray = what => {
-  return Object.prototype.toString.call(what) === '[object Array]';
+exports.isArray = what => {
+  return (
+    what == undefined ||
+    Object.prototype.toString.call(what) === '[object Array]'
+  );
+};
+
+exports.isArrayUndefined = what => {
+  return Object.prototype.toString.call(what) === '[object Undefined]';
 };
 
 exports.validatePatientGroupData = data => {
@@ -84,6 +91,8 @@ exports.reducePatientDetails = data => {
     patientDetails.patientName = data.patientName;
   if (!this.isEmpty(data.weightUom.trim()))
     patientDetails.weightUom = data.weightUom;
+  if (this.isArrayUndefined(data.medicines)) data.medicines = [];
+  if (this.isArrayUndefined(data.schedules)) data.schedules = [];
 
   return patientDetails;
 };
@@ -91,7 +100,7 @@ exports.reducePatientDetails = data => {
 exports.validatePatientDetails = data => {
   let errors = {};
 
-  if (!this.isEmpty(data.patientName)) errors.patientName = 'Must not be empty';
+  if (this.isEmpty(data.patientName)) errors.patientName = 'Must not be empty';
   if (!this.isArray(data.medicines)) errors.medicines = 'Must be an array';
   if (!this.isArray(data.schedules)) errors.schedules = 'Must be an array';
 
@@ -104,8 +113,8 @@ exports.validatePatientDetails = data => {
 exports.validateUserIntoGroupData = data => {
   let errors = {};
 
-  if (!this.isEmpty(data.groupId)) errors.groupId = 'Must not be empty';
-  if (!this.isEmpty(data.userId)) errors.userId = 'Must not be empty';
+  if (this.isEmpty(data.groupId)) errors.groupId = 'Must not be empty';
+  if (this.isEmpty(data.userId)) errors.userId = 'Must not be empty';
 
   return {
     errors,
