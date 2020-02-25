@@ -55,8 +55,12 @@ class Patient extends Equatable {
       heightUom: json['heightUom'],
       weight: double.parse(json['weight']),
       weightUom: json['weightUom'],
-      medicines: new List<String>.from(json['medicines']),
-      schedules: new List<String>.from(json['schedules']),
+      medicines: json['medicines'] != null
+          ? new List<String>.from(json['medicines'])
+          : new List<String>(),
+      schedules: json['schedules'] != null
+          ? new List<String>.from(json['schedules'])
+          : new List<String>(),
       createdAt: DateTime.parse(json['createdAt']),
     );
   }
