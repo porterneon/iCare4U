@@ -1,19 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:icare4u_ui/constants.dart';
+import 'package:icare4u_ui/screens/components/logo.dart';
 
 class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final logo = Hero(
-      tag: 'hero',
-      child: CircleAvatar(
-        backgroundColor: Colors.transparent,
-        radius: 100.0,
-        backgroundImage: AssetImage('assets/logos/logo.png'),
-      ),
-    );
-
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: AnnotatedRegion<SystemUiOverlayStyle>(

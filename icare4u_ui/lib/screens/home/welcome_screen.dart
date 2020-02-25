@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:icare4u_ui/login/login_screen.dart';
 import 'package:icare4u_ui/register/register_screen.dart';
 import 'package:icare4u_ui/repositories/user_repository.dart';
+import 'package:icare4u_ui/screens/components/logo.dart';
 import 'package:icare4u_ui/service_locator.dart';
 import 'package:icare4u_ui/services/localizations.dart';
 import 'package:icare4u_ui/constants.dart';
@@ -13,15 +14,6 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
-  final logo = Hero(
-    tag: 'hero',
-    child: CircleAvatar(
-      backgroundColor: Colors.transparent,
-      radius: 100.0,
-      backgroundImage: AssetImage('assets/logos/logo.png'),
-    ),
-  );
-
   Widget _buildLoginBtn() {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 25.0),
@@ -127,7 +119,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     logo,
-                    SizedBox(height: 30.0),
+                    SizedBox(height: 10.0),
                     _buildLoginBtn(),
                     _buildSignUpBtn(),
                   ],
