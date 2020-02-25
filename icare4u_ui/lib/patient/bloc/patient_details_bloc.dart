@@ -30,7 +30,7 @@ class PatientDetailsBloc
 
         yield PatientCollectionLoaded(patients: patientCollection);
       } catch (e) {
-        print(e);
+        debugPrint(e);
         yield PatientCollectionError(error: e);
       }
     } else if (event is FetchPatientDetails) {

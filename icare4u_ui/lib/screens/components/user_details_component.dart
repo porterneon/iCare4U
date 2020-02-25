@@ -43,7 +43,7 @@ class _UserDetailsComponentState extends State<UserDetailsComponent> {
             }
             if (state is UserDetailsLoaded) {
               userDetails = state.userDetails;
-              print(userDetails.userName);
+              debugPrint(userDetails.userName);
 
               return ListView(
                 children: <Widget>[

@@ -76,7 +76,7 @@ class Patient extends Equatable {
     final difference =
         (DateTime.now().difference(birthday).inDays / 365).floor().toString();
 
-    print('patient age: $difference');
+    debugPrint('patient age: $difference');
     return difference;
   }
 }

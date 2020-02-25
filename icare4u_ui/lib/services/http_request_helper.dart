@@ -11,7 +11,7 @@ class HttpRequestHelper {
   Future<Map<String, String>> getRequestAuthenticateHeader() async {
     var _user = await userRepository.getUser();
     final String headerToken = "Bearer " + _user.token;
-    print(headerToken);
+    debugPrint(headerToken);
 
     Map<String, String> headerParams = {
       "Content-Type": 'application/json',

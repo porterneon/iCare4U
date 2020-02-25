@@ -49,18 +49,18 @@ class _PatientListState extends State<PatientList> {
 
         if ((state is PatientCollectionEmpty || state is PatientDetailsEmpty) &&
             widget._userId != null) {
-          print('fetch patient collection');
+          debugPrint('fetch patient collection');
           _bloc.add(FetchPatientCollection(
             userId: widget._userId,
           ));
         }
 
         if (state is PatientCollectionLoading) {
-          print('loading patient collection');
+          debugPrint('loading patient collection');
         }
 
         if (state is PatientCollectionLoaded) {
-          print("patients loaded");
+          debugPrint("patients loaded");
         }
       },
       child: BlocBuilder<PatientDetailsBloc, PatientDetailsState>(
@@ -99,7 +99,7 @@ class _PatientListState extends State<PatientList> {
 
   ListTile _tile(Patient patient, IconData icon) => ListTile(
         onTap: () => {
-          print(patient.name),
+          debugPrint(patient.name),
         },
         title: Text(
           patient.name,

@@ -8,8 +8,8 @@ class AppLocalizations {
   final Locale locale;
 
   AppLocalizations(this.locale) {
-    print("system locale");
-    print(this.locale.languageCode);
+    debugPrint("system locale");
+    debugPrint(this.locale.languageCode);
   }
 
   // Helper method to keep the code in the widgets concise
@@ -39,7 +39,7 @@ class AppLocalizations {
 
   // This method will be called from every widget which needs a localized text
   String translate(String key) {
-    print(_localizedStrings[key]);
+    debugPrint(_localizedStrings[key]);
     return _localizedStrings[key];
   }
 }
