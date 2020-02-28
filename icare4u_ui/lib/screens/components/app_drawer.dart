@@ -46,13 +46,7 @@ class AppDrawer extends StatelessWidget {
               BlocProvider.of<AuthenticationBloc>(context).add(
                 LoggedOut(),
               );
-              // Navigator.pop(context);
-              Navigator.pushReplacement(
-                context,
-                new MaterialPageRoute(
-                  builder: (BuildContext context) => new WelcomeScreen(),
-                ),
-              );
+              Navigator.pop(context);
             },
           ),
           ListTile(
