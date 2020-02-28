@@ -88,16 +88,22 @@ class _PatientListState extends State<PatientList> {
         physics: AlwaysScrollableScrollPhysics(),
         itemCount: data.length,
         itemBuilder: (BuildContext context, int index) {
-          return Card(
-            child: _tile(data[index], Icons.person),
+          return GestureDetector(
+            onTap: () => {
+              debugPrint(data[index].name),
+            },
+            child: Card(
+              elevation: 5,
+              child: buildTile(data[index], Icons.person),
+            ),
           );
         });
   }
 
-  Widget _tile(Patient patient, IconData icon) => ExpansionTile(
-        // onTap: () => {
-        //   debugPrint(patient.name),
-        // },
+  Widget buildTile(Patient patient, IconData icon) {
+    return Container(
+      child: ExpansionTile(
+        // backgroundColor: Colors.lightBlue[50],
         children: <Widget>[
           Container(
             child: Padding(
@@ -117,6 +123,7 @@ class _PatientListState extends State<PatientList> {
               padding: const EdgeInsets.all(8.0),
               child: Center(
                 child: Row(
+                  // mainAxisAlignment: MainAxisAlignment.center,
                   mainAxisSize: MainAxisSize.max,
                   children: <Widget>[
                     Text("Weight:"),
@@ -167,5 +174,7 @@ class _PatientListState extends State<PatientList> {
           icon,
           color: Colors.blue[500],
         ),
-      );
+      ),
+    );
+  }
 }
