@@ -4,7 +4,6 @@ import 'package:icare4u_ui/bloc/authentication_bloc/authentication_bloc.dart';
 import 'package:icare4u_ui/bloc/user_details_bloc/user_details_bloc.dart';
 import 'package:icare4u_ui/repositories/repositories.dart';
 import 'package:icare4u_ui/screens/components/user_details_component.dart';
-import 'package:icare4u_ui/screens/home/welcome_screen.dart';
 import 'package:icare4u_ui/service_locator.dart';
 import 'package:icare4u_ui/services/app_language.dart';
 import 'package:icare4u_ui/services/localizations.dart';
