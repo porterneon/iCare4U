@@ -89,18 +89,72 @@ class _PatientListState extends State<PatientList> {
         itemCount: data.length,
         itemBuilder: (BuildContext context, int index) {
           return Card(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: _tile(data[index], Icons.work),
-            ),
+            child: _tile(data[index], Icons.person),
           );
         });
   }
 
-  ListTile _tile(Patient patient, IconData icon) => ListTile(
-        onTap: () => {
-          debugPrint(patient.name),
-        },
+  Widget _tile(Patient patient, IconData icon) => ExpansionTile(
+        // onTap: () => {
+        //   debugPrint(patient.name),
+        // },
+        children: <Widget>[
+          Container(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Center(
+                child: Row(
+                  children: <Widget>[
+                    Text("Age:"),
+                    Text(patient.age),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          Container(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Center(
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: <Widget>[
+                    Text("Weight:"),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Text(patient.weight.toString()),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Text(patient.weightUom),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          Container(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Center(
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: <Widget>[
+                    Text("Height:"),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Text(patient.height.toString()),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Text(patient.heightUom),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
         title: Text(
           patient.name,
           style: TextStyle(
@@ -108,7 +162,7 @@ class _PatientListState extends State<PatientList> {
             fontSize: 20,
           ),
         ),
-        subtitle: Text(patient.patientId),
+        // subtitle: Text(patient.patientId),
         leading: Icon(
           icon,
           color: Colors.blue[500],
