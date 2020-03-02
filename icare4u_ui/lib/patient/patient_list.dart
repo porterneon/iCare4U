@@ -66,8 +66,16 @@ class _PatientListState extends State<PatientList> {
       child: BlocBuilder<PatientDetailsBloc, PatientDetailsState>(
         builder: (context, state) {
           if (state is PatientCollectionLoading) {
-            return Center(
-              child: CircularProgressIndicator(),
+            return Column(
+              children: <Widget>[
+                Center(
+                  child: SizedBox(
+                    height: 100.0,
+                    width: 100.0,
+                    child: CircularProgressIndicator(),
+                  ),
+                ),
+              ],
             );
           }
 
