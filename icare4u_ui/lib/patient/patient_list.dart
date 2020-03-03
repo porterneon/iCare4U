@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:icare4u_ui/models/patient.dart';
 import 'package:icare4u_ui/patient/bloc/patient_details_bloc.dart';
+import 'package:icare4u_ui/patient/patient_row.dart';
 
 class PatientList extends StatefulWidget {
   final String _userId;
@@ -80,13 +81,41 @@ class _PatientListState extends State<PatientList> {
           }
 
           if (state is PatientCollectionLoaded) {
-            return Center(
+            // return Column(
+            //   children: <Widget>[
+            //     buildPatientSilverList(state.patients),
+            //   ],
+            // );
+            return Container(
               child: buildPatientList(state.patients),
             );
           } else {
             return Container();
           }
         },
+      ),
+    );
+  }
+
+  Widget buildPatientSilverList(List<Patient> patients) {
+    return new Expanded(
+      child: new Container(
+        color: new Color(0xFF736AB7),
+        child: new CustomScrollView(
+          scrollDirection: Axis.vertical,
+          shrinkWrap: false,
+          slivers: <Widget>[
+            new SliverPadding(
+              padding: const EdgeInsets.symmetric(vertical: 24.0),
+              sliver: new SliverList(
+                delegate: new SliverChildBuilderDelegate(
+                  (context, index) => new PatientRow(patients[index]),
+                  childCount: patients.length,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
