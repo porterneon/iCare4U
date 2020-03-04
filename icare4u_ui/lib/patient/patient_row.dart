@@ -8,12 +8,13 @@ class PatientRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //TODO: implement basing on https://github.com/sergiandreplace/flutter_planets_tutorial/blob/Lesson_4_Planets_Flutter_Making_a_list_of_cards/lib/ui/home/planet_row.dart
+    //implement basing on
+    // https://github.com/sergiandreplace/flutter_planets_tutorial/blob/Lesson_4_Planets_Flutter_Making_a_list_of_cards/lib/ui/home/planet_row.dart
     final planetThumbnail = new Container(
       margin: new EdgeInsets.symmetric(vertical: 16.0),
       alignment: FractionalOffset.centerLeft,
       child: new Image(
-        image: new AssetImage('icon-png-person-5.png'),
+        image: new AssetImage('assets/img/icon-png-person-5.png'),
         height: 92.0,
         width: 92.0,
       ),

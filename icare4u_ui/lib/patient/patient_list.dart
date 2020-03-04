@@ -81,14 +81,14 @@ class _PatientListState extends State<PatientList> {
           }
 
           if (state is PatientCollectionLoaded) {
-            // return Column(
-            //   children: <Widget>[
-            //     buildPatientSilverList(state.patients),
-            //   ],
-            // );
-            return Container(
-              child: buildPatientList(state.patients),
+            return Column(
+              children: <Widget>[
+                buildPatientSilverList(state.patients),
+              ],
             );
+            // return Container(
+            //   child: buildPatientList(state.patients),
+            // );
           } else {
             return Container();
           }
