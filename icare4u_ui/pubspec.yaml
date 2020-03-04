@@ -61,8 +61,8 @@ flutter:
     - i18n/en.json
     - i18n/pl.json
     - assets/img/icon-png-person-5.png
-    - assets/img/ic_distance.png
-    - assets/img/ic_gravity.png
+    - assets/img/height.png
+    - assets/img/weight_machine.png
 
   fonts:
     - family: OpenSans

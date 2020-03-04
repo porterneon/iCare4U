@@ -86,9 +86,6 @@ class _PatientListState extends State<PatientList> {
                 buildPatientSilverList(state.patients),
               ],
             );
-            // return Container(
-            //   child: buildPatientList(state.patients),
-            // );
           } else {
             return Container();
           }

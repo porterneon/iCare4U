@@ -21,7 +21,7 @@ class PatientRow extends StatelessWidget {
     final baseTextStyle = const TextStyle(fontFamily: 'Poppins');
     final regularTextStyle = baseTextStyle.copyWith(
         color: const Color(0xffb6b2df),
-        fontSize: 9.0,
+        fontSize: 11.0,
         fontWeight: FontWeight.w400);
     final subHeaderTextStyle = regularTextStyle.copyWith(fontSize: 12.0);
     final headerTextStyle = baseTextStyle.copyWith(
@@ -29,14 +29,18 @@ class PatientRow extends StatelessWidget {
 
     Widget _patientValue({String value, String image}) {
       return new Row(children: <Widget>[
-        new Image.asset(image, height: 12.0),
+        Image.asset(
+          image,
+          color: const Color(0xffb6b2df),
+          height: 18.0,
+        ),
         new Container(width: 8.0),
         new Text(value, style: regularTextStyle),
       ]);
     }
 
     final patientCardContent = new Container(
-      margin: new EdgeInsets.fromLTRB(76.0, 16.0, 16.0, 16.0),
+      margin: new EdgeInsets.fromLTRB(60.0, 16.0, 16.0, 16.0),
       constraints: new BoxConstraints.expand(),
       child: new Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -54,12 +58,14 @@ class PatientRow extends StatelessWidget {
             children: <Widget>[
               new Expanded(
                   child: _patientValue(
-                      value: patient.height.toString(),
-                      image: 'assets/img/ic_distance.png')),
+                      value:
+                          patient.height.toString() + " " + patient.heightUom,
+                      image: 'assets/img/height.png')),
               new Expanded(
                   child: _patientValue(
-                      value: patient.weight.toString(),
-                      image: 'assets/img/ic_gravity.png'))
+                      value:
+                          patient.weight.toString() + " " + patient.weightUom,
+                      image: 'assets/img/weight_machine.png'))
             ],
           ),
         ],
