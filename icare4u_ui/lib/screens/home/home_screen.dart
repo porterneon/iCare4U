@@ -32,7 +32,7 @@ class Home extends StatelessWidget {
             child: Column(
               children: <Widget>[
                 Container(
-                  height: 80,
+                  height: 40,
                   width: double.infinity,
                   decoration: new BoxDecoration(
                     color: appBarDecoration.color,

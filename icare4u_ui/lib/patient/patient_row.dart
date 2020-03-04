@@ -8,9 +8,7 @@ class PatientRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //implement basing on
-    // https://github.com/sergiandreplace/flutter_planets_tutorial/blob/Lesson_4_Planets_Flutter_Making_a_list_of_cards/lib/ui/home/planet_row.dart
-    final planetThumbnail = new Container(
+    final patientThumbnail = new Container(
       margin: new EdgeInsets.symmetric(vertical: 16.0),
       alignment: FractionalOffset.centerLeft,
       child: new Image(
@@ -29,15 +27,15 @@ class PatientRow extends StatelessWidget {
     final headerTextStyle = baseTextStyle.copyWith(
         color: Colors.white, fontSize: 18.0, fontWeight: FontWeight.w600);
 
-    Widget _planetValue({String value, String image}) {
+    Widget _patientValue({String value, String image}) {
       return new Row(children: <Widget>[
         new Image.asset(image, height: 12.0),
         new Container(width: 8.0),
-        new Text(patient.birthDate, style: regularTextStyle),
+        new Text(value, style: regularTextStyle),
       ]);
     }
 
-    final planetCardContent = new Container(
+    final patientCardContent = new Container(
       margin: new EdgeInsets.fromLTRB(76.0, 16.0, 16.0, 16.0),
       constraints: new BoxConstraints.expand(),
       child: new Column(
@@ -45,8 +43,8 @@ class PatientRow extends StatelessWidget {
         children: <Widget>[
           new Container(height: 4.0),
           new Text(patient.name, style: headerTextStyle),
-          // new Container(height: 10.0),
-          // new Text(planet.location, style: subHeaderTextStyle),
+          new Container(height: 10.0),
+          new Text(patient.patientId, style: subHeaderTextStyle),
           new Container(
               margin: new EdgeInsets.symmetric(vertical: 8.0),
               height: 2.0,
@@ -55,11 +53,11 @@ class PatientRow extends StatelessWidget {
           new Row(
             children: <Widget>[
               new Expanded(
-                  child: _planetValue(
+                  child: _patientValue(
                       value: patient.height.toString(),
                       image: 'assets/img/ic_distance.png')),
               new Expanded(
-                  child: _planetValue(
+                  child: _patientValue(
                       value: patient.weight.toString(),
                       image: 'assets/img/ic_gravity.png'))
             ],
@@ -68,8 +66,8 @@ class PatientRow extends StatelessWidget {
       ),
     );
 
-    final planetCard = new Container(
-      child: planetCardContent,
+    final patientCard = new Container(
+      child: patientCardContent,
       height: 124.0,
       margin: new EdgeInsets.only(left: 46.0),
       decoration: new BoxDecoration(
@@ -90,12 +88,12 @@ class PatientRow extends StatelessWidget {
         height: 120.0,
         margin: const EdgeInsets.symmetric(
           vertical: 16.0,
-          horizontal: 24.0,
+          horizontal: 16.0,
         ),
         child: new Stack(
           children: <Widget>[
-            planetCard,
-            planetThumbnail,
+            patientCard,
+            patientThumbnail,
           ],
         ));
   }
