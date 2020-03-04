@@ -90,11 +90,16 @@ class PatientRow extends StatelessWidget {
           vertical: 16.0,
           horizontal: 16.0,
         ),
-        child: new Stack(
-          children: <Widget>[
-            patientCard,
-            patientThumbnail,
-          ],
+        child: GestureDetector(
+          onTap: () => {
+            debugPrint(patient.name),
+          },
+          child: new Stack(
+            children: <Widget>[
+              patientCard,
+              patientThumbnail,
+            ],
+          ),
         ));
   }
 }
