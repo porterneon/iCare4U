@@ -1,65 +1,56 @@
-const { db } = require("../util/admin");
+const { db, admin } = require('../util/admin');
 
-const { reducePatientDetails } = require("../util/validators");
+const {
+  reducePatientDetails,
+  validatePatientGroupData,
+  validatePatientDetails,
+  isEmpty
+} = require('../util/validators');
 
-const connections = require("../modules/connections");
+const groupModule = require('../modules/userGroups');
 
-async function getPatients(ids) {
-  let queries = [];
-  ids.forEach(id => {
-    queries.push(db.doc(`/patient/${id}`).get());
-  });
-
-  var errors = [];
-  var results = [];
-
-  return Promise.all(queries)
-    .then(items => {
-      items.forEach(element => {
-        results.push(element.data());
-      });
-
-      return {
-        errors: errors,
-        results: results
-      };
-    })
-    .catch(e => {
-      console.error(e);
-      errors.push(e);
-      return {
-        errors: errors,
-        results: results
-      };
-    });
-}
+const { getItems } = require('../modules/generic');
 
 exports.getPatientsByUser = async (req, res) => {
   try {
     console.log(req.params);
 
-    let patientIds = await connections.getPatientIdsByUserId(req.params.userId);
+    let patientIds = [];
 
-    let patients = await getPatients(patientIds);
-    console.log(patients);
-    if (patients.errors.length > 0) {
-      console.error(patients.errors);
-      return res.status(500).json(errors);
-    } else {
-      return res.json(patients.results);
-    }
+    let groups = await groupModule.getUserGroups(req.params.userId);
+    groups.forEach(group => {
+      group.patients.forEach(p => {
+        patientIds.push(p);
+      });
+    });
+
+    const uniquePatientIds = [...new Set(patientIds.map(i => i))];
+
+    console.log(uniquePatientIds);
+
+    const { errors, results, valid } = await getItems(
+      'patient',
+      uniquePatientIds
+    );
+
+    if (!valid) return res.status(400).json(errors);
+
+    return res.status(200).json(results);
   } catch (e) {
+    console.error(e);
     return res.status(500).json(e);
   }
 };
 
 exports.getAllPatients = async (req, res) => {
   try {
-    const data = await db.collection("patient").get();
+    const data = await db.collection('patient').get();
 
     let items = [];
     data.docs.forEach(doc => {
-      items.push(doc.data());
+      let patient = doc.data();
+      patient.id = doc.id;
+      items.push(patient);
     });
 
     return res.status(200).json(items);
@@ -74,13 +65,13 @@ exports.getPatientDetails = async (req, res) => {
     console.log(req.params);
     const data = await db.doc(`/patient/${req.params.patientId}`).get();
 
-    //console.log(data.data());
-    if (data) {
+    console.log(data.data());
+    if (data.exists) {
       patientDetails = data.data();
       patientDetails.patientId = data.id;
       return res.status(200).json(patientDetails);
     } else {
-      return res.status(404).json({ errror: "Patient not found" });
+      return res.status(404).json({ errror: 'Patient not found' });
     }
   } catch (e) {
     return res.status(500).json(e);
@@ -90,20 +81,92 @@ exports.getPatientDetails = async (req, res) => {
 exports.addPatientDetails = async (req, res) => {
   try {
     console.log(req.body);
-    if (req.body.patientName.trim() === "") {
-      return res.status(400).json({ body: "Body must not be empty" });
+    if (req.body.patientName.trim() === '') {
+      return res.status(400).json({ body: 'Body must not be empty' });
     }
 
     let newPatient = reducePatientDetails(req.body);
     newPatient.createdAt = new Date().toISOString();
 
-    let doc = await db.collection("patient").add(newPatient);
+    console.log(newPatient);
+
+    const { errors, valid } = validatePatientDetails(newPatient);
+
+    if (!valid) {
+      return res.status(400).json(errors);
+    }
+
+    let doc = await db.collection('patient').add(newPatient);
     const resPatient = newPatient;
     resPatient.patientId = doc.id;
 
     return res.json(resPatient);
   } catch (e) {
     console.log(e);
-    return res.status(500).json({ error: "something went wrong" });
+    return res.status(500).json({ error: 'something went wrong' });
+  }
+};
+
+exports.updatePatientDetails = async (req, res) => {
+  try {
+    if (isEmpty(req.params.patientId))
+      return res
+        .status(400)
+        .json({ error: 'Parameter patientId is required.' });
+
+    let patient = reducePatientDetails(req.body);
+    patient.createdAt = new Date().toISOString();
+    const { errors, valid } = validatePatientDetails(patient);
+
+    if (!valid) {
+      return res.status(400).json(errors);
+    }
+
+    let result = await db
+      .collection('patient')
+      .doc(req.params.patientId)
+      .set(req.body, { merge: true });
+
+    return res.status(200).json(result);
+  } catch (e) {
+    console.log(e);
+    return res.status(500).json({ error: e.message });
+  }
+};
+
+exports.addPatientIntoGroup = async (req, res) => {
+  try {
+    console.log(req.body);
+    const { valid, errors } = validatePatientGroupData(req.body);
+
+    if (!valid) return res.status(400).json(errors);
+
+    let doc = db.collection('userGroups').doc(req.body.groupId);
+    //console.log((await doc.get()).data());
+
+    let arrUnion = await doc.update({
+      patients: admin.firestore.FieldValue.arrayUnion(req.body.patientId)
+    });
+
+    console.log(arrUnion);
+
+    return res.json(req.body);
+  } catch (e) {
+    console.error(e);
+    return res.status(500).json({ error: e.message });
+  }
+};
+
+exports.deletePatient = async (req, res) => {
+  try {
+    await db
+      .collection('patient')
+      .doc(req.params.patientId)
+      .delete();
+
+    return res.status(200).json('Ok');
+  } catch (e) {
+    console.error(e);
+    return res.status(500).json({ error: e.message });
   }
 };

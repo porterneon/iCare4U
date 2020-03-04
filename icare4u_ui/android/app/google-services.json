@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "469905324726",
+    "firebase_url": "https://icare4uapi.firebaseio.com",
+    "project_id": "icare4uapi",
+    "storage_bucket": "icare4uapi.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:469905324726:android:7745e2af2a7909466c4417",
+        "android_client_info": {
+          "package_name": "com.porterneon.iCare4U"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "469905324726-frb6p5v0dkj4tpml94auee2j7mcr48t8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAW0sqmlF5k53Z-fc0QZQiq2nTc6JTMl3U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "469905324726-frb6p5v0dkj4tpml94auee2j7mcr48t8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "469905324726-pofvr4fnth7t6n74bahu8dfnpcs76jmv.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.icare4uUi"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
