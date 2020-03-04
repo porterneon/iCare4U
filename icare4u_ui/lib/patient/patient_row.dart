@@ -71,7 +71,7 @@ class PatientRow extends StatelessWidget {
       height: 124.0,
       margin: new EdgeInsets.only(left: 46.0),
       decoration: new BoxDecoration(
-        color: new Color(0xFF333366),
+        color: new Color.fromRGBO(14, 107, 168, 1),
         shape: BoxShape.rectangle,
         borderRadius: new BorderRadius.circular(8.0),
         boxShadow: <BoxShadow>[
