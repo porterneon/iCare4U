@@ -60,6 +60,7 @@ flutter:
     - assets/logos/logo.png
     - i18n/en.json
     - i18n/pl.json
+    - assets/icons/icon-png-person-5.png
 
   fonts:
     - family: OpenSans
