@@ -1,10 +1,10 @@
-part of 'patient_details_bloc.dart';
+part of 'patient_list_bloc.dart';
 
-abstract class PatientDetailsEvent extends Equatable {
-  const PatientDetailsEvent();
+abstract class PatientListEvent extends Equatable {
+  const PatientListEvent();
 }
 
-class FetchPatientCollection extends PatientDetailsEvent {
+class FetchPatientCollection extends PatientListEvent {
   final String userId;
 
   const FetchPatientCollection({@required this.userId})
@@ -14,7 +14,7 @@ class FetchPatientCollection extends PatientDetailsEvent {
   List<Object> get props => [userId];
 }
 
-class FetchPatientDetails extends PatientDetailsEvent {
+class FetchPatientDetails extends PatientListEvent {
   final String patientId;
 
   const FetchPatientDetails({

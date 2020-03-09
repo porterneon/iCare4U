@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:icare4u_ui/models/patient.dart';
-import 'package:icare4u_ui/patient/bloc/patient_details_bloc.dart';
+import 'package:icare4u_ui/patient/bloc/patient_list_bloc.dart';
 import 'package:icare4u_ui/patient/patient_row.dart';
 
 class PatientList extends StatefulWidget {
@@ -18,12 +18,12 @@ class PatientList extends StatefulWidget {
 }
 
 class _PatientListState extends State<PatientList> {
-  PatientDetailsBloc _bloc;
+  PatientListBloc _bloc;
 
   @override
   void initState() {
     super.initState();
-    _bloc = BlocProvider.of<PatientDetailsBloc>(context);
+    _bloc = BlocProvider.of<PatientListBloc>(context);
 
     _bloc.add(FetchPatientCollection(
       userId: widget._userId,
@@ -32,7 +32,7 @@ class _PatientListState extends State<PatientList> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<PatientDetailsBloc, PatientDetailsState>(
+    return BlocListener<PatientListBloc, PatientListState>(
       listener: (context, state) {
         if (state is PatientCollectionError) {
           Scaffold.of(context)
@@ -48,7 +48,8 @@ class _PatientListState extends State<PatientList> {
             );
         }
 
-        if ((state is PatientCollectionEmpty || state is PatientDetailsEmpty) &&
+        if ((state is PatientCollectionEmpty ||
+                state is PatientCollectionEmpty) &&
             widget._userId != null) {
           debugPrint('fetch patient collection');
           _bloc.add(FetchPatientCollection(
@@ -64,7 +65,7 @@ class _PatientListState extends State<PatientList> {
           debugPrint("patients loaded");
         }
       },
-      child: BlocBuilder<PatientDetailsBloc, PatientDetailsState>(
+      child: BlocBuilder<PatientListBloc, PatientListState>(
         builder: (context, state) {
           if (state is PatientCollectionLoading) {
             return Column(

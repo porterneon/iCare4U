@@ -26,8 +26,7 @@ class PatientDetailsRepository {
     return apiClient.deletePatientDetails(patientId);
   }
 
-  Future<Patient> fetchPatientDetials(
-      String userId, String groupId, String patientId) async {
-    return apiClient.fetchPatientDetails(userId, groupId, patientId);
+  Future<Patient> fetchPatientDetials(String patientId) async {
+    return apiClient.fetchPatientDetails(patientId);
   }
 }

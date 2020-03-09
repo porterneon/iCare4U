@@ -30,27 +30,3 @@ class PatientDetailsError extends PatientDetailsState {
   @override
   List<Object> get props => [error];
 }
-
-class PatientCollectionEmpty extends PatientDetailsState {}
-
-class PatientCollectionLoading extends PatientDetailsState {}
-
-class PatientCollectionLoaded extends PatientDetailsState {
-  final List<Patient> patients;
-
-  const PatientCollectionLoaded({
-    @required this.patients,
-  }) : assert(patients != null);
-
-  @override
-  List<Object> get props => [patients];
-}
-
-class PatientCollectionError extends PatientDetailsState {
-  final String error;
-
-  PatientCollectionError({@required this.error}) : assert(error != null);
-
-  @override
-  List<Object> get props => [error];
-}

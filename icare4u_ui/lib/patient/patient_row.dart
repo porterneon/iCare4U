@@ -1,11 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:icare4u_ui/models/models.dart';
+import 'package:icare4u_ui/patient/bloc/patient_details_bloc.dart';
+import 'package:icare4u_ui/patient/patient_details_screen.dart';
+import 'package:icare4u_ui/repositories/repositories.dart';
+import 'package:icare4u_ui/service_locator.dart';
 
-class PatientRow extends StatelessWidget {
+class PatientRow extends StatefulWidget {
   final Patient patient;
 
   PatientRow(this.patient);
 
+  @override
+  _PatientRowState createState() => _PatientRowState();
+}
+
+class _PatientRowState extends State<PatientRow> {
   @override
   Widget build(BuildContext context) {
     final patientThumbnail = new Container(
@@ -46,9 +56,9 @@ class PatientRow extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           new Container(height: 4.0),
-          new Text(patient.name, style: headerTextStyle),
+          new Text(widget.patient.name, style: headerTextStyle),
           new Container(height: 10.0),
-          new Text(patient.patientId, style: subHeaderTextStyle),
+          new Text(widget.patient.patientId, style: subHeaderTextStyle),
           new Container(
               margin: new EdgeInsets.symmetric(vertical: 8.0),
               height: 2.0,
@@ -58,13 +68,15 @@ class PatientRow extends StatelessWidget {
             children: <Widget>[
               new Expanded(
                   child: _patientValue(
-                      value:
-                          patient.height.toString() + " " + patient.heightUom,
+                      value: widget.patient.height.toString() +
+                          " " +
+                          widget.patient.heightUom,
                       image: 'assets/img/height.png')),
               new Expanded(
                   child: _patientValue(
-                      value:
-                          patient.weight.toString() + " " + patient.weightUom,
+                      value: widget.patient.weight.toString() +
+                          " " +
+                          widget.patient.weightUom,
                       image: 'assets/img/weight_machine.png'))
             ],
           ),
@@ -96,15 +108,29 @@ class PatientRow extends StatelessWidget {
           vertical: 16.0,
           horizontal: 16.0,
         ),
-        child: GestureDetector(
-          onTap: () => {
-            debugPrint(patient.name),
-          },
-          child: new Stack(
-            children: <Widget>[
-              patientCard,
-              patientThumbnail,
-            ],
+        child: BlocProvider<PatientDetailsBloc>(
+          create: (context) => PatientDetailsBloc(
+              repository: locator<PatientDetailsRepository>()),
+          child: GestureDetector(
+            onTap: () => {
+              debugPrint(widget.patient.name),
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => PatientDetailsScreen(
+                    patientId: widget.patient.patientId,
+                    patientDetailsBloc:
+                        BlocProvider.of<PatientDetailsBloc>(context),
+                  ),
+                ),
+              )
+            },
+            child: new Stack(
+              children: <Widget>[
+                patientCard,
+                patientThumbnail,
+              ],
+            ),
           ),
         ));
   }

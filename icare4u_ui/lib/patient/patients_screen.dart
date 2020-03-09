@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:icare4u_ui/patient/bloc/patient_details_bloc.dart';
+import 'package:icare4u_ui/patient/bloc/patient_list_bloc.dart';
 import 'package:icare4u_ui/patient/patient_list.dart';
 import 'package:icare4u_ui/repositories/repositories.dart';
 
@@ -19,9 +19,9 @@ class PatientsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<PatientDetailsBloc>(
+    return BlocProvider<PatientListBloc>(
       create: (context) =>
-          PatientDetailsBloc(repository: _patientDetailsRepository),
+          PatientListBloc(repository: _patientDetailsRepository),
       child: PatientList(
         userId: _userId,
       ),

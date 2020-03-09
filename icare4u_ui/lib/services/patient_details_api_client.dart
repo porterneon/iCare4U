@@ -59,8 +59,17 @@ class PatientDetailsApiClient {
     return true;
   }
 
-  Future<Patient> fetchPatientDetails(
-      String userId, String groupId, String patientId) async {
-    return null;
+  Future<Patient> fetchPatientDetails(String patientId) async {
+    return new Patient(
+      patientId: patientId,
+      birthDate: "1978-07-28",
+      name: "Marcin",
+      heightUom: "cm",
+      weightUom: "kg",
+      height: 182,
+      weight: 106,
+      age: "42",
+      createdAt: DateTime.now(),
+    );
   }
 }

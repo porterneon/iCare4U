@@ -22,22 +22,11 @@ class PatientDetailsBloc
   Stream<PatientDetailsState> mapEventToState(
     PatientDetailsEvent event,
   ) async* {
-    if (event is FetchPatientCollection) {
-      yield PatientCollectionLoading();
-      try {
-        final List<Patient> patientCollection =
-            await repository.fetchPatientCollection(event.userId);
-
-        yield PatientCollectionLoaded(patients: patientCollection);
-      } catch (e) {
-        debugPrint(e);
-        yield PatientCollectionError(error: e);
-      }
-    } else if (event is FetchPatientDetails) {
+    if (event is FetchPatientDetails) {
       yield PatientDetailsLoading();
       try {
-        final Patient patient = await repository.fetchPatientDetials(
-            event.userId, event.groupId, event.patientId);
+        final Patient patient =
+            await repository.fetchPatientDetials(event.patientId);
         yield PatientDetailsLoaded(patient: patient);
       } catch (e) {
         yield PatientDetailsError(error: e);
