@@ -71,35 +71,26 @@ class PatientDetailsScreenState extends State<PatientDetailsScreen> {
               PatientDetailsState currentState,
             ) {
               if (currentState is PatientDetailsLoading) {
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
-              }
-              if (currentState is PatientDetailsError) {
-                return Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text(currentState.error ?? 'Error'),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 32.0),
-                        child: RaisedButton(
-                          color: Colors.blue,
-                          child: Text('reload'),
-                          onPressed: () => this._load(),
-                        ),
+                return Column(
+                  children: <Widget>[
+                    Center(
+                      child: SizedBox(
+                        height: 100.0,
+                        width: 100.0,
+                        child: CircularProgressIndicator(),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 );
               }
+
               if (currentState is PatientDetailsLoaded) {
                 return Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Text(currentState.patient.name),
-                      Text('Flutter files: done'),
+                      Text(currentState.patient.patientId),
                     ],
                   ),
                 );
