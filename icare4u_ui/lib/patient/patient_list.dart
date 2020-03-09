@@ -25,9 +25,7 @@ class _PatientListState extends State<PatientList> {
     super.initState();
     _bloc = BlocProvider.of<PatientListBloc>(context);
 
-    _bloc.add(FetchPatientCollection(
-      userId: widget._userId,
-    ));
+    this._load();
   }
 
   @override
@@ -52,9 +50,11 @@ class _PatientListState extends State<PatientList> {
                 state is PatientCollectionEmpty) &&
             widget._userId != null) {
           debugPrint('fetch patient collection');
-          _bloc.add(FetchPatientCollection(
-            userId: widget._userId,
-          ));
+          _bloc.add(
+            FetchPatientCollection(
+              userId: widget._userId,
+            ),
+          );
         }
 
         if (state is PatientCollectionLoading) {
@@ -99,21 +99,32 @@ class _PatientListState extends State<PatientList> {
     return new Expanded(
       child: new Container(
         color: Colors.transparent,
-        child: new CustomScrollView(
-          scrollDirection: Axis.vertical,
-          shrinkWrap: false,
-          slivers: <Widget>[
-            new SliverPadding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0),
-              sliver: new SliverList(
-                delegate: new SliverChildBuilderDelegate(
-                  (context, index) => new PatientRow(patients[index]),
-                  childCount: patients.length,
+        child: RefreshIndicator(
+          child: new CustomScrollView(
+            scrollDirection: Axis.vertical,
+            shrinkWrap: false,
+            slivers: <Widget>[
+              new SliverPadding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                sliver: new SliverList(
+                  delegate: new SliverChildBuilderDelegate(
+                    (context, index) => new PatientRow(patients[index]),
+                    childCount: patients.length,
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
+          onRefresh: _load,
         ),
+      ),
+    );
+  }
+
+  Future<void> _load() async {
+    _bloc.add(
+      FetchPatientCollection(
+        userId: widget._userId,
       ),
     );
   }
