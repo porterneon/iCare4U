@@ -102,36 +102,36 @@ class _PatientRowState extends State<PatientRow> {
       ),
     );
 
-    return new Container(
-        height: 120.0,
-        margin: const EdgeInsets.symmetric(
-          vertical: 16.0,
-          horizontal: 16.0,
-        ),
-        child: BlocProvider<PatientDetailsBloc>(
-          create: (context) => PatientDetailsBloc(
-              repository: locator<PatientDetailsRepository>()),
-          child: GestureDetector(
-            onTap: () => {
-              debugPrint(widget.patient.name),
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => PatientDetailsScreen(
-                    patientId: widget.patient.patientId,
-                    patientDetailsBloc:
-                        BlocProvider.of<PatientDetailsBloc>(context),
-                  ),
+    return Container(
+      height: 120.0,
+      margin: const EdgeInsets.symmetric(
+        vertical: 16.0,
+        horizontal: 16.0,
+      ),
+      child: GestureDetector(
+        onTap: () => {
+          debugPrint(widget.patient.name),
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => BlocProvider<PatientDetailsBloc>(
+                create: (context) => PatientDetailsBloc(
+                  repository: locator<PatientDetailsRepository>(),
                 ),
-              )
-            },
-            child: new Stack(
-              children: <Widget>[
-                patientCard,
-                patientThumbnail,
-              ],
+                child: PatientDetailsScreen(
+                  patientId: widget.patient.patientId,
+                ),
+              ),
             ),
-          ),
-        ));
+          )
+        },
+        child: new Stack(
+          children: <Widget>[
+            patientCard,
+            patientThumbnail,
+          ],
+        ),
+      ),
+    );
   }
 }

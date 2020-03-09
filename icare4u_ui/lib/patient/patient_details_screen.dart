@@ -7,12 +7,8 @@ class PatientDetailsScreen extends StatefulWidget {
 
   const PatientDetailsScreen({
     Key key,
-    @required PatientDetailsBloc patientDetailsBloc,
     @required this.patientId,
-  })  : _patientDetailsBloc = patientDetailsBloc,
-        super(key: key);
-
-  final PatientDetailsBloc _patientDetailsBloc;
+  }) : super(key: key);
 
   @override
   PatientDetailsScreenState createState() {
@@ -21,72 +17,106 @@ class PatientDetailsScreen extends StatefulWidget {
 }
 
 class PatientDetailsScreenState extends State<PatientDetailsScreen> {
-  PatientDetailsScreenState();
+  PatientDetailsBloc _patientDetailsBloc;
 
   @override
   void initState() {
     super.initState();
+    _patientDetailsBloc = BlocProvider.of<PatientDetailsBloc>(context);
     this._load();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: BlocBuilder<PatientDetailsBloc, PatientDetailsState>(
-          bloc: widget._patientDetailsBloc,
-          builder: (
-            BuildContext context,
-            PatientDetailsState currentState,
-          ) {
-            if (currentState is PatientDetailsLoading) {
+      body: BlocListener<PatientDetailsBloc, PatientDetailsState>(
+        listener: (context, state) {
+          if (state is PatientDetailsError) {
+            Scaffold.of(context)
+              ..hideCurrentSnackBar()
+              ..showSnackBar(
+                SnackBar(
+                  content: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text('Fetch patient failure'),
+                      Icon(Icons.error)
+                    ],
+                  ),
+                  backgroundColor: Colors.red,
+                ),
+              );
+          }
+
+          if ((state is PatientDetailsEmpty || state is PatientDetailsEmpty) &&
+              widget.patientId != null) {
+            _patientDetailsBloc.add(FetchPatientDetails(
+              patientId: widget.patientId,
+            ));
+          }
+
+          if (state is PatientDetailsLoading) {
+            debugPrint('loading patient details');
+          }
+
+          if (state is PatientDetailsLoaded) {
+            debugPrint("patient details loaded");
+          }
+        },
+        child: BlocBuilder<PatientDetailsBloc, PatientDetailsState>(
+            bloc: _patientDetailsBloc,
+            builder: (
+              BuildContext context,
+              PatientDetailsState currentState,
+            ) {
+              if (currentState is PatientDetailsLoading) {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+              if (currentState is PatientDetailsError) {
+                return Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(currentState.error ?? 'Error'),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 32.0),
+                        child: RaisedButton(
+                          color: Colors.blue,
+                          child: Text('reload'),
+                          onPressed: () => this._load(),
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              }
+              if (currentState is PatientDetailsLoaded) {
+                return Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(currentState.patient.name),
+                      Text('Flutter files: done'),
+                    ],
+                  ),
+                );
+              }
               return Center(
                 child: CircularProgressIndicator(),
               );
-            }
-            if (currentState is PatientDetailsError) {
-              return Center(
-                  child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text(currentState.error ?? 'Error'),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 32.0),
-                    child: RaisedButton(
-                      color: Colors.blue,
-                      child: Text('reload'),
-                      onPressed: () => this._load(),
-                    ),
-                  ),
-                ],
-              ));
-            }
-            if (currentState is PatientDetailsLoaded) {
-              return Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text(currentState.patient.name),
-                    Text('Flutter files: done'),
-                  ],
-                ),
-              );
-            }
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          }),
+            }),
+      ),
     );
   }
 
   void _load() {
-    widget._patientDetailsBloc.add(FetchPatientDetails(
-      patientId: widget.patientId,
-    ));
+    _patientDetailsBloc.add(
+      FetchPatientDetails(
+        patientId: widget.patientId,
+      ),
+    );
   }
 }
