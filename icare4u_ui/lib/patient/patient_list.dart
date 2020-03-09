@@ -115,13 +115,15 @@ class _PatientListState extends State<PatientList> {
               ),
             ],
           ),
-          onRefresh: _load,
+          onRefresh: () async {
+            _load();
+          },
         ),
       ),
     );
   }
 
-  Future<void> _load() async {
+  void _load() {
     _bloc.add(
       FetchPatientCollection(
         userId: widget._userId,
