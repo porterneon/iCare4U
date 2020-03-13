@@ -60,16 +60,23 @@ class PatientDetailsApiClient {
   }
 
   Future<Patient> fetchPatientDetails(String patientId) async {
-    return new Patient(
-      patientId: patientId,
-      birthDate: "1978-07-28",
-      name: "Marcin",
-      heightUom: "cm",
-      weightUom: "kg",
-      height: 182,
-      weight: 106,
-      age: "42",
-      createdAt: DateTime.now(),
-    );
+    this.apiUrl = _globalSettings.getApiUrl();
+    var apiPath = _globalSettings.getPatientDetailsApiPath(patientId);
+    var headerParams = await requestHelper.getRequestAuthenticateHeader();
+
+    final requestUrl = '$apiUrl$apiPath';
+
+    final response =
+        await this.httpClient.get(requestUrl, headers: headerParams);
+
+    if (response.statusCode != 200) {
+      throw Exception('error getting patient collection');
+    }
+
+    if (response.body.length == 0) {
+      throw Exception('patients not found');
+    }
+
+    return Patient.fromJson(json.decode(response.body));
   }
 }

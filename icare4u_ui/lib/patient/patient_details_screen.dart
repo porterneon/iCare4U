@@ -23,7 +23,7 @@ class PatientDetailsScreenState extends State<PatientDetailsScreen> {
   void initState() {
     super.initState();
     _patientDetailsBloc = BlocProvider.of<PatientDetailsBloc>(context);
-    this._load();
+    // this._load();
   }
 
   @override
@@ -49,13 +49,6 @@ class PatientDetailsScreenState extends State<PatientDetailsScreen> {
               );
           }
 
-          if ((state is PatientDetailsEmpty || state is PatientDetailsEmpty) &&
-              widget.patientId != null) {
-            _patientDetailsBloc.add(FetchPatientDetails(
-              patientId: widget.patientId,
-            ));
-          }
-
           if (state is PatientDetailsLoading) {
             debugPrint('loading patient details');
           }
@@ -70,6 +63,10 @@ class PatientDetailsScreenState extends State<PatientDetailsScreen> {
               BuildContext context,
               PatientDetailsState currentState,
             ) {
+              if (currentState is PatientDetailsEmpty &&
+                  widget.patientId != null) {
+                _load();
+              }
               if (currentState is PatientDetailsLoading) {
                 return Column(
                   children: <Widget>[
@@ -89,14 +86,50 @@ class PatientDetailsScreenState extends State<PatientDetailsScreen> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Text(currentState.patient.name),
-                      Text(currentState.patient.patientId),
+                      Card(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            children: <Widget>[
+                              Row(
+                                children: <Widget>[
+                                  Text("Patient name:"),
+                                  SizedBox(width: 10.0),
+                                  Text(currentState.patient.name),
+                                ],
+                              ),
+                              Row(
+                                children: <Widget>[
+                                  Text("Birth date:"),
+                                  SizedBox(width: 10.0),
+                                  Text(currentState.patient.birthDate),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      // Text(currentState.patient.patientId),
+                      Card(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            children: <Widget>[
+                              Text("Wiek:"),
+                              SizedBox(width: 10.0),
+                              Text(currentState.patient.age),
+                              SizedBox(width: 5.0),
+                              Text("years."),
+                            ],
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 );
               }
               return Center(
-                child: CircularProgressIndicator(),
+                child: Container(),
               );
             }),
       ),
