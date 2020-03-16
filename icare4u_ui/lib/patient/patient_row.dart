@@ -120,6 +120,9 @@ class _PatientRowState extends State<PatientRow> {
                 ),
                 child: PatientDetailsScreen(
                   patientId: widget.patient.patientId,
+                  patientDetailsBloc: PatientDetailsBloc(
+                    repository: locator<PatientDetailsRepository>(),
+                  ),
                 ),
               ),
             ),

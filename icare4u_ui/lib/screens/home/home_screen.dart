@@ -31,25 +31,25 @@ class Home extends StatelessWidget {
           child: Center(
             child: Column(
               children: <Widget>[
-                Container(
-                  height: 40,
-                  width: double.infinity,
-                  decoration: new BoxDecoration(
-                    color: appBarDecoration.color,
-                    borderRadius: new BorderRadius.only(
-                        bottomLeft: const Radius.circular(30.0)),
-                  ),
-                  child: Text(
-                    "This is temporary text...",
-                    style: TextStyle(
-                      color: Colors.white,
-                      letterSpacing: 1.5,
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.bold,
-                      // fontFamily: 'OpenSans',
-                    ),
-                  ),
-                ),
+                // Container(
+                //   height: 40,
+                //   width: double.infinity,
+                //   decoration: new BoxDecoration(
+                //     color: appBarDecoration.color,
+                //     borderRadius: new BorderRadius.only(
+                //         bottomLeft: const Radius.circular(30.0)),
+                //   ),
+                //   child: Text(
+                //     "This is temporary text...",
+                //     style: TextStyle(
+                //       color: Colors.white,
+                //       letterSpacing: 1.5,
+                //       fontSize: 18.0,
+                //       fontWeight: FontWeight.bold,
+                //       // fontFamily: 'OpenSans',
+                //     ),
+                //   ),
+                // ),
                 Expanded(
                   child: PatientsScreen(
                     patientDetailsRepository:
@@ -57,13 +57,6 @@ class Home extends StatelessWidget {
                     userId: _userId,
                   ),
                 ),
-                // RaisedButton(
-                //   child: Text('Launch screen'),
-                //   onPressed: () {
-                //     // Navigate to the second screen using a named route.
-                //     Navigator.pushNamed(context, '/second');
-                //   },
-                // ),
               ],
             ),
           ),

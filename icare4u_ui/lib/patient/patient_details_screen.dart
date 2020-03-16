@@ -2,29 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:icare4u_ui/patient/bloc/patient_details_bloc.dart';
 
-class PatientDetailsScreen extends StatefulWidget {
+class PatientDetailsScreen extends StatelessWidget {
   final String patientId;
+  final PatientDetailsBloc patientDetailsBloc;
 
   const PatientDetailsScreen({
     Key key,
     @required this.patientId,
+    @required this.patientDetailsBloc,
   }) : super(key: key);
-
-  @override
-  PatientDetailsScreenState createState() {
-    return PatientDetailsScreenState();
-  }
-}
-
-class PatientDetailsScreenState extends State<PatientDetailsScreen> {
-  PatientDetailsBloc _patientDetailsBloc;
-
-  @override
-  void initState() {
-    super.initState();
-    _patientDetailsBloc = BlocProvider.of<PatientDetailsBloc>(context);
-    // this._load();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,13 +44,12 @@ class PatientDetailsScreenState extends State<PatientDetailsScreen> {
           }
         },
         child: BlocBuilder<PatientDetailsBloc, PatientDetailsState>(
-            bloc: _patientDetailsBloc,
+            bloc: patientDetailsBloc,
             builder: (
               BuildContext context,
               PatientDetailsState currentState,
             ) {
-              if (currentState is PatientDetailsEmpty &&
-                  widget.patientId != null) {
+              if (currentState is PatientDetailsEmpty && patientId != null) {
                 _load();
               }
               if (currentState is PatientDetailsLoading) {
@@ -137,9 +122,9 @@ class PatientDetailsScreenState extends State<PatientDetailsScreen> {
   }
 
   void _load() {
-    _patientDetailsBloc.add(
+    patientDetailsBloc.add(
       FetchPatientDetails(
-        patientId: widget.patientId,
+        patientId: patientId,
       ),
     );
   }
