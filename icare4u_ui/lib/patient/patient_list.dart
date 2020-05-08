@@ -116,16 +116,24 @@ class _PatientListState extends State<PatientList> {
             ],
           ),
           onRefresh: () async {
-            _load();
+            _reload();
           },
         ),
       ),
     );
   }
 
-  void _load() {
+  void _reload() {
     _bloc.add(
       FetchPatientCollection(
+        userId: widget._userId,
+      ),
+    );
+  }
+
+  void _load() {
+    _bloc.add(
+      GetCachedPatientCollection(
         userId: widget._userId,
       ),
     );
