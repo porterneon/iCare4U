@@ -24,3 +24,14 @@ class FetchPatientDetails extends PatientDetailsEvent {
   @override
   List<Object> get props => [patientId];
 }
+
+class GetCachedPatientDetails extends PatientDetailsEvent {
+  final String patientId;
+
+  const GetCachedPatientDetails({
+    @required this.patientId,
+  }) : assert(patientId != null);
+
+  @override
+  List<Object> get props => [patientId];
+}

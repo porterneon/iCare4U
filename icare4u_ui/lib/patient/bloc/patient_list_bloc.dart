@@ -35,6 +35,7 @@ class PatientListBloc extends Bloc<PatientListEvent, PatientListState> {
     }
 
     if (event is GetCachedPatientCollection) {
+      yield PatientCollectionLoading();
       try {
         List<Patient> patientCollection =
             await repository.getPatientCollection();

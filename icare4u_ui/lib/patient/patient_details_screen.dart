@@ -50,7 +50,7 @@ class PatientDetailsScreen extends StatelessWidget {
               PatientDetailsState currentState,
             ) {
               if (currentState is PatientDetailsEmpty && patientId != null) {
-                _load();
+                _reload();
               }
               if (currentState is PatientDetailsLoading) {
                 return Column(
@@ -117,6 +117,14 @@ class PatientDetailsScreen extends StatelessWidget {
                 child: Container(),
               );
             }),
+      ),
+    );
+  }
+
+  void _reload() {
+    patientDetailsBloc.add(
+      GetCachedPatientDetails(
+        patientId: patientId,
       ),
     );
   }
