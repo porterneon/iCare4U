@@ -32,5 +32,16 @@ class PatientDetailsBloc
         yield PatientDetailsError(error: e);
       }
     }
+
+    if (event is GetCachedPatientDetails) {
+      yield PatientDetailsLoading();
+      try {
+        final Patient patient =
+            await repository.getCachedPatientDetials(event.patientId);
+        yield PatientDetailsLoaded(patient: patient);
+      } catch (e) {
+        yield PatientDetailsError(error: e);
+      }
+    }
   }
 }

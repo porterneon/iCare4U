@@ -7,6 +7,7 @@ import 'package:icare4u_ui/services/app_shared_preferences.dart';
 import 'package:icare4u_ui/services/global_settings.dart';
 import 'package:http/http.dart' as http;
 import 'package:icare4u_ui/services/http_request_helper.dart';
+import 'package:icare4u_ui/services/patient_cache.dart';
 import 'package:icare4u_ui/services/patient_details_api_client.dart';
 import 'package:icare4u_ui/services/user_details_api_client.dart';
 
@@ -31,12 +32,22 @@ void setupLocator() {
   );
   locator.registerFactory<AppSharedPreferences>(() => AppSharedPreferences());
 
+  locator.registerLazySingleton<PatientCache>(() => PatientCache());
+
   locator.registerFactory<PatientDetailsRepository>(
     () => PatientDetailsRepository(
       apiClient: PatientDetailsApiClient(
         httpClient: http.Client(),
         requestHelper: locator<HttpRequestHelper>(),
       ),
+      patientCache: locator<PatientCache>(),
     ),
   );
+
+  // locator.registerSingleton(PatientDetailsRepository(
+  //   apiClient: PatientDetailsApiClient(
+  //     httpClient: http.Client(),
+  //     requestHelper: locator<HttpRequestHelper>(),
+  //   ),
+  // ));
 }

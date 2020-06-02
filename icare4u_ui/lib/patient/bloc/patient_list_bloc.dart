@@ -33,5 +33,23 @@ class PatientListBloc extends Bloc<PatientListEvent, PatientListState> {
         yield PatientCollectionError(error: e);
       }
     }
+
+    if (event is GetCachedPatientCollection) {
+      yield PatientCollectionLoading();
+      try {
+        List<Patient> patientCollection =
+            await repository.getPatientCollection();
+
+        if (patientCollection == null || patientCollection.isEmpty) {
+          patientCollection =
+              await repository.fetchPatientCollection(event.userId);
+        }
+
+        yield PatientCollectionLoaded(patients: patientCollection);
+      } catch (e) {
+        debugPrint(e);
+        yield PatientCollectionError(error: e);
+      }
+    }
   }
 }
