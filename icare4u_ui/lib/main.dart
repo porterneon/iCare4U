@@ -11,13 +11,13 @@ import 'package:flutter/material.dart';
 import 'package:icare4u_ui/service_locator.dart';
 import 'package:icare4u_ui/services/app_language.dart';
 import 'package:icare4u_ui/services/localizations.dart';
-import 'package:icare4u_ui/simple_bloc_delegate.dart';
+import 'package:icare4u_ui/my_bloc_observer.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Bloc.observer = SimpleBlocDelegate();
+  Bloc.observer = MyBlocObserver();
   setupLocator();
   await locator<AppLanguage>().fetchLocale();
   await Firebase.initializeApp();
