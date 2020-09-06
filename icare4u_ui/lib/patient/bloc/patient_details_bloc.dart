@@ -13,10 +13,9 @@ class PatientDetailsBloc
     extends Bloc<PatientDetailsEvent, PatientDetailsState> {
   final PatientDetailsRepository repository;
 
-  PatientDetailsBloc({@required this.repository}) : assert(repository != null);
-
-  @override
-  PatientDetailsState get initialState => PatientDetailsEmpty();
+  PatientDetailsBloc({@required this.repository})
+      : assert(repository != null),
+        super(PatientDetailsEmpty());
 
   @override
   Stream<PatientDetailsState> mapEventToState(

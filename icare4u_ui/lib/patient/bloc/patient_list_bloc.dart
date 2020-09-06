@@ -12,10 +12,9 @@ part 'patient_list_state.dart';
 class PatientListBloc extends Bloc<PatientListEvent, PatientListState> {
   final PatientDetailsRepository repository;
 
-  PatientListBloc({@required this.repository}) : assert(repository != null);
-
-  @override
-  PatientListState get initialState => PatientCollectionEmpty();
+  PatientListBloc({@required this.repository})
+      : assert(repository != null),
+        super(PatientCollectionEmpty());
 
   @override
   Stream<PatientListState> mapEventToState(

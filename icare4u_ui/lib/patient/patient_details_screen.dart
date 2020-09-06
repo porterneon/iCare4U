@@ -44,7 +44,7 @@ class PatientDetailsScreen extends StatelessWidget {
           }
         },
         child: BlocBuilder<PatientDetailsBloc, PatientDetailsState>(
-            bloc: patientDetailsBloc,
+            cubit: patientDetailsBloc,
             builder: (
               BuildContext context,
               PatientDetailsState currentState,
