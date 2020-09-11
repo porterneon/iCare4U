@@ -13,10 +13,8 @@ class UserDetailsBloc extends Bloc<UserDetailsEvent, UserDetailsState> {
   final UserDetailsRepository userDetailsRepository;
 
   UserDetailsBloc({@required this.userDetailsRepository})
-      : assert(userDetailsRepository != null);
-
-  @override
-  UserDetailsState get initialState => UserDetailsEmpty();
+      : assert(userDetailsRepository != null),
+        super(UserDetailsEmpty());
 
   @override
   Stream<UserDetailsState> mapEventToState(
