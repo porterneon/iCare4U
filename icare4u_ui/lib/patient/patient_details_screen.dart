@@ -50,7 +50,7 @@ class PatientDetailsScreen extends StatelessWidget {
               PatientDetailsState currentState,
             ) {
               if (currentState is PatientDetailsEmpty && patientId != null) {
-                _reload();
+                _load();
               }
               if (currentState is PatientDetailsLoading) {
                 return Column(
@@ -67,49 +67,43 @@ class PatientDetailsScreen extends StatelessWidget {
               }
 
               if (currentState is PatientDetailsLoaded) {
-                return Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Card(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            children: <Widget>[
-                              Row(
-                                children: <Widget>[
-                                  Text("Patient name:"),
-                                  SizedBox(width: 10.0),
-                                  Text(currentState.patient.name),
-                                ],
-                              ),
-                              Row(
-                                children: <Widget>[
-                                  Text("Birth date:"),
-                                  SizedBox(width: 10.0),
-                                  Text(currentState.patient.birthDate),
-                                ],
-                              ),
-                            ],
-                          ),
+                // return buildPatiendDetailsView(currentState);
+                return SafeArea(
+                  child: new Container(
+                    margin: new EdgeInsets.fromLTRB(60.0, 16.0, 16.0, 16.0),
+                    constraints: new BoxConstraints.expand(),
+                    child: new Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        new Container(height: 4.0),
+                        new Text(currentState.patient.name),
+                        new Container(height: 10.0),
+                        new Text(currentState.patient.patientId),
+                        new Container(
+                            margin: new EdgeInsets.symmetric(vertical: 8.0),
+                            height: 2.0,
+                            width: 18.0,
+                            color: new Color(0xff00c6ff)),
+                        new Row(
+                          children: <Widget>[
+                            new Expanded(
+                                child: _patientValue(
+                                    value:
+                                        currentState.patient.height.toString() +
+                                            " " +
+                                            currentState.patient.heightUom,
+                                    image: 'assets/img/height.png')),
+                            new Expanded(
+                                child: _patientValue(
+                                    value:
+                                        currentState.patient.weight.toString() +
+                                            " " +
+                                            currentState.patient.weightUom,
+                                    image: 'assets/img/weight_machine.png'))
+                          ],
                         ),
-                      ),
-                      // Text(currentState.patient.patientId),
-                      Card(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(
-                            children: <Widget>[
-                              Text("Wiek:"),
-                              SizedBox(width: 10.0),
-                              Text(currentState.patient.age),
-                              SizedBox(width: 5.0),
-                              Text("years."),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 );
               }
@@ -121,7 +115,19 @@ class PatientDetailsScreen extends StatelessWidget {
     );
   }
 
-  void _reload() {
+  Widget _patientValue({String value, String image}) {
+    return new Row(children: <Widget>[
+      Image.asset(
+        image,
+        color: const Color(0xffb6b2df),
+        height: 18.0,
+      ),
+      new Container(width: 8.0),
+      new Text(value),
+    ]);
+  }
+
+  void _load() {
     patientDetailsBloc.add(
       GetCachedPatientDetails(
         patientId: patientId,
@@ -129,7 +135,7 @@ class PatientDetailsScreen extends StatelessWidget {
     );
   }
 
-  void _load() {
+  void _reload() {
     patientDetailsBloc.add(
       FetchPatientDetails(
         patientId: patientId,
