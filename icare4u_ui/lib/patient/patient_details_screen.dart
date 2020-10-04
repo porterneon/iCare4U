@@ -16,33 +16,37 @@ class PatientDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: BlocListener<PatientDetailsBloc, PatientDetailsState>(
-        listener: (context, state) {
-          if (state is PatientDetailsError) {
-            Scaffold.of(context)
-              ..hideCurrentSnackBar()
-              ..showSnackBar(
-                SnackBar(
-                  content: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text('Fetch patient failure'),
-                      Icon(Icons.error)
-                    ],
-                  ),
-                  backgroundColor: Colors.red,
-                ),
-              );
-          }
+      body: MultiBlocListener(
+        listeners: [
+          BlocListener<PatientDetailsBloc, PatientDetailsState>(
+            listener: (context, state) {
+              if (state is PatientDetailsError) {
+                Scaffold.of(context)
+                  ..hideCurrentSnackBar()
+                  ..showSnackBar(
+                    SnackBar(
+                      content: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text('Fetch patient failure'),
+                          Icon(Icons.error)
+                        ],
+                      ),
+                      backgroundColor: Colors.red,
+                    ),
+                  );
+              }
 
-          if (state is PatientDetailsLoading) {
-            debugPrint('loading patient details');
-          }
+              if (state is PatientDetailsLoading) {
+                debugPrint('loading patient details');
+              }
 
-          if (state is PatientDetailsLoaded) {
-            debugPrint("patient details loaded");
-          }
-        },
+              if (state is PatientDetailsLoaded) {
+                debugPrint("patient details loaded");
+              }
+            },
+          ),
+        ],
         child: BlocBuilder<PatientDetailsBloc, PatientDetailsState>(
             cubit: patientDetailsBloc,
             builder: (
@@ -67,7 +71,6 @@ class PatientDetailsScreen extends StatelessWidget {
               }
 
               if (currentState is PatientDetailsLoaded) {
-                // return buildPatiendDetailsView(currentState);
                 return SafeArea(
                   child: new Container(
                     margin: new EdgeInsets.fromLTRB(60.0, 16.0, 16.0, 16.0),
