@@ -123,7 +123,7 @@ exports.getMedicinesByPatient = async (req, res) => {
     let medicineIds = doc.data().medicines;
 
     const { errors, results, valid } = await getItems("medicines", medicineIds);
-
+    
     if (!valid) return res.status(400).json(errors);
 
     return res.status(200).json(results);

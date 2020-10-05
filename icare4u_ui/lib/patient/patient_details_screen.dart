@@ -153,7 +153,9 @@ class PatientDetailsScreen extends StatelessWidget {
         MedicamentsState currentState,
       ) {
         return Center(
-          child: Container(),
+          child: Container(
+            child: Text('this is medicament details container'),
+          ),
         );
       },
     );
