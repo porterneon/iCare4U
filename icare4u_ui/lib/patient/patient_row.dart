@@ -123,7 +123,9 @@ class _PatientRowState extends State<PatientRow> {
                     ),
                   ),
                   BlocProvider<MedicamentsBloc>(
-                    create: (context) => MedicamentsBloc(),
+                    create: (context) => MedicamentsBloc(
+                      repository: locator<MedicamentsRepository>(),
+                    ),
                   ),
                 ],
                 child: PatientDetailsScreen(
@@ -131,7 +133,9 @@ class _PatientRowState extends State<PatientRow> {
                   patientDetailsBloc: PatientDetailsBloc(
                     repository: locator<PatientDetailsRepository>(),
                   ),
-                  medicamentsBloc: MedicamentsBloc(),
+                  medicamentsBloc: MedicamentsBloc(
+                    repository: locator<MedicamentsRepository>(),
+                  ),
                 ),
               ),
             ),
