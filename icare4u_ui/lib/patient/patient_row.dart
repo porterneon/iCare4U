@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:icare4u_ui/medicaments/bloc/medicaments_bloc.dart';
 import 'package:icare4u_ui/models/models.dart';
 import 'package:icare4u_ui/patient/bloc/patient_details_bloc.dart';
 import 'package:icare4u_ui/patient/patient_details_screen.dart';
@@ -114,19 +115,27 @@ class _PatientRowState extends State<PatientRow> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => BlocProvider<PatientDetailsBloc>(
-                create: (context) => PatientDetailsBloc(
-                  repository: locator<PatientDetailsRepository>(),
-                ),
+              builder: (context) => MultiBlocProvider(
+                providers: [
+                  BlocProvider<PatientDetailsBloc>(
+                    create: (context) => PatientDetailsBloc(
+                      repository: locator<PatientDetailsRepository>(),
+                    ),
+                  ),
+                  BlocProvider<MedicamentsBloc>(
+                    create: (context) => MedicamentsBloc(),
+                  ),
+                ],
                 child: PatientDetailsScreen(
                   patientId: widget.patient.patientId,
                   patientDetailsBloc: PatientDetailsBloc(
                     repository: locator<PatientDetailsRepository>(),
                   ),
+                  medicamentsBloc: MedicamentsBloc(),
                 ),
               ),
             ),
-          )
+          ),
         },
         child: new Stack(
           children: <Widget>[
