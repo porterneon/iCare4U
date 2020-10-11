@@ -36,7 +36,7 @@ class Patient extends Equatable {
   List<Object> get props => [patientId];
 
   Map<String, dynamic> toJson() => {
-        'patientId': patientId,
+        'id': patientId,
         'patientName': name,
         'weight': weight,
         'weightUom': weightUom,
@@ -51,7 +51,7 @@ class Patient extends Equatable {
 
   static Patient fromJson(dynamic json) {
     return Patient(
-      patientId: json['patientId'],
+      patientId: json['id'],
       name: json['patientName'],
       age: calculateAge(json['birthDate']),
       height: double.parse(json['height']),
