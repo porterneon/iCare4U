@@ -9,6 +9,8 @@ import 'package:icare4u_ui/services/app_language.dart';
 import 'package:icare4u_ui/services/localizations.dart';
 import 'package:provider/provider.dart';
 
+import '../../constants.dart';
+
 class AppDrawer extends StatelessWidget {
   const AppDrawer({
     Key key,
@@ -19,62 +21,65 @@ class AppDrawer extends StatelessWidget {
     final appLanguage = Provider.of<AppLanguage>(context);
     return Drawer(
       elevation: 20.0,
-      child: ListView(
-        children: <Widget>[
-          DrawerHeader(
-            child: BlocProvider(
-              create: (context) => UserDetailsBloc(
-                  userDetailsRepository: locator<UserDetailsRepository>()),
-              child: UserDetailsComponent(),
+      child: Container(
+        color: Color.fromARGB(150, 236, 245, 253),
+        child: ListView(
+          children: <Widget>[
+            DrawerHeader(
+              child: BlocProvider(
+                create: (context) => UserDetailsBloc(
+                    userDetailsRepository: locator<UserDetailsRepository>()),
+                child: UserDetailsComponent(),
+              ),
             ),
-          ),
-          ListTile(
-            leading: Icon(Icons.account_circle),
-            // title: Text('Profile'),
-            title: Text(AppLocalizations.of(context).translate('Profile')),
-          ),
-          ListTile(
-            leading: Icon(Icons.settings),
-            title: Text(r'Settings'),
-          ),
-          ListTile(
-            // title: Text(r'Logout'),
-            title: Text(AppLocalizations.of(context).translate('logout')),
-            leading: Icon(Icons.person),
-            onTap: () async {
-              BlocProvider.of<AuthenticationBloc>(context).add(
-                LoggedOut(),
-              );
-              Navigator.pop(context);
-            },
-          ),
-          ListTile(
-            leading: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                RaisedButton(
-                  onPressed: () {
-                    appLanguage.changeLanguage(Locale("en"));
-                  },
-                  child: Text('English'),
-                ),
-              ],
+            ListTile(
+              leading: Icon(Icons.account_circle),
+              // title: Text('Profile'),
+              title: Text(AppLocalizations.of(context).translate('Profile')),
             ),
-          ),
-          ListTile(
-            leading: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                RaisedButton(
-                  onPressed: () {
-                    appLanguage.changeLanguage(Locale("pl"));
-                  },
-                  child: Text('Polski'),
-                ),
-              ],
+            ListTile(
+              leading: Icon(Icons.settings),
+              title: Text(r'Settings'),
             ),
-          ),
-        ],
+            ListTile(
+              // title: Text(r'Logout'),
+              title: Text(AppLocalizations.of(context).translate('logout')),
+              leading: Icon(Icons.person),
+              onTap: () async {
+                BlocProvider.of<AuthenticationBloc>(context).add(
+                  LoggedOut(),
+                );
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  RaisedButton(
+                    onPressed: () {
+                      appLanguage.changeLanguage(Locale("en"));
+                    },
+                    child: Text('English'),
+                  ),
+                ],
+              ),
+            ),
+            ListTile(
+              leading: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  RaisedButton(
+                    onPressed: () {
+                      appLanguage.changeLanguage(Locale("pl"));
+                    },
+                    child: Text('Polski'),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

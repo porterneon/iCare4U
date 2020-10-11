@@ -19,4 +19,8 @@ class GlobalSettings {
   String getPatientDetailsApiPath(String patientId) {
     return '/api/patients/$patientId';
   }
+
+  String getPatientMedicamentsApiPath(String patientId) {
+    return '/medicinesByPatientId/$patientId';
+  }
 }

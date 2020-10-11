@@ -20,7 +20,7 @@ async function getItems(collectionName, ids) {
       items.forEach(element => {
         if (element.data() != null) {
           let p = element.data();
-          p.patientId = element.id;
+          p.id = element.id;
           results.push(p);
 
           console.log(p);

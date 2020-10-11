@@ -47,4 +47,4 @@ final appBarDecoration = AppBarTheme(
 
 final getSystemUiOverlayStyle = SystemUiOverlayStyle.light;
 
-final globalBackgroundColor = Color(0xFF73AEF5);
+final globalBackgroundColor = Color.fromARGB(255, 228, 242, 253);
