@@ -28,7 +28,7 @@ class PatientDetailsBloc
             await repository.fetchPatientDetials(event.patientId);
         yield PatientDetailsLoaded(patient: patient);
       } catch (e) {
-        yield PatientDetailsError(error: e);
+        yield PatientDetailsError(error: e.toString());
       }
     }
 
@@ -39,7 +39,7 @@ class PatientDetailsBloc
             await repository.getCachedPatientDetials(event.patientId);
         yield PatientDetailsLoaded(patient: patient);
       } catch (e) {
-        yield PatientDetailsError(error: e);
+        yield PatientDetailsError(error: e.toString());
       }
     }
   }

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
@@ -28,8 +29,7 @@ class PatientListBloc extends Bloc<PatientListEvent, PatientListState> {
 
         yield PatientCollectionLoaded(patients: patientCollection);
       } catch (e) {
-        debugPrint(e);
-        yield PatientCollectionError(error: e);
+        yield PatientCollectionError(error: e.toString());
       }
     }
 
@@ -46,8 +46,7 @@ class PatientListBloc extends Bloc<PatientListEvent, PatientListState> {
 
         yield PatientCollectionLoaded(patients: patientCollection);
       } catch (e) {
-        debugPrint(e);
-        yield PatientCollectionError(error: e);
+        yield PatientCollectionError(error: e.toString());
       }
     }
   }
