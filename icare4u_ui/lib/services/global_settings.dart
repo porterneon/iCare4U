@@ -1,8 +1,19 @@
+import 'dart:io';
+import 'package:flutter/foundation.dart' as Foundation;
+
 class GlobalSettings {
   String getApiUrl() {
-    // return 'https://europe-west1-icare4uapi.cloudfunctions.net';
-    // return 'http://localhost:5000/icare4uapi/europe-west1'; // for iOS symulator
-    return 'http://10.0.2.2:5000/icare4uapi/europe-west1'; // for android emulator
+    if (Foundation.kDebugMode) {
+      if (Platform.isAndroid) {
+        return 'http://10.0.2.2:5000/icare4uapi/europe-west1'; // for android emulator
+      } else if (Platform.isIOS) {
+        return 'http://localhost:5000/icare4uapi/europe-west1'; // for iOS symulator
+      } else {
+        return 'https://europe-west1-icare4uapi.cloudfunctions.net';
+      }
+    } else {
+      return 'https://europe-west1-icare4uapi.cloudfunctions.net';
+    }
   }
 
   String getUsersApiPath() {
