@@ -10,7 +10,7 @@ final logo = Hero(
             borderRadius: BorderRadius.all(
               Radius.circular(40),
             ),
-            child: Image.asset('assets/logos/logo.png'),
+            child: Image.asset('assets/logos/logo1.png'),
           )),
     ),
   ),
