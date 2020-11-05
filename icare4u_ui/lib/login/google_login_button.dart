@@ -1,4 +1,15 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart'
+    show
+        BorderRadius,
+        BuildContext,
+        Colors,
+        Icon,
+        RaisedButton,
+        RoundedRectangleBorder,
+        StatelessWidget,
+        Text,
+        TextStyle,
+        Widget;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:icare4u_ui/login/bloc/bloc.dart';

@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 import 'package:icare4u_ui/repositories/user_repository.dart';
 
 part 'authentication_event.dart';
@@ -12,7 +11,7 @@ class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {
   final UserRepository _userRepository;
 
-  AuthenticationBloc({@required UserRepository userRepository})
+  AuthenticationBloc({UserRepository userRepository})
       : assert(userRepository != null),
         _userRepository = userRepository,
         super(Uninitialized());

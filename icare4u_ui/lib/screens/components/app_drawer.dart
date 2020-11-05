@@ -9,8 +9,6 @@ import 'package:icare4u_ui/services/app_language.dart';
 import 'package:icare4u_ui/services/localizations.dart';
 import 'package:provider/provider.dart';
 
-import '../../constants.dart';
-
 class AppDrawer extends StatelessWidget {
   const AppDrawer({
     Key key,
