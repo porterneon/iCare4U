@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:icare4u_ui/bloc/authentication_bloc/authentication_bloc.dart';
 import 'package:icare4u_ui/bloc/user_details_bloc/user_details_bloc.dart';
+import 'package:icare4u_ui/constants.dart';
 import 'package:icare4u_ui/repositories/repositories.dart';
 import 'package:icare4u_ui/screens/components/user_details_component.dart';
 import 'package:icare4u_ui/service_locator.dart';
@@ -20,7 +21,7 @@ class AppDrawer extends StatelessWidget {
     return Drawer(
       elevation: 20.0,
       child: Container(
-        color: Color.fromARGB(150, 236, 245, 253),
+        color: Color(0xFF73AEF5),
         child: ListView(
           children: <Widget>[
             DrawerHeader(
@@ -33,15 +34,24 @@ class AppDrawer extends StatelessWidget {
             ListTile(
               leading: Icon(Icons.account_circle),
               // title: Text('Profile'),
-              title: Text(AppLocalizations.of(context).translate('Profile')),
+              title: Text(
+                AppLocalizations.of(context).translate('Profile'),
+                style: drawerTextStyle,
+              ),
             ),
             ListTile(
               leading: Icon(Icons.settings),
-              title: Text(r'Settings'),
+              title: Text(
+                r'Settings',
+                style: drawerTextStyle,
+              ),
             ),
             ListTile(
               // title: Text(r'Logout'),
-              title: Text(AppLocalizations.of(context).translate('logout')),
+              title: Text(
+                AppLocalizations.of(context).translate('logout'),
+                style: drawerTextStyle,
+              ),
               leading: Icon(Icons.person),
               onTap: () async {
                 BlocProvider.of<AuthenticationBloc>(context).add(

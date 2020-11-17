@@ -48,3 +48,9 @@ final appBarDecoration = AppBarTheme(
 final getSystemUiOverlayStyle = SystemUiOverlayStyle.light;
 
 final globalBackgroundColor = Color.fromARGB(255, 228, 242, 253);
+
+final drawerTextStyle = TextStyle(
+  fontSize: 18,
+  fontWeight: FontWeight.w200,
+  color: Colors.white,
+);

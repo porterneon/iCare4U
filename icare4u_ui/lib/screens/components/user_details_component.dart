@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:icare4u_ui/bloc/user_details_bloc/user_details_bloc.dart';
+import 'package:icare4u_ui/constants.dart';
 // import 'package:icare4u_ui/models/user.dart';
 import 'package:icare4u_ui/models/user_details.dart';
 import 'package:icare4u_ui/repositories/user_repository.dart';
@@ -52,10 +53,7 @@ class _UserDetailsComponentState extends State<UserDetailsComponent> {
                     child: Center(
                       child: Text(
                         userDetails.userName,
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w200,
-                        ),
+                        style: drawerTextStyle,
                       ),
                     ),
                   ),
@@ -64,10 +62,7 @@ class _UserDetailsComponentState extends State<UserDetailsComponent> {
                     child: Center(
                       child: Text(
                         userDetails.email,
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w200,
-                        ),
+                        style: drawerTextStyle,
                       ),
                     ),
                   ),
