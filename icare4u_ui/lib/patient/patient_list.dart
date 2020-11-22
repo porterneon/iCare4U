@@ -30,67 +30,80 @@ class _PatientListState extends State<PatientList> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<PatientListBloc, PatientListState>(
-      listener: (context, state) {
-        if (state is PatientCollectionError) {
-          Scaffold.of(context)
-            ..hideCurrentSnackBar()
-            ..showSnackBar(
-              SnackBar(
-                content: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [Text('Fetch patients failure'), Icon(Icons.error)],
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+      body: BlocListener<PatientListBloc, PatientListState>(
+        listener: (context, state) {
+          if (state is PatientCollectionError) {
+            Scaffold.of(context)
+              ..hideCurrentSnackBar()
+              ..showSnackBar(
+                SnackBar(
+                  content: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text('Fetch patients failure'),
+                      Icon(Icons.error)
+                    ],
+                  ),
+                  backgroundColor: Colors.red,
                 ),
-                backgroundColor: Colors.red,
+              );
+          }
+
+          if ((state is PatientCollectionEmpty ||
+                  state is PatientCollectionEmpty) &&
+              widget._userId != null) {
+            debugPrint('fetch patient collection');
+            _bloc.add(
+              FetchPatientCollection(
+                userId: widget._userId,
               ),
             );
-        }
+          }
 
-        if ((state is PatientCollectionEmpty ||
-                state is PatientCollectionEmpty) &&
-            widget._userId != null) {
-          debugPrint('fetch patient collection');
-          _bloc.add(
-            FetchPatientCollection(
-              userId: widget._userId,
-            ),
-          );
-        }
-
-        if (state is PatientCollectionLoading) {
-          debugPrint('loading patient collection');
-        }
-
-        if (state is PatientCollectionLoaded) {
-          debugPrint("patients loaded");
-        }
-      },
-      child: BlocBuilder<PatientListBloc, PatientListState>(
-        builder: (context, state) {
           if (state is PatientCollectionLoading) {
-            return Column(
-              children: <Widget>[
-                Center(
-                  child: SizedBox(
-                    height: 100.0,
-                    width: 100.0,
-                    child: CircularProgressIndicator(),
-                  ),
-                ),
-              ],
-            );
+            debugPrint('loading patient collection');
           }
 
           if (state is PatientCollectionLoaded) {
-            return Column(
-              children: <Widget>[
-                buildPatientSilverList(state.patients),
-              ],
-            );
-          } else {
-            return Container();
+            debugPrint("patients loaded");
           }
         },
+        child: BlocBuilder<PatientListBloc, PatientListState>(
+          builder: (context, state) {
+            if (state is PatientCollectionLoading) {
+              return Column(
+                children: <Widget>[
+                  Center(
+                    child: SizedBox(
+                      height: 100.0,
+                      width: 100.0,
+                      child: CircularProgressIndicator(),
+                    ),
+                  ),
+                ],
+              );
+            }
+
+            if (state is PatientCollectionLoaded) {
+              return Column(
+                children: <Widget>[
+                  buildPatientSilverList(state.patients),
+                ],
+              );
+            } else {
+              return Container();
+            }
+          },
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          // Add your onPressed code here!
+        },
+        child: Icon(Icons.add),
+        backgroundColor: Colors.lightBlue,
       ),
     );
   }
