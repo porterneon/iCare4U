@@ -35,7 +35,7 @@ class _PatientListState extends State<PatientList> {
       body: BlocListener<PatientListBloc, PatientListState>(
         listener: (context, state) {
           if (state is PatientCollectionError) {
-            Scaffold.of(context)
+            ScaffoldMessenger.of(context)
               ..hideCurrentSnackBar()
               ..showSnackBar(
                 SnackBar(
