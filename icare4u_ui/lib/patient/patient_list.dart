@@ -93,8 +93,8 @@ class _PatientListState extends State<PatientList> {
                 ],
               );
             } else {
-              return Center(
-                child: Container(
+              return Container(
+                child: Center(
                   child: FlatButton(
                     color: Colors.white,
                     onPressed: () {
