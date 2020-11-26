@@ -35,7 +35,7 @@ class _RegisterFormState extends State<RegisterForm> {
     return BlocListener<RegisterBloc, RegisterState>(
       listener: (context, state) {
         if (state.isSubmitting) {
-          ScaffoldMessenger.of(context)
+          Scaffold.of(context)
             ..hideCurrentSnackBar()
             ..showSnackBar(
               SnackBar(
@@ -61,7 +61,7 @@ class _RegisterFormState extends State<RegisterForm> {
           );
         }
         if (state.isFailure) {
-          ScaffoldMessenger.of(context)
+          Scaffold.of(context)
             ..hideCurrentSnackBar()
             ..showSnackBar(
               SnackBar(

@@ -24,7 +24,7 @@ class PatientDetailsScreen extends StatelessWidget {
           BlocListener<PatientDetailsBloc, PatientDetailsState>(
             listener: (context, state) {
               if (state is PatientDetailsError) {
-                ScaffoldMessenger.of(context)
+                Scaffold.of(context)
                   ..hideCurrentSnackBar()
                   ..showSnackBar(
                     SnackBar(
@@ -52,7 +52,7 @@ class PatientDetailsScreen extends StatelessWidget {
           BlocListener<MedicamentsBloc, MedicamentsState>(
             listener: (context, state) {
               if (state is MedicamentsError) {
-                ScaffoldMessenger.of(context)
+                Scaffold.of(context)
                   ..hideCurrentSnackBar()
                   ..showSnackBar(
                     SnackBar(
@@ -139,7 +139,16 @@ class PatientDetailsScreen extends StatelessWidget {
           );
         }
         return Center(
-          child: Container(),
+          child: Container(
+            child: FlatButton(
+              onPressed: () {
+                _load();
+              },
+              child: Text(
+                "Reload",
+              ),
+            ),
+          ),
         );
       },
     );

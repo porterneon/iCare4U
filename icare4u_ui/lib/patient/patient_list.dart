@@ -35,7 +35,7 @@ class _PatientListState extends State<PatientList> {
       body: BlocListener<PatientListBloc, PatientListState>(
         listener: (context, state) {
           if (state is PatientCollectionError) {
-            ScaffoldMessenger.of(context)
+            Scaffold.of(context)
               ..hideCurrentSnackBar()
               ..showSnackBar(
                 SnackBar(
@@ -93,7 +93,19 @@ class _PatientListState extends State<PatientList> {
                 ],
               );
             } else {
-              return Container();
+              return Center(
+                child: Container(
+                  child: FlatButton(
+                    color: Colors.white,
+                    onPressed: () {
+                      _reload();
+                    },
+                    child: Text(
+                      "Refresh patient collection",
+                    ),
+                  ),
+                ),
+              );
             }
           },
         ),
