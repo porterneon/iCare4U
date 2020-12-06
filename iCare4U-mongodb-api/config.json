@@ -1,4 +1,4 @@
 {
-    "connectionString": "mongodb://192.168.1.112:32768/icare4u",
-    "secret": "THIS IS USED TO SIGN AND VERIFY JWT TOKENS, REPLACE IT WITH YOUR OWN SECRET, IT CAN BE ANY STRING"
+    "connectionString": "mongodb+srv://neon:q0fM3cj4AR9S4hhp@cluster0.cix1r.mongodb.net/icare4u?retryWrites=true&w=majority",
+    "secret": "4273383f-335b-4b3a-862e-f692060f646a"
 }
