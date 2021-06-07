@@ -27,7 +27,7 @@ class MedicamentsApiClient {
     final requestUrl = '$apiUrl$apiPath';
 
     final response =
-        await this.httpClient.get(requestUrl, headers: headerParams);
+        await this.httpClient.get(Uri.parse(requestUrl), headers: headerParams);
 
     if (response.statusCode != 200) {
       throw Exception('error getting patient\'s medicaments collection');

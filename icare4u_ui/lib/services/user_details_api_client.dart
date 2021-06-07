@@ -25,8 +25,9 @@ class UserDetailsApiClient {
     final userDetailsUrl = '$apiUrl$apiPath$userId';
     var headerParams = await requestHelper.getRequestAuthenticateHeader();
 
-    final response =
-        await this.httpClient.get(userDetailsUrl, headers: headerParams);
+    final response = await this
+        .httpClient
+        .get(Uri.parse(userDetailsUrl), headers: headerParams);
 
     if (response.statusCode != 200) {
       throw Exception('error getting user details');
